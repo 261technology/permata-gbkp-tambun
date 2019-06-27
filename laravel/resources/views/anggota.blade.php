@@ -2,7 +2,7 @@
 
 @section('assets')
 <!-- Datatable -->
-<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet"> 
+<link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 @endsection
@@ -22,35 +22,37 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6">
                                                 <div class="form-group">
-                                                        <label for="sektor">Sektor</label>
-                                                        <select id="sektor" class="form-control">
+                                                        <label for="status">Status</label>
+                                                        <select id="status" class="form-control">
                                                             <option value="0">Semua</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
-                                                        </select>
-                                                    </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                                <div class="form-group">
-                                                        <label for="marga">Marga</label>
-                                                        <select id="marga" class="form-control">
-                                                            <option value="0">Semua</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
+                                                            <option value="aktif">Aktif</option>
+                                                            <option value="Luar Biasa">Luar Biasa</option>
+                                                            <option value="Normal">Normal</option>
+                                                            <option value="pasfi">Pasif</option>
                                                         </select>
                                                     </div>
                                         </div>
 
                                         <div class="col-md-3 col-sm-6">
                                                 <div class="form-group">
-                                                        <label for="marga">Jenis Kelamin</label>
+                                                        <label for="sektor">Sektor</label>
+                                                        <select id="sektor" class="form-control">
+                                                            <option value="x">Semua</option>
+                                                            @foreach($sektor as $key => $value )
+                                                            <option value="{{$value->id}}">{{$value->nama}}</option>
+                                                            @endforeach;
+                                                        </select>
+                                                    </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-sm-6">
+                                                <div class="form-group">
+                                                        <label for="marga">Marga</label>
                                                         <select id="marga" class="form-control">
-                                                            <option value="0">Semua</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
+                                                            <option value="x">Semua</option>
+                                                            @foreach($marga as $key => $value )
+                                                            <option value="{{$value->id}}">{{$value->nama}}</option>
+                                                            @endforeach;
                                                         </select>
                                                     </div>
                                         </div>
@@ -59,10 +61,10 @@
                                                 <div class="form-group">
                                                         <label for="pekerjaan">Pekerjaan</label>
                                                         <select id="pekerjaan" class="form-control">
-                                                            <option value="0">Pekerjaan</option>
-                                                            <option value="1">Option #1</option>
-                                                            <option value="2">Option #2</option>
-                                                            <option value="3">Option #3</option>
+                                                            <option value="x">Semua</option>
+                                                            @foreach($marga as $key => $value )
+                                                            <option value="{{$value->id}}">{{$value->nama}}</option>
+                                                            @endforeach;
                                                         </select>
                                                     </div>
                                         </div>
@@ -70,13 +72,12 @@
                                 </div>
                             
                                 <div class="col-sm-12">
-                                    <table id="tableAnggota" class="table table-responsive-sm table-bordered table-striped table-md">
+                                    <table id="data-anggota" class="table table-responsive-sm table-bordered table-striped table-md" style="width: 100%;">
                                         <thead>
                                             <th style="width:45%">NAMA</th>
                                             <th style="width:20%">SEKTOR</th>
                                             <th style="width:15%">TELEPON</th>
                                             <th style="width:10%">STATUS</th>
-                                            <th style="width:10%"></th>
                                         </thead>
                                         <tbody>
                                         </tbody>
@@ -94,13 +95,75 @@
                                     <span>Download excel</span>
                                 </button>
 
+                                <a href="{{url('/app/anggota/upload')}}" style="margin-left:5px;" class="btn btn-brand btn-success float-right" type="button" style="margin-bottom: 4px">
+                                    <i class="fa fa-plus"></i>
+                                    <span>Upload Excel</span>
+                                </a>
+
                                 <button class="btn btn-brand btn-success float-right" type="button" style="margin-bottom: 4px">
-                                        <i class="fa fa-plus"></i>
-                                        <span>Tambah Anggota</span>
-                                    </button>
+                                    <i class="fa fa-plus"></i>
+                                    <span>Tambah Anggota</span>
+                                </button>
                         </div>
             
                     </div>
         </div>
     </div>
+@endsection
+
+
+@section('footcode')
+<script type="text/javascript">    
+  var Page = function () {
+
+    var tableInit = function(){                     
+        var table = $('#data-anggota').DataTable({
+                    language: {
+                        searchPlaceholder: "Cari dengan nama"
+                    },
+                    processing: true,
+                    serverSide: true,
+                    dom: '<f<t>ip>',
+                    ajax: { 
+                        'url'  :"{{url('/')}}/app/datatable_anggota", 
+                        'type' :'POST',
+                        'data' : { _token: "{{csrf_token()}}", status : $('#status').val(),sku:$('#sku').val() },
+                        },
+                    aoColumns: [
+                        {mData: "nama"},
+                        {mData: "sektor"},
+                        {mData: "telepon"},
+                        {mData: "status"},
+
+                       ],
+                    fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                        $(nRow).addClass('r_anggota');
+                        $(nRow).attr('data-id',aData['id']);
+                    } 
+                });  
+    };  
+
+      return {
+          init: function() { 
+            tableInit();
+             $(document).on('change','.filter_data_anggota', function (e) {
+                e.stopImmediatePropagation();
+                $('#data-anggota').dataTable().fnDestroy();
+                tableInit();
+                });
+             $(document).on("click",".r_anggota",function(){
+                window.location = "{{url('/')}}/app/anggota/detail/"+$(this).data('id');
+             });
+           }
+      };
+
+  }();
+
+  jQuery(document).ready(function() {
+      Page.init();
+  });  
+</script>
+<style type="text/css">
+    .table>tbody>tr>td {cursor: pointer;}
+</style>
 @endsection

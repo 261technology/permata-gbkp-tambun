@@ -23,11 +23,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('anggota');
+        return view('beranda');
     }
-
-    function upload(){
-        return view('anggota_upload');
-    }
-
 }

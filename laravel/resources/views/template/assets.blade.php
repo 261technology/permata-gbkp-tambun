@@ -11,6 +11,8 @@
     <link href="{{url('assets/template/coreui')}}/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
+
     <!-- Main styles for this application-->
     <link href="{{url('assets/template/coreui')}}/src/css/style.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/src/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -25,6 +27,9 @@
     <script src="{{url('assets/template/coreui')}}/node_modules/pace-progress/pace.min.js"></script>
     <script src="{{url('assets/template/coreui')}}/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="{{url('assets/template/coreui')}}/node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="{{url('assets/plugin/datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+
+
     <!-- Plugins and scripts required by this view-->
     {{-- <script src="{{url('assets/template/coreui')}}/node_modules/chart.js/dist/Chart.min.js"></script> --}}
     <script src="{{url('assets/template/coreui')}}/node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>

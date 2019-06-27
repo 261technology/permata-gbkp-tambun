@@ -16,5 +16,6 @@
     </div>
         @include('template.footer')
   </body>
+  @yield('footcode')
 </html>
  

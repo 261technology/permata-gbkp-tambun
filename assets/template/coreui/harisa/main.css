@@ -3,6 +3,14 @@ body{
 	  background-image: -webkit-linear-gradient(65deg, #a3a3a3 50%, #bebebe 50%);
 }
 
+main{
+	padding: 20px 10px;
+}
+.card-header .card-actions{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
 .app-body .main{
 	padding: 0px 10px;
 }
@@ -20,7 +28,7 @@ body{
 }
 
 .sidebar{
-	background :#960707c2;
+	background :#363e87c2;
 }
 
 .sidebar .nav-link{
@@ -29,7 +37,7 @@ body{
 }
 
 .sidebar .nav-link:hover{
-	background: #c43b3b;
+	background: #4169df;
 }
 
 .sidebar .nav-link .nav-icon{
@@ -43,7 +51,7 @@ body{
 }
 
 .sidebar .nav-link.active{
-	background: #ff3c3cb8;
+	background: #0019ffb8;
 	font-weight: 700;
 }
 
@@ -96,4 +104,101 @@ body{
 
 .btn-outline-secondary{
 	color: #696060;
+}
+
+.meta-project{
+	width: 20%;
+	border-right: 1px solid #29363d;
+	border-left: 1px solid #29363d;
+	background-color: #404040;
+	color:#f7f7f7;
+	font-size:11px;
+}
+
+
+table{
+	background: #fff;
+}
+
+.hidden{
+	display: none;
+}
+
+
+.sidebar .sidebar-minimizer{
+	background: #524d8d;
+
+}
+
+thead{
+	background: #404040;
+	color: #e3e3e3;
+}
+
+.con_issue{
+	background: #ed6c6c;padding-top: 5px;padding-bottom: 5px;
+	border: 1px #f42020 solid;
+}
+
+
+@media (min-width: 992px){
+	.sidebar-minimized .sidebar .sidebar-minimizer{
+		background: #524d8d;
+	}
+
+	.sidebar-minimized .sidebar .nav > .nav-dropdown > .nav-dropdown-items{
+		background: rgb(160, 51, 51);
+	}
+
+	.sidebar-minimized .sidebar .nav-item:hover > .nav-link{
+		background: #524d8d;
+	}
+}
+
+
+
+.awesomplete{
+	width: 100%;
+}
+
+.table-condensed thead{
+	background: #20a8d8;
+}
+
+.sidebar .nav-link .nav-icon{
+	color: #e3e3e3;
+}
+
+.nav-title{
+	background: #0012794f;
+	color: #d4d4d4;
+	padding: 5px 20px !important;
+	font-size: 9px;
+}
+
+.mini-label{
+	font-size: 12px;
+	margin-bottom: 2px;
+}
+
+.card-header{
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.Jselect2{
+	width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single{
+	height: 35px !important;
+	border-radius: 2px !important;
+}
+
+.error{
+	color: red;
+}
+
+.border-right-history{
+	border-right: 2px solid #a3a3a3 !important;
 }
