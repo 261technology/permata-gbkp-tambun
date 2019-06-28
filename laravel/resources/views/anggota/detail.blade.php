@@ -73,6 +73,12 @@
         </div>
 
         <div class="col-md-6">
+
+          <div class="form-group">
+              <label>Email</label>
+              <input type="text" name="email" id="email" value="{{$data['email']}}" class="form-control" readOnly>
+          </div>
+
           <div class="form-group">
             <label>Telepon</label>
             <div class="input-group">
@@ -85,10 +91,6 @@
             </div>
           </div>
 
-          <div class="form-group">
-              <label>Email</label>
-              <input type="text" name="email" id="email" value="{{$data['email']}}" class="form-control">
-          </div>
 
           <div class="form-group">
               <label>Domisili</label>
@@ -153,4 +155,11 @@
       Page.init();
   });  
 </script>
+
+
+<style type="text/css">
+  .form-control:disabled, .form-control[readonly]{
+    background: #f1f1f1 !important;
+  }
+</style>
 @endsection

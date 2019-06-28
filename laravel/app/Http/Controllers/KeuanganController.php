@@ -29,6 +29,10 @@ class keuanganController extends Controller
         return view('keuangan',compact('sektor'));
     }
 
+    function upload_kas(){
+        return view('keuangan.upload_kas');
+    }
+
     public function datatable_pemasukan_kas(Request $request){
         $model  = new Keuangan();
         $length         = $request->input('length');

@@ -29,11 +29,11 @@ class AnggotaController extends Controller
         $pekerjaan  = Harisa::get_pekerjaan();
         $sektor     = Harisa::get_sektor();
         $marga      = Harisa::get_marga();
-        return view('anggota',compact('sektor','marga','pekerjaan'));
+        return view('anggota.list',compact('sektor','marga','pekerjaan'));
     }
 
     function upload_anggota(){
-        return view('anggota_upload');
+        return view('anggota.upload');
     }
 
     function detail($id){
@@ -45,7 +45,13 @@ class AnggotaController extends Controller
         $sektor     = Harisa::get_sektor();
         $marga      = Harisa::get_marga();
         $pendidikan = Harisa::get_pendidikan();
-        return view('anggota_detail',compact('pendidikan','data','sektor','marga','pekerjaan'));
+        return view('anggota.detail',compact('pendidikan','data','sektor','marga','pekerjaan'));
+    }
+
+    function profile($id){
+        $model  = new Anggota();
+        $data   = $model->get_anggota($id);
+        return view('anggota.profile',compact('data'));
     }
 
     function upload_anggota_process(Request $request){

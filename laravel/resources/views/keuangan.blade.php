@@ -54,7 +54,7 @@
 
                 <div class="row">
                             <div class="col-md-12">
-                              <label><h6 class="text-muted">Riwayat pemasukan kas</h6></label>
+                              <label><h6 class="text-muted">Pemasukan kas anggota</h6></label>
                               <table id="data-kas" class="table table-striped" style="width: 100%;">
                                   <thead>
                                       <tr>
