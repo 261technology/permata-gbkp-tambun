@@ -11,7 +11,7 @@
                     <?php if(!empty(Session::get('notif'))) :  ?>
                     <div class="alert alert-warning">
                     {!! Session::get('notif') !!}
-                    </div>
+                    </div> 
                     <?php endif; ?>
                     <form action="{{route('upload_data_kas')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}

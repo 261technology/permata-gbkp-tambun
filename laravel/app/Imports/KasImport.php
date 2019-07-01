@@ -17,26 +17,11 @@ class KasImport implements ToModel, WithHeadingRow, WithChunkReading, ShouldQueu
     */
     public function model(array $row)
     {   
-        return new ka([
-            'nama' => $row['nama'],
-            'marga' => $row['marga'],
-            'tempat_lahir' => $row['tempat_lahir'],
-            'tanggal_lahir' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal_lahir']),
-            'jenis_kelamin' => $row['jenis_kelamin'],
-            'telepon' => "'".$row['telepon']."'",
-            'email' => $row['email'],
-            'alamat' => $row['alamat'],
-            'domisili' => $row['domisili'],
-            'pekerjaan' => $row['pekerjaan'],
-            'pendidikan' => $row['pendidikan'],
-            'jurusan' => $row['jurusan'],
-            'sekolah' => $row['sekolah'],
-            'kantor' => $row['kantor'],
-            'hobi' => $row['hobi'],
-            'sektor' => $row['sektor'],
-            'tahun_ngawan' => $row['tahun_ngawan'],
-            'lokasi_ngawan' => $row['lokasi_ngawan'],
-            'instagram' => $row['instagram'],
+        return new Keuangan([
+            'nama_anggota' => $row['nama'],
+            'tanggal_pembayaran' => date('Y-m-d'),
+            'nominal' => $row['iuran'],
+            'tahun' => 2019,
             'created_at' => date('Y-m-d'),
             'updated_at' => date('Y-m-d'),
         ]);

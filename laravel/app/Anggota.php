@@ -36,18 +36,18 @@ class Anggota extends Model
 
         if(!empty($searchValue)){
             $query->where(function($q) use ($searchValue) {
-                  $q->whereRaw("UPPER(nama) like '%".$searchValue."%'")
-                    ->orWhereRaw("UPPER(marga) like '%".$searchValue."%'");
+                  $q->whereRaw("UPPER(a.nama) like '%".$searchValue."%'")
+                    ->orWhereRaw("UPPER(a.marga) like '%".$searchValue."%'");
               });
 
         } 
 
-        $fieldTable = array('nama','sektor','telepon','status');
+        $fieldTable = array('a.nama','a.sektor','a.telepon','a.status');
                 
         if(!empty($fieldTable[$orderColumn])){
             $query->orderBy($fieldTable[$orderColumn],$orderDir);
         }else{
-            $query->orderBy('nama','asc');
+            $query->orderBy('a.nama','asc');
         }
         
         return array(

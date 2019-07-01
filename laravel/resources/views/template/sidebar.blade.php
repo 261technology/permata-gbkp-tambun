@@ -27,10 +27,21 @@
                 <i class="nav-icon icon-puzzle"></i> Iuran Kas
                 <span class="badge badge-warning">dev.</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/keuangan">
-                <i class="nav-icon fa fa-dollar"></i> Keuangan
+            <li class="nav-item nav-dropdown open">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon fa fa-dollar"></i> Keuangan</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                <a class="nav-link" href="{{url('/')}}/app/keuangan/pemasukan">
+                <i class="nav-icon icon-list"></i> Pemasukan</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{url('/')}}/app/keuangan/pengeluarann">
+                <i class="nav-icon icon-list"></i> Pengeluaran
                 <span class="badge badge-warning">dev.</span></a>
+                </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-title">Administasi</li>
             <li class="nav-item">

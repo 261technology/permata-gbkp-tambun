@@ -8,14 +8,33 @@ use DB;
 class Keuangan extends Model
 {
     protected $guarded = [];
+    protected $table = 'kas';
 
-    function get_anggota($id){
-    	return  DB::table('anggotas')->find($id);
+    function get_iuran_kas($year = null){
+        if(empty($year)){
+            $year = date('Y');
+        }
+
+        $data =   DB::table('m_parameter')
+                    ->select('type','nama')
+                    ->where(function($q){
+                      $q->where('type','=','iuran_kas_pekerja')
+                        ->orWhere('type','=','iuran_kas_pelajar');
+                        })
+                    ->where('tahun','=',$year)
+                    ->get();
+
+        $param = array();
+        foreach ($data as $key => $value) {
+            $param[$value->type]= intval($value->nama);
+        }
+        return $param;
     }
 
-
-    function get_datatable_pemasukan_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$status){
-        $query      = DB::table('anggotas as a')->select('a.*');
+    function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$iuran_pekerja,$iuran_pelajar){
+        $query      = DB::table('kas as a')
+                        ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"))
+                        ->leftJoin('anggotas as b','a.id_anggota','=','b.id');
         $countAll   = $query->count();
 
 
@@ -32,7 +51,7 @@ class Keuangan extends Model
 
         } 
 
-        $fieldTable = array('nama','sektor','telepon','status');
+        $fieldTable = array('nama','nominal','tanggal_pembayaran','keterangan',null);
                 
         if(!empty($fieldTable[$orderColumn])){
             $query->orderBy($fieldTable[$orderColumn],$orderDir);
