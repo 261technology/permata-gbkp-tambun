@@ -5,8 +5,6 @@
 <link href="{{url('assets/plugin/datatables/datatablesBootsrap.min.css')}}" rel="stylesheet">
 <script src="{{url('assets/plugin/datatables/datatables.js')}}"></script>
 <script src="{{url('assets/plugin/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-<script src="{{url('assets/plugin/jquery.priceformat.js')}}"></script>
 @endsection
 
 @section('content')
@@ -32,7 +30,7 @@
                     </div>    
                      <div class="col-sm-8" style="margin-bottom: 15px;">
                         <div class="row">
-                            <div class="offset-md-4 col-md-4">
+                            <div class="col-md-4">
                                     <div class="form-group">
                                             <select id="sektor" class="form-control">
                                                 <option value="x">Semua Sektor</option>
@@ -50,6 +48,14 @@
                                             </select>
                                         </div>
                             </div>
+
+                            <div class="col-md-4 text-right">
+                                <button id="tambah_iuran" class="btn btn-success btn-md"  type="button" 
+                                data-toggle="modal" data-target="#modal_tambah_iuran_kas" style="margin-bottom: 5px">
+                                  <i class="fa fa-plus"></i>
+                                  <span>Catat Pembayaran</span>
+                              </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,12 +66,12 @@
                               <table id="data-kas" class="table table-striped" style="width: 100%;">
                                   <thead>
                                       <tr>
-                                            <th>Nama</th>
-                                            <th>Nominal</th>
-                                            <th>Kategori</th>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
-                                            <th></th>
+                                            <th width="40%">Nama</th>
+                                            <th width="15%">Nominal</th>
+                                            <th width="10%">Kategori</th>
+                                            <th width="15%">Tanggal</th>
+                                            <th width="15%">Keterangan</th>
+                                            <th width="5%"></th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -82,6 +88,47 @@
             </div>
             </div>
     </div>
+
+
+<!-- MODAL -->
+
+<!-- Modal Tambah Iuran Kas-->
+<div class="modal fade" id="modal_tambah_iuran_kas">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Catatan Iuran Kas</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+            <hr>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label>Nama Anggota</label>
+                      <select name="iuran_nama" id="iuran_nama" class="form-control" required="required" style="width:100%;">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nominal</label>
+                    <input type="text" name="iuran_nominal" id="iuran_nominal" class="form-control rupiah" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <textarea id="iuran_keterangan" name="iuran_keterangan" class="form-control" rows="4"></textarea>
+                </div>
+              
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-danger btn-sm col-md-offset-4 col-md-2" data-dismiss="modal">Batal</button>
+                    <button type="button" id="simpan_iuran_kas" class="btn btn-success btn-sm col-md-2">Simpan</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
 
 
@@ -113,7 +160,11 @@
                         {mData: "status_pekerja"},
                         {mData: "tanggal_pembayaran"},
                         {mData: "keterangan"},
-
+                        {
+                          'mRender' : function(data,type,obj){
+                            return "<button class='btn btn-xs btn-danger' ><i class='fa fa-trash'></i></button>";
+                          }
+                        },
                        ],
                     fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                         $(nRow).addClass('r_anggota');
@@ -138,6 +189,37 @@
                       centsLimit: 0
                   });
               });
+
+              $("#iuran_nama").select2({
+                      placeholder: "Pilih Anggota",
+                      width: 'resolve',
+                      allowClear : true,
+                      ajax: {
+                          type: 'POST',
+                          url:base_url+"/app/json/anggota",
+                          dataType: "json",
+                          data: function (params) {
+                              return {
+                                  q: params.term,
+                                  _token: "{{csrf_token()}}"
+                              };
+                          },
+                          processResults: function (data) {
+                              return {
+                                  results: $.map(data, function(obj) {
+                                      return { id: obj.id, text: obj.nama};
+                                  })
+                              };
+                          },
+                          
+                      }
+              }); 
+
+             $(document).on("click","#simpan_iuran_kas",function(){
+                
+             });
+
+
            }
       };
 

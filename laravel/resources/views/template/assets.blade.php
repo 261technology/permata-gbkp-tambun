@@ -13,6 +13,11 @@
     <link href="{{url('assets/template/coreui')}}/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <link href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
 
+     <!-- Select 2-->
+    <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2-bootstrap.css')}}">
+
+
     <!-- Main styles for this application-->
     <link href="{{url('assets/template/coreui')}}/src/css/style.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/src/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
@@ -34,4 +39,11 @@
     {{-- <script src="{{url('assets/template/coreui')}}/node_modules/chart.js/dist/Chart.min.js"></script> --}}
     <script src="{{url('assets/template/coreui')}}/node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
     {{-- <script src="{{url('assets/template/coreui')}}/src/js/main.js"></script> --}}
+
+
+    <script src="{{url('assets/plugin/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{url('assets/plugin/jquery.priceformat.js')}}"></script>
     
+    <script type="text/javascript">
+        const base_url = "{{url('/')}}";
+    </script>

@@ -31,3 +31,5 @@ Route::post('app/keuangan/upload_data_kas', 'KeuanganController@upload_kas_proce
 
 Route::post('app/datatable_anggota', 'AnggotaController@datatable_anggota');
 Route::post('app/datatable_iuran_kas', 'KeuanganController@datatable_iuran_kas');
+
+Route::post('app/json/anggota', 'JsonController@list_anggota');

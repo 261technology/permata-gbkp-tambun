@@ -8,7 +8,7 @@ use DB;
 class Keuangan extends Model
 {
     protected $guarded = [];
-    protected $table = 'kas';
+    protected $table = 'iuran_kas';
 
     function get_iuran_kas($year = null){
         if(empty($year)){
@@ -32,7 +32,7 @@ class Keuangan extends Model
     }
 
     function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$iuran_pekerja,$iuran_pelajar){
-        $query      = DB::table('kas as a')
+        $query      = DB::table('iuran_kas as a')
                         ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"))
                         ->leftJoin('anggotas as b','a.id_anggota','=','b.id');
         $countAll   = $query->count();
