@@ -47,10 +47,10 @@ class keuanganController extends Controller
         $orderDir       = $_POST['order']['0']['dir'];
         $order          = $request->input('order');
         
-        $iuran_pekerja = Input::get('iuran_pekerja');
-        $iuran_pelajar = Input::get('iuran_pelajar');
+        $tahun  = Input::get('tahun');
+        $sektor = Input::get('sektor');
 
-        $output         = $model->get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$iuran_pekerja,$iuran_pelajar);  
+        $output         = $model->get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor);  
         $output['draw'] = $request->input('draw');
 
         echo json_encode($output); 
@@ -70,5 +70,35 @@ class keuanganController extends Controller
         } 
         Session::flash('notif', 'ERROR!!!!!!');
         return redirect()->back();
+    }
+
+    function add_iuran_kas(Request $request){
+        $model          = new Keuangan();
+        $result['data'] = 'failed';
+        $data           = array();
+        $data['id_anggota'] = $request->input('anggota');
+        $data['nominal']    = $request->input('nominal');
+        $data['tahun']      = $request->input('tahun');
+        $data['tanggal_pembayaran'] = $request->input('tanggal_pembayaran');
+        $data['keterangan'] = !empty($request->input('keterangan')) ? $request->input('keterangan') : "dibayarkan pada tanggal ".date('dd/mm/YYYY');
+
+        if($model->add_iuran_kas($data)){
+            $result['data']  = 'success';
+            Session::flash('notification', 'Berhasil mencatat pembayaran kas'); 
+        }
+        echo json_encode($result);
+    }
+
+    function delete_iuran_kas(Request $request){
+        $model          = new Keuangan();
+        $result['data'] = 'failed';
+        $id             = $request->input('id');
+
+        if($model->delete_iuran_kas($id)){
+            $result['data']  = 'success';
+            Session::flash('notification', 'Berhasil menghapus pembayaran kas'); 
+        }
+        echo json_encode($result);
+
     }
 }

@@ -55,6 +55,11 @@
                 <span class="badge badge-warning">dev.</span></a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{url('/')}}/app/agenda">
+                <i class="nav-icon fa fa-calendar"></i> Agenda
+                <span class="badge badge-warning">dev.</span></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/">
                 <i class="nav-icon fa fa-info"></i> Tentang
                 <span class="badge badge-warning">dev.</span></a>

@@ -13,6 +13,9 @@
     <link href="{{url('assets/template/coreui')}}/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <link href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
 
+    <!-- Moment -->
+     <script src="{{url('assets/plugin/moment/min/moment.min.js')}}"  type="text/javascript"></script>
+
      <!-- Select 2-->
     <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2-bootstrap.css')}}">
@@ -43,7 +46,15 @@
 
     <script src="{{url('assets/plugin/select2/js/select2.full.min.js')}}"></script>
     <script src="{{url('assets/plugin/jquery.priceformat.js')}}"></script>
+
+
+    <!-- Jquery Validation -->
+    <script src="{{url('assets/plugin/jquery-validation/dist/jquery.validate.min.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url('assets/plugin/jquery-validation/dist/additional-methods.min.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{url('assets/plugin/bootbox.min.js')}}" type="text/javascript" charset="utf-8"></script>
     
+
+    <script src="{{url('assets/js/main.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         const base_url = "{{url('/')}}";
     </script>

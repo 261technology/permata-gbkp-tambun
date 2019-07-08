@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#kas" role="tab" aria-controls="kas">Kas</a>
+                    <a class="nav-link active" data-toggle="tab" href="#iuran_kas" role="tab" aria-controls="iuran_kas">Iuran Kas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#kantin" role="tab" aria-controls="kantin">Kantin</a>
@@ -22,7 +22,7 @@
                 </li>
             </ul>
             <div class="tab-content">
-            <div class="tab-pane active" id="kas" role="tabpanel">
+            <div class="tab-pane active" id="iuran_kas" role="tabpanel">
                 <div class="row">
                     <div class="col-sm-4">
                         <h4 class="card-title mb-0">Keuangan Kas</h4>
@@ -32,8 +32,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                     <div class="form-group">
-                                            <select id="sektor" class="form-control">
-                                                <option value="x">Semua Sektor</option>
+                                            <select id="filter_sektor_iuran_kas" class="form-control filter_iuran_kas">
+                                                <option value="">Semua Sektor</option>
                                                 @foreach($sektor as $key => $value )
                                                 <option value="{{$value->id}}">{{$value->nama}}</option>
                                                 @endforeach;
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-4">
                                     <div class="form-group">
-                                             <select id="tahun" class="form-control">
+                                             <select id="filter_tahun_iuran_kas" class="form-control filter_iuran_kas">
                                                 <option value="{{date('Y')}}">{{ date('Y')}}</option>
                                                 <option value="{{date('Y')-1}}">{{ date('Y')-1}}</option>
                                             </select>
@@ -81,9 +81,9 @@
                         </div>
             </div>
 
-            <div class="tab-pane" id="profile" role="tabpanel">2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            <div class="tab-pane" id="kantin" role="tabpanel">2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-            <div class="tab-pane" id="messages" role="tabpanel">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            <div class="tab-pane" id="janji" role="tabpanel">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
             </div>
             </div>
@@ -101,8 +101,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-            <hr>
-            <form action="" method="POST">
+            <form id="form_iuran_kas" action="" method="POST">
                 <div class="form-group">
                     <label>Nama Anggota</label>
                       <select name="iuran_nama" id="iuran_nama" class="form-control" required="required" style="width:100%;">
@@ -111,6 +110,19 @@
                 <div class="form-group">
                     <label>Nominal</label>
                     <input type="text" name="iuran_nominal" id="iuran_nominal" class="form-control rupiah" required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Kas Untuk Tahun</label>
+                    <select id="iuran_tahun" class="form-control">
+                        <option value="{{date('Y')}}">{{ date('Y')}}</option>
+                        <option value="{{date('Y')-1}}">{{ date('Y')-1}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pembayaran</label>
+                    <input type="text" name="iuran_tanggal_pembayaran" id="iuran_tanggal_pembayaran" required class="form-control date-picker" readonly>
                 </div>
 
                 <div class="form-group">
@@ -133,6 +145,8 @@
 
 
 @section('footcode')
+
+
 <script type="text/javascript">    
   const iuran_pelajar = {{$param_iuran['iuran_kas_pelajar']}};
   const iuran_pekerja = {{$param_iuran['iuran_kas_pekerja']}};
@@ -148,7 +162,7 @@
                     ajax: { 
                         'url'  :"{{url('/')}}/app/datatable_iuran_kas", 
                         'type' :'POST',
-                        'data' : { _token: "{{csrf_token()}}", iuran_pekerja : iuran_pekerja, iuran_pelajar:iuran_pelajar },
+                        'data' : { _token: "{{csrf_token()}}", tahun : $('#filter_tahun_iuran_kas').val(), sektor : $('#filter_sektor_iuran_kas').val() },
                         },
                     aoColumns: [
                         {mData: "nama"},
@@ -162,7 +176,7 @@
                         {mData: "keterangan"},
                         {
                           'mRender' : function(data,type,obj){
-                            return "<button class='btn btn-xs btn-danger' ><i class='fa fa-trash'></i></button>";
+                            return "<button class='btn btn-xs btn-danger btn_delete_iuran' data-id='"+obj.id+"'><i class='fa fa-trash'></i></button>";
                           }
                         },
                        ],
@@ -176,10 +190,10 @@
       return {
           init: function() {
              tableKasInit(); 
-             $(document).on('change','.filter_data_anggota', function (e) {
+             $(document).on('change','.filter_iuran_kas', function (e) {
                 e.stopImmediatePropagation();
                 $('#data-kas').dataTable().fnDestroy();
-                tableInit();
+                tableKasInit();
                 });
              $('#data-kas').on( 'draw.dt', function () {
                 $('.rp').priceFormat({
@@ -215,8 +229,61 @@
                       }
               }); 
 
-             $(document).on("click","#simpan_iuran_kas",function(){
-                
+             $(document).on("click","#simpan_iuran_kas",function(e){
+                e.preventDefault();
+                if($('#form_iuran_kas').valid()){
+                    let iuran_nominal = $('#iuran_nominal').unmask();
+                    $.ajax({
+                        url: base_url+"/app/keuangan/add_iuran_kas",
+                        method: 'post',
+                        data:{_token: "{{csrf_token()}}",anggota : $('#iuran_nama').val(), nominal : iuran_nominal, tanggal_pembayaran : $('#iuran_tanggal_pembayaran').val(), keterangan : $('#iuran_keterangan').val(), tahun : $('#iuran_tahun').val()},
+                        dataType : "json",
+                        success:function(result){
+                                 if(result.data.trim()=='success'){
+                                  window.location.reload();
+                                }else{
+                                  bootbox.alert("Failed!", function(){});
+                                  }
+                                return result;
+                                }
+                    });
+                  }
+             });
+
+             $(document).on("click",".btn_delete_iuran",function(){
+                let id_iuran = $(this).data('id');
+                bootbox.confirm({
+                    message: "Hapus pemasukan kas ini?",
+                    buttons: {
+                        confirm: {
+                            label: 'Ya',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'Tidak',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result){
+                          $.ajax({
+                                  url: base_url+'/app/keuangan/delete_iuran_kas',
+                                  method: 'post',
+                                  data:{_token: "{{csrf_token()}}",id : id_iuran},
+                                  dataType : "json",
+                                  success:function(result){
+                                   if(result.data.trim()=='success'){
+                                    window.location.reload();
+                                  }else{
+                                    bootbox.alert("Failed!", function(){});
+                                    }
+                                  return result;
+                                  }
+
+                          });
+                        }
+                    }
+                })
              });
 
 
@@ -229,6 +296,7 @@
       Page.init();
   });  
 </script>
+
 <style type="text/css">
     .table>tbody>tr>td {cursor: pointer;}
 </style>

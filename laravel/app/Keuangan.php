@@ -31,16 +31,29 @@ class Keuangan extends Model
         return $param;
     }
 
-    function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$iuran_pekerja,$iuran_pelajar){
+    function add_iuran_kas($data){
+        return DB::table('iuran_kas')
+                ->insert($data);
+    }
+
+    function delete_iuran_kas($id){
+        return DB::table('iuran_kas')->where('id','=',$id)->delete();
+    }
+
+    function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor){
         $query      = DB::table('iuran_kas as a')
-                        ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"))
+                        ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"),'b.sektor')
                         ->leftJoin('anggotas as b','a.id_anggota','=','b.id');
         $countAll   = $query->count();
 
 
-        // if($status != 'x'){
-        //     $query->where('status','=',$status);
-        // }
+        if(!empty($tahun)){
+            $query->where('tahun','=',$tahun);
+        }
+
+        if(!empty($sektor)){
+            $query->where('sektor','=',$sektor);
+        }
 
 
         if(!empty($searchValue)){

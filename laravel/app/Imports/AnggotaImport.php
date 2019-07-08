@@ -38,9 +38,7 @@ class AnggotaImport implements ToModel, WithHeadingRow, WithChunkReading, Should
             'sektor' => $row['sektor'],
             'tahun_ngawan' => $row['tahun_ngawan'],
             'lokasi_ngawan' => $row['lokasi_ngawan'],
-            'instagram' => $row['instagram'],
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'instagram' => $row['instagram']
         ]);
     }
 

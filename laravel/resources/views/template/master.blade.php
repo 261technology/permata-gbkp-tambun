@@ -10,12 +10,18 @@
         @include('template.sidebar')      
           <main class="main">
               <div class="container-fluid">
+                @include('template.pesan')
                 @yield('content')
               </div>
           </main>
     </div>
         @include('template.footer')
   </body>
-  @yield('footcode')
+@yield('footcode')
+
+<style type="text/css">
+  .form-control[readonly].date-picker{
+    background-color: #fff !important;
+  }
+</style>
 </html>
- 
