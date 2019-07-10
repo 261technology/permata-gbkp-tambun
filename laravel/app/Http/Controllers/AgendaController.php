@@ -50,7 +50,44 @@ class AgendaController extends Controller
             ->where('id', $request->input('acara_id'))
             ->update($data);
         }
-        echo json_encode($data);
+        Session::flash('notification', 'Agenda data has been updated');
+        $result['data'] = 'success';
+        echo json_encode($result);
 
     }
+
+    function update_jam_agenda(Request $request){
+        $id                 = $request->input('id');
+        $data['mulai']      = $request->input('mulai');
+        $data['selesai']    = $request->input('selesai');
+        
+        // DB::enableQueryLog();
+        DB::table('acara')
+            ->where('id', $id)
+            ->update($data);
+        
+        Session::flash('notification', 'Agenda data has been updated');
+        $result['data'] = 'success';
+        echo json_encode($result);
+        // $query = DB::getQueryLog();
+        // echo json_encode($query);
+    }
+
+    function delete_agenda(Request $request){
+        $id                 = $request->input('id');
+        
+        DB::enableQueryLog();
+        DB::table('acara')
+            ->where('id', $id)
+            ->delete();
+        
+        Session::flash('notification', 'Agenda '.$request->input('nama').' data has been deleted');
+        $result['data'] = 'success';
+        echo json_encode($result);
+        // $query = DB::getQueryLog();
+        // echo json_encode($query);
+    }
+
+
+
 }

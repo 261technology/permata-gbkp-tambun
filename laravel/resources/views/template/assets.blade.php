@@ -11,6 +11,7 @@
     <link href="{{url('assets/template/coreui')}}/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{url('assets/template/coreui')}}/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    
     <link href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
 
     <!-- Moment -->

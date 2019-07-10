@@ -34,6 +34,9 @@
 					</div>
 					<div class='calendar col-md-5'>
 							<div id="event"></div>
+							<button class="btn btn-md pull-right btn-success" id="btn_addAgenda" style="margin-top: 10px;">
+								<i class="fa fa-plus"> Tambahkan Agenda</i>
+							</button>
 					</div>
 				</div>	
 			</div>
@@ -53,7 +56,9 @@
           </div>
           <form id="form_event">
           <div class="modal-body">
-                
+                	<button class="btn btn-danger pull-right btn-sm" id="btn_delete_agenda" style="margin-bottom: 10px;" type="button">
+                		<i class="fa fa-trash"></i>
+                	</button>
                     <div class="form-group">
                         <label><strong>Nama Acara</strong></label>
                         <input type="hidden" name="acara_id" id="acara_id">
@@ -96,9 +101,9 @@
 					<div class="form-group">
 						<label><strong>Tipe Acara</strong></label>
 						<select class="form-control" id="acara_tipe" name="acara_tipe">
-						<option value="event">event</option>
+						<option value="persekutuan">persukutan</option>
+						<option value="pendalaman Alkitab">pa</option>
 						<option value="rapat">rapat</option>
-						<option value="pa">pa</option>
 						<option value="pp">pp</option>
 						<option value="lain-lain">lain-lain</option>
 						</select>
@@ -180,7 +185,10 @@
 			      defaultDate: '{{date('Y-m-d')}}',
 			      selectable: true,
 			      dateClick: function(date) {
-						calendarGoTo(date);
+						calendarGoTo(date.date);
+					          },
+				  eventClick: function(data) {
+						calendarGoTo(data.event.start);
 					          },
 			      eventLimit: true, // allow "more" link when too many events
 			      events: {
@@ -197,7 +205,7 @@
 			    calendar2.render();
 			  	
 			  	var calendarGoTo = function(date){
-			  	  	calendar1.gotoDate(date.date);
+			  	  	calendar1.gotoDate(date);
 			  	 }
 
 			  	 var addEventModal = function(start,end){
@@ -208,14 +216,13 @@
 			  	 	
 			  	 	let date_end = end.getFullYear()+'-' + (end.getMonth()+1) + '-'+end.getDate();
 			  	 	let time_end = (("0" + end.getHours()).slice(-2))+':' + (("0" + end.getMinutes()).slice(-2));
-
-			  	 	console.log(time_start);
 			  	 	$('#acara_tanggal_mulai').val(date_start);
 			  	 	$('#acara_jam_mulai').val(time_start);
 
 			  	 	$('#acara_tanggal_selesai').val(date_end);
 			  	 	$('#acara_jam_selesai').val(time_end);
-
+			  	 	$('#btn_delete_agenda').addClass('hidden');
+			  	 	$('#modal_event_label').text('Tambahkan');
 			  	 	$('#modal_event').modal('show');
 			  	 }
 
@@ -236,35 +243,49 @@
 			  	 	$('#acara_deskripsi').val(event.extendedProps.desripsi);
 			  	 	$('#acara_tipe').val(event.extendedProps.tipe).trigger('change');
 			  	 	$('#acara_skala').val(event.extendedProps.skala).trigger('change');
+			  	 	$('#btn_delete_agenda').removeClass('hidden');
+			  	 	$('#modal_event_label').text('Edit');
 			  	 	$('#modal_event').modal('show');
 			  	 	
 			  	 }
 
 			  	 var adjustTimeEvenet = function(event){
-			  	 	console.log(event);
-					  // $.ajax({
-					  //   url: "update.php",
-					  //   type: "POST",
-					  //   dataType: "json",
-					  //   data: ({
-					  //     id: event.id,
-					  //     day: dayDelta,
-					  //     min: minuteDelta,
-					  //     allday: allDay,
-					  //     drag: drag
-					  //   }),
-					  //   success: function(data, textStatus) {
-					  //     if (!data)
-					  //     {
-					  //       revertFunc();
-					  //       return;
-					  //     }
-					  //     calendar.fullCalendar('updateEvent', event);
-					  //   },
-					  //   error: function() {
-					  //     revertFunc();
-					  //   }
-					  // });
+			  	 	let id = event.id;
+			  	 	let start = event.start.getFullYear()+'-' + (event.start.getMonth()+1) + '-'+event.start.getDate()+' '+(("0" + event.start.getHours()).slice(-2))+':' + (("0" + event.start.getMinutes()).slice(-2));
+			  	 	
+			  	 	let end = event.end.getFullYear()+'-' + (event.end.getMonth()+1) + '-'+event.end.getDate()+' '+(("0" + event.end.getHours()).slice(-2))+':' + (("0" + event.end.getMinutes()).slice(-2));
+			  	 	bootbox.confirm({
+					    message: "Perbaharui jam agenda?",
+					    buttons: {
+					        confirm: {
+					            label: 'Ya',
+					            className: 'btn-success'
+					        },
+					        cancel: {
+					            label: 'Tidak',
+					            className: 'btn-danger'
+					        }
+					    },
+					    callback: function (result) {
+					        if(result == true){
+					        	$.ajax({
+					                    url: "{{url('/')}}/app/agenda/update_jam_agenda",
+					                    type:'POST',
+					                    data: {id:id, mulai : start, selesai : end, _token: "{{csrf_token()}}"},
+					                    dataType : "json",
+					                    success:function(result){
+					                    	if(result.data == 'success'){
+					                    		location.reload();
+					                    	}
+					                    }
+
+					            });
+					        }else{
+
+					        }
+					    }
+					});
+			  	 	
 			  	 }
 
 	      return {
@@ -275,7 +296,6 @@
 
 								var dataForm  = $('#form_event').serialize();
 								dataForm = dataForm+"&_token={{csrf_token()}}"; 
-								console.log(dataForm);
 								var url = "{{url('/')}}/app/agenda/update_agenda";
 								$.ajax({
 					                    url: url,
@@ -290,6 +310,51 @@
 
 					            });
 						}
+	          		});
+
+	          		$(document).on("click","#btn_addAgenda",function(){
+	          			$("#acara_id").val('');
+	          			$("#acara_tanggal_mulai").val('');
+	          			$("#acara_tanggal_selesai").val('');
+	          			$("#acara_jam_mulai").val('');
+	          			$("#acara_jam_selesai").val('');
+			  	 		$(".form_modal_acara").val('');
+			  	 		$("#modal_event_label").text("Tambahkan");
+			  	 		$("#modal_event").modal("show");
+	          		});
+
+	          		$(document).on("click","#btn_delete_agenda",function(){
+	          			let id = $("#acara_id").val();	
+	          			let nama = $("#acara_nama").val();	
+	          			bootbox.confirm({
+					    message: "Hapus agenda " + nama + " ?",
+					    buttons: {
+					        confirm: {
+					            label: 'Ya',
+					            className: 'btn-success'
+					        },
+					        cancel: {
+					            label: 'Tidak',
+					            className: 'btn-danger'
+					        }
+						    },
+						    callback: function (result) {
+						        if(result == true){
+						        	$.ajax({
+						                    url: "{{url('/')}}/app/agenda/delete_agenda",
+						                    type:'POST',
+						                    data: {id:id, _token: "{{csrf_token()}}", nama : nama},
+						                    dataType : "json",
+						                    success:function(result){
+						                    	if(result.data == 'success'){
+						                    		location.reload();
+						                    	}
+						                    }
+
+						            });
+						        }
+						    }
+						});
 	          		});
 				}
 	      };
@@ -309,22 +374,11 @@
 		.fc-view-container{
 			border: 1px solid #2d3e50;
 		}
-
-		.btn_delete_agenda {
-			color:black;
-			position: absolute;
-			top: 0;
-			right: 0;
-		    width:13px;
-		    height: 13px;
-		    text-align:center;
-		    border-radius:50%;
-		    font-size: 10px;
-			cursor: pointer;
-		    background-color: #FFF
-		}
 		.fc-highlight{
 			background-color: #036bd8 !important;
+		}
+		.fc-event-container{
+			cursor: pointer;
 		}
 	</style>
 @endsection

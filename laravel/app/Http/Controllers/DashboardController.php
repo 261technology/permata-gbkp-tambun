@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Dashboard;
+use App\Helpers\Harisa;
+use Session;
 
 class DashboardController extends Controller
 {
@@ -13,7 +16,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        
     }
 
     /**
@@ -23,6 +26,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
-    }
+        $model  = new Dashboard();
+        $chartAnggota = $model->getChartAnggota();
+        //echo json_encode($chartAnggota);
+        return view('dashboard.index',compact('chartAnggota'));
+    } 
 }

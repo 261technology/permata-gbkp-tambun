@@ -13,6 +13,7 @@ use Redirect;
 
 class Harisa
 {
+
     public static function get_marga(){
         return DB::table('m_parameter')->where('type','=','marga')->get()->toArray();
     }

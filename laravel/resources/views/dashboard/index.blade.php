@@ -24,7 +24,18 @@
 @endsection
 
 @section('content')
-	<div class="container-fluid row">
+	<div class="row">
+		<div class="col-md-6">
+			<div id="chart_anggota"></div>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header"></div>
+				<div class="card-body"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div id='calendar1' class='calendar col-md-8'></div>
   		<div id='calendar2' class='calendar col-md-4'></div>
 	</div>
@@ -33,5 +44,35 @@
 
 
 @section('footcode')
-
-@endsection
+<script type="text/javascript">
+	Highcharts.chart('chart_anggota', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: <?= json_encode($chartAnggota) ?>
+    }]
+}); 
+</script>
+@endsection 

@@ -45,6 +45,11 @@
             </li>
             <li class="nav-title">Administasi</li>
             <li class="nav-item">
+              <a class="nav-link" href="{{url('/')}}/app/agenda">
+                <i class="nav-icon fa fa-calendar"></i> Agenda
+                <span class="badge badge-warning">dev.</span></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/anggota/keluarga">
                 <i class="nav-icon icon-puzzle"></i> Keluarga
                 <span class="badge badge-warning">dev.</span></a>
@@ -52,11 +57,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/rencana_keuangan">
                 <i class="nav-icon icon-puzzle"></i> Renc. Keuangan
-                <span class="badge badge-warning">dev.</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/agenda">
-                <i class="nav-icon fa fa-calendar"></i> Agenda
                 <span class="badge badge-warning">dev.</span></a>
             </li>
             <li class="nav-item">

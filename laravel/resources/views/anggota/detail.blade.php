@@ -24,7 +24,7 @@
           </div>
 
           <div class="form-group">
-            <label>Marga</label>
+            <label>Jenis Kelamin</label>
             <select id="jenis_kelamin"  name="jenis_kelamin" class="form-control">
                 <option {{"Laki-laki" == $data['jenis_kelamin'] ? 'selected' : ''}}  value="Laki-laki">Laki-laki</option>
                 <option {{"Perempuan" == $data['jenis_kelamin'] ? 'selected' : ''}}  value="Perempuan">Perempuan</option>
@@ -38,7 +38,7 @@
 
           <div class="form-group">
             <label>Tanggal Lahir</label>
-            <input type="text" name="tempat_lahir" id="tanggal_lahir" value="{{$data['tanggal_lahir']}}" class="form-control datepicker">
+            <input type="text" name="tempat_lahir" id="tanggal_lahir" value="{{$data['tanggal_lahir']}}" class="form-control date-picker">
           </div>
 
           <div class="form-group">
