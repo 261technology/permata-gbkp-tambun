@@ -53,7 +53,6 @@ class AgendaController extends Controller
         Session::flash('notification', 'Agenda data has been updated');
         $result['data'] = 'success';
         echo json_encode($result);
-
     }
 
     function update_jam_agenda(Request $request){

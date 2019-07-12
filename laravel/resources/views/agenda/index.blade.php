@@ -80,7 +80,7 @@
 						</div>
 						<div class="form-group col-sm-4">
 							<label for="postal-code">Jam</label>
-							<input class="form-control form_modal_acara" id="acara_jam_mulai" name="acara_jam_mulai" type="text" placeholder="hh:mm">
+							<input class="form-control form_modal_acara time-picker" id="acara_jam_mulai" name="acara_jam_mulai" jamMenit="true" type="text" placeholder="hh:mm">
 						</div>
 					</div>
 
@@ -94,17 +94,17 @@
 						</div>
 						<div class="form-group col-sm-4">
 							<label for="postal-code">Jam</label>
-							<input class="form-control form_modal_acara" id="acara_jam_selesai" name="acara_jam_selesai" type="text" placeholder="hh:mm" >
+							<input class="form-control form_modal_acara time-picker" id="acara_jam_selesai" jamMenit="true" name="acara_jam_selesai" type="text" placeholder="hh:mm" >
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label><strong>Tipe Acara</strong></label>
 						<select class="form-control" id="acara_tipe" name="acara_tipe">
-						<option value="persekutuan">persukutan</option>
-						<option value="pendalaman Alkitab">pa</option>
-						<option value="rapat">rapat</option>
-						<option value="pp">pp</option>
+						<option value="persekutuan">Persukutuan</option>
+						<option value="pendalaman_alkitab">Pendalaman Alkitab</option>
+						<option value="perpulungen_permata">Perpulungen Permata</option>
+						<option value="rapat">Rapat</option>
 						<option value="lain-lain">lain-lain</option>
 						</select>
 					</div>

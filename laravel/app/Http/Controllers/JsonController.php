@@ -38,5 +38,16 @@ class JsonController extends Controller
         echo json_encode($data->get()); 
     }
 
+    function select2Anggota(Request $request){
+        $q = $request->input('q');
+        
+        $query = DB::table('anggotas')->select('id','nama');
+        if(!empty($q)){
+            $query->whereRaw("UPPER(nama) LIKE '%".strtoupper($q)."%'");
+        }
+
+        echo json_encode($query->get());
+    }
+
     
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Anggota;
 use App\Helpers\Harisa;
+use Illuminate\Support\Facades\Hash;
 use Session;
 use DB;
 
@@ -51,6 +52,7 @@ class AuthController extends Controller
             Session::flash('notification','Selamat datang '.Session::get('nama').' !!!');
             return redirect(url('/').'/app');
         }else{
+            Session::flash('notification','Email atau password anda salah');
             return redirect(url('/').'/login');
         }
 
@@ -58,25 +60,19 @@ class AuthController extends Controller
 
     function validate_login($email,$password){
         $result = false;
-        $validasi     = DB::table('auth') 
-                                ->select('auth.id_anggota as id_anggota','m_role.nama as role','auth.role as id_role')
-                                ->join('m_role','m_role.id','=','auth.role')
-                                ->where('email','=',$email)
-                                ->where('password','=',$password)
+        $user     = DB::table('anggotas as user') 
+                                ->select('user.*','user.id as id_anggota','m_role.nama as role_name','user.role as role_id')
+                                ->join('m_role','m_role.id','=','user.role')
+                                ->where('user.email','=',$email)
                                 ->first();
-        if(!empty($validasi)){
-            Session::put('id', $validasi->id_anggota);
-            Session::put('id_role', $validasi->id_role);
-            Session::put('role', $validasi->role);
-            if(!empty($validasi->id_anggota)){
-                $user = DB::table('anggotas')->find($validasi->id_anggota);
-                if(!empty($user)){
-                    foreach ($user as $key => $value) {
+
+        if(!empty($user)){
+            if (Hash::check($password, $user->password)) {
+                foreach ($user as $key => $value) {
                         Session::put($key,$value);
-                    }
-                    Session::put('isLogin',1);
-                    $result = true;
                 }
+                Session::put('isLogin',1);
+                $result = true;
             }
         }
         return $result;
@@ -115,17 +111,14 @@ class AuthController extends Controller
         $data['sektor'] = $request->input('sektor');
         $data['hobi'] = $request->input('hobi');
         $data['kantor'] = $request->input('kantor');
+        $data['role']  = 3;
+        $data['password']   = Hash::make($request->input('password'));
 
 
 
         $id_anggota = DB::table('anggotas')->insertGetId($data);
         
         if(!empty($id_anggota)){
-            $valid['id_anggota'] = $id_anggota;
-            $valid['email'] = $request->input('email');
-            $valid['role']  = 3;
-            $valid['password']   = $request->input('password');
-            DB::table('auth')->insert($valid);
             Session::flash('notification', 'Anda berhasil mendaftar silahkan hubungi pengurus runggun untuk mengaktifkan akun anda');
             return redirect(url('/').'/login');
         }else{

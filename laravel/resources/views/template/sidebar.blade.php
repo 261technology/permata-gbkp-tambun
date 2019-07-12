@@ -13,7 +13,7 @@
                 <span class="badge badge-warning">dev.</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/pa">
+              <a class="nav-link" href="{{url('/')}}/app/pa"> 
                 <i class="nav-icon icon-puzzle"></i> Pen. Alkitab
                 <span class="badge badge-warning">dev.</span></a>
             </li>
@@ -47,7 +47,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/agenda">
                 <i class="nav-icon fa fa-calendar"></i> Agenda
-                <span class="badge badge-warning">dev.</span></a>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/anggota/keluarga">

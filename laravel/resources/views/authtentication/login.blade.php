@@ -10,7 +10,7 @@
 
 <!-- Icons-->
 <link href="{{url('assets/template/coreui')}}/node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-<link href="{{url('assets/template/coreui')}}/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+<link href="{{url('assets/template/coreui')}}/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"> 
 <link href="{{url('assets/template/coreui')}}/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <link href="{{url('assets/template/coreui')}}/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 <link href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
@@ -55,6 +55,11 @@
                               <input class="form-control" type="password" name="password" id="password" placeholder="Password">
                           </div>
                           <div class="row">
+                              @if(Session::has('notification'))
+                                    <div class="alert alert-danger alert-block col-12">
+                                        <strong>{{ Session::get('notification') }}</strong>
+                                    </div>
+                                @endif
                               <div class="col-6">
                                   <button class="btn btn-login px-4" type="submit">Login</button>
                               </div>
