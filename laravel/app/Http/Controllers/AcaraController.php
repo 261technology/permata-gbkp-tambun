@@ -51,6 +51,29 @@ class AcaraController  extends Controller
         echo json_encode($data);
     }
 
+    function getPaView(Request $request){
+        $model      = new Acara();
+        $data       = $model->get_pa($request->input('id'));
+        $data->tanggal_mulai = null;
+        $data->jam_mulai = null;
+        $data->tanggal_selesai = null;
+        $data->jam_selesai = null;
+        
+        if(!empty($data->mulai)){
+            $mulai = explode(' ', $data->mulai);
+            $data->tanggal_mulai = $mulai[0];
+            $data->jam_mulai = substr($mulai[1], 0,5);
+        }
+        if(!empty($data->selesai)){
+            $selesai = explode(' ', $data->selesai);
+            $data->tanggal_selesai = $selesai[0];
+            $data->jam_selesai = substr($selesai[1], 0,5);;
+        }
+
+        $data->people = $model->getPaPeople($request->input('id'));
+        echo json_encode($data);
+    }
+
     function datatable_pa(Request $request){
         $model  = new Acara();
         $length         = $request->input('length');
@@ -80,6 +103,7 @@ class AcaraController  extends Controller
         $data_pa['ayat']        = $request->input('pa_ayat');
         $data_pa['pendamping']  = $request->input('pa_pendamping');
         $data_pa['lokasi']      = $request->input('pa_lokasi');
+        $data_pa['persembahan']      = $request->input('persembahan');
 
 
         if((empty($request->input('pa_id')))&&(empty($request->input('acara_id')))){
@@ -121,7 +145,7 @@ class AcaraController  extends Controller
         }
 
         foreach ($request->input('pa_tuan_rumah') as $key => $value) {
-             $data['peran']         = 'tuan_rumah';
+             $data['peran']         = 'tuan rumah';
              $data['id_anggota']    = $value;
              DB::table('aktivitas_anggota')->insert($data);
         }
@@ -131,20 +155,9 @@ class AcaraController  extends Controller
     }
 
     function getPesertaPa(Request $request){
+        $model      = new Acara();
         $id = $request->input('id');
-        $data['tuan_rumah'] = DB::table('aktivitas_anggota as main')
-                                    ->select('main.*','anggotas.nama as nama_anggota')
-                                    ->join('anggotas','main.id_anggota','=','anggotas.id')
-                                    ->where('main.id_acara',$id)
-                                    ->where('peran','tuan_rumah')
-                                    ->get(); 
-
-        $data['peserta'] = DB::table('aktivitas_anggota as main')
-                                    ->select('main.*','anggotas.nama as nama_anggota')
-                                    ->join('anggotas','main.id_anggota','=','anggotas.id')
-                                    ->where('main.id_acara',$id)
-                                    ->where('peran','peserta')
-                                    ->get(); 
+        $data = $model->getPaPeople($id);
         echo json_encode($data);
     }
 

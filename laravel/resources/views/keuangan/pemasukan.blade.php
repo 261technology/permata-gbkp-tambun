@@ -15,10 +15,10 @@
                     <a class="nav-link active" data-toggle="tab" href="#iuran_kas" role="tab" aria-controls="iuran_kas">Iuran Kas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#kantin" role="tab" aria-controls="kantin">Kantin</a>
+                    <a class="nav-link" data-toggle="tab" href="#pa" role="tab" aria-controls="pa">PA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#janji" role="tab" aria-controls="janji">Janji Iman</a>
+                    <a class="nav-link" data-toggle="tab" href="#kantin" role="tab" aria-controls="kantin">Kantin</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <h4 class="card-title mb-0">Keuangan Kas</h4>
-                        <div class="small text-muted">GBKP Runggun Tambun</div>
+                        <div class="small text-muted">Permata GBKP Runggun Tambun</div>
                     </div>    
                      <div class="col-sm-8" style="margin-bottom: 15px;">
                         <div class="row">
@@ -62,8 +62,8 @@
 
                 <div class="row">
                             <div class="col-md-12">
-                              <label><h6 class="text-muted">Pemasukan kas anggota</h6></label>
-                              <table id="data-kas" class="table table-striped" style="width: 100%;">
+                              <label><h6 class="text-muted">Riwayat Pemasukan kas anggota</h6></label>
+                              <table id="data-kas" class="table table-striped table-responsive" style="width: 100%;">
                                   <thead>
                                       <tr>
                                             <th width="40%">Nama</th>
@@ -81,10 +81,61 @@
                         </div>
             </div>
 
-            <div class="tab-pane" id="kantin" role="tabpanel">2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-            <div class="tab-pane" id="janji" role="tabpanel">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+              <div class="tab-pane" id="pa" role="tabpanel">
+                <div class="row">
+                        <div class="col-md-12">
+                          <label><h6 class="text-muted">Riwayat Pemasukan kas anggota</h6></label>
+                          <table id="data-persembahan" class="table table-striped" style="width: 100%;">
+                              <thead>
+                                  <tr>
+                                        <th width="20%">Tanggal PA</th>
+                                        <th width="50%">Nama</th>
+                                        <th width="30%">Persembahan</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                          </table>   
+                        </div>
+                    </div>
+              </div>
+              <div class="tab-pane" id="kantin" role="tabpanel">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="card-title mb-0">Pendapatan Kantin</h4>
+                        <div class="small text-muted">Permata GBKP Runggun Tambun</div>
+                    </div>    
+                     <div class="col-sm-8" style="margin-bottom: 15px;">
+                        <div class="row">
+                            <div class="col-md-4 offset-md-8 text-right">
+                                <button id="tambah_iuran" class="btn btn-success btn-md"  type="button" 
+                                data-toggle="modal" data-target="#modal_tambah_pemasukan_kantin" style="margin-bottom: 5px">
+                                  <i class="fa fa-plus"></i>
+                                  <span>Catat Pendapatan</span>
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-12">
+                          <label><h6 class="text-muted">Riwayat Pendapatan Kantin</h6></label>
+                          <table id="data-kantin" class="table table-striped " style="min-width: 100%;width: 100%;">
+                              <thead>
+                                  <tr>
+                                        <th style="width: 15%;">Tanggal</th>
+                                        <th style="width: 20%;">Pemasukan</th>
+                                        <th style="width: 30%;">Tujuan</th>
+                                        <th style="width: 25%;">Keterangan</th>
+                                        <th style="width: 10%;"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                          </table>   
+                        </div>
+                    </div>
+              </div>
             </div>
             </div>
     </div>
@@ -140,6 +191,56 @@
   </div>
 </div>
 
+<!-- Modal Tambah Iuran Kas-->
+<div class="modal fade" id="modal_tambah_pemasukan_kantin">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Tambah Catatan Iuran Kas</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+            <form id="form_pemasukan_kantin" action="" method="POST">
+                <div class="form-group">
+                    <label>Tanggal</label>
+                      <input type="text" name="kantin_tanggal" id="kantin_tanggal" class="form-control date-picker" required="required" placeholder="Tanggal penjualan" readOnly>
+                </div>
+
+                <div class="form-group">
+                  <label><strong>Petugas</strong></label>
+                  <select class="form-control" id="kantin_petugas" multiple="multiple" name="kantin_petugas[]" requierd>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Pendapatan Bersih</label>
+                    <input type="text" name="kantin_pemasukan" id="kantin_pemasukan" class="form-control rupiah" placeholder="Nilai Pendapatan Persih kantin" required/>
+                </div>
+
+                <div class="form-group">
+                    <label>Tujuan Pemasukan</label>
+                    <select class="form-control" id="kantin_tujuan" name="kantin_tujuan" requried>
+                      <option value="kas">Kas Permata</option>
+                      <option value="panitia">Kepanitiaan</option>
+                      <option value="lain-lain">Lain - lain</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Keterangan</label>
+                  <textarea class="form-control" rows="3" id="kantin_keterangan" name="kantin_keterangan" placeholder="keterangan ....."></textarea>
+                </div>
+              
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-danger btn-sm col-md-offset-4 col-md-2" data-dismiss="modal">Batal</button>
+                    <button type="button" id="simpan_pemasukan_kantin" class="btn btn-success btn-sm col-md-2">Simpan</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @endsection
 
@@ -185,17 +286,75 @@
                         $(nRow).attr('data-id',aData['id']);
                     } 
                 });  
-    }; 
+    };
+
+      var tablePersembahanInit = function(){                     
+        var tablePersembahan = $('#data-persembahan').DataTable({
+                    language: {
+                        searchPlaceholder: "Cari Acara PA"
+                    },
+                    processing: true,
+                    serverSide: true,
+                    ajax: { 
+                        'url'  :"{{url('/')}}/app/datatable_persembahan_pa", 
+                        'type' :'POST',
+                        'data' : { _token: "{{csrf_token()}}"},
+                        },
+                    aoColumns: [
+                        {mData: "tmulai"},
+                        {mData: "nama"},
+                        {
+                          'mRender' : function(data,type,obj){
+                            return "<span class='rp' >"+obj.persembahan+"</span>";
+                          }
+                        },
+                       ] 
+                });  
+      }; 
+
+      var tableKantinInit = function(){                     
+        var tableKantin = $('#data-kantin').DataTable({
+                    language: {
+                        searchPlaceholder: "Cari ....."
+                    },
+                    processing: true,
+                    serverSide: true,
+                    ajax: { 
+                        'url'  :"{{url('/')}}/app/datatable_pemasukan_kantin", 
+                        'type' :'POST',
+                        'data' : { _token: "{{csrf_token()}}"},
+                        },
+                    aoColumns: [
+                        {mData: "tanggal"},
+                        {
+                          'mRender' : function(data,type,obj){
+                            return "<span class='rp' >"+obj.pemasukan+"</span>";
+                          }
+                        },
+                        {mData: "tujuan"},
+                        {mData: "keterangan"},
+                        {
+                          'mRender' : function(data,type,obj){
+                            return "<span class='btn btn-view-kantin btn-info'><i class='fa fa-eye'></i></span><span style='margin-left:2px;' class='btn btn-edit-kantin btn-warning'><i class='fa fa-edit'></i></span>";
+                          }
+                        },
+                       ] 
+                });  
+      }; 
 
       return {
           init: function() {
              tableKasInit(); 
+             tablePersembahanInit(); 
+             tableKantinInit(); 
              $(document).on('change','.filter_iuran_kas', function (e) {
                 e.stopImmediatePropagation();
                 $('#data-kas').dataTable().fnDestroy();
                 tableKasInit();
                 });
-             $('#data-kas').on( 'draw.dt', function () {
+
+
+             $('#data-kas, #data-persembahan, #data-kantin').on( 'draw.dt', function () {
                 $('.rp').priceFormat({
                       prefix: '',
                       centsSeparator: ',', 
@@ -250,6 +409,30 @@
                   }
              });
 
+             $(document).on("click","#simpan_pemasukan_kantin",function(e){
+                e.preventDefault();
+                if($('#form_pemasukan_kantin').valid()){
+                    let pemasukan_nominal = $('#kantin_pemasukan').unmask();
+                    let dataForm  = $('#form_pemasukan_kantin').serialize();
+                    dataForm = dataForm+"&_token={{csrf_token()}}&pemasukan="+pemasukan_nominal;
+
+                    $.ajax({
+                        url: base_url+"/app/keuangan/add_pemasukan_kantin",
+                        method: 'post',
+                        data: dataForm,
+                        dataType : "json",
+                        success:function(result){
+                                 if(result.data.trim()=='success'){
+                                  window.location.reload();
+                                }else{
+                                  bootbox.alert("Failed!", function(){});
+                                  }
+                                return result;
+                                }
+                    });
+                  }
+             });
+
              $(document).on("click",".btn_delete_iuran",function(){
                 let id_iuran = $(this).data('id');
                 bootbox.confirm({
@@ -285,6 +468,31 @@
                     }
                 })
              });
+
+             $("#kantin_petugas").select2({
+                      placeholder: "Pilih Anggota",
+                      width: 'resolve',
+                      allowClear : true,
+                      ajax: {
+                          type: 'POST',
+                          url:"{{url('/')}}/json/select2-anggota",
+                          dataType: "json",
+                          data: function (params) {
+                              return {
+                                  q: params.term,
+                                  _token : "{{csrf_token()}}"
+                              };
+                          },
+                          processResults: function (data) {
+                              return {
+                                  results: $.map(data, function(obj) {
+                                      return { id: obj.id, text: obj.nama};
+                                  })
+                              };
+                          },
+                          
+                      }
+              });
 
 
            }

@@ -43,6 +43,7 @@ Route::group(['middleware' => 'login'], function(){
 	Route::get('app/pa', 'AcaraController@pa');
 	Route::post('app/update_pa', 'AcaraController@update_pa');
 	Route::post('app/get_pa', 'AcaraController@get_pa');
+	Route::post('app/get_pa-view', 'AcaraController@getPaView');
 	Route::post('app/get-peserta-pa', 'AcaraController@getPesertaPa');
 	Route::post('app/update-peserta-pa', 'AcaraController@updatePesertaPa');
 
@@ -53,10 +54,14 @@ Route::group(['middleware' => 'login'], function(){
 	Route::post('app/keuangan/add_iuran_kas', 'KeuanganController@add_iuran_kas');
 	Route::post('app/keuangan/delete_iuran_kas', 'KeuanganController@delete_iuran_kas');
 
+	Route::post('app/keuangan/add_pemasukan_kantin', 'KeuanganController@addPemasukanKantin');
+
 	//Datatable 
 	Route::post('app/datatable_anggota', 'AnggotaController@datatable_anggota');
 	Route::post('app/datatable_iuran_kas', 'KeuanganController@datatable_iuran_kas');
 	Route::post('app/datatable_pa', 'AcaraController@datatable_pa');
+	Route::post('app/datatable_persembahan_pa', 'KeuanganController@datatable_persembahan_pa');
+	Route::post('app/datatable_pemasukan_kantin', 'KeuanganController@datatablePemasukanKantin');
 
 	// Json
 	Route::post('app/json/anggota', 'JsonController@list_anggota');

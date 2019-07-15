@@ -17,11 +17,11 @@
 					<table id="data-pa" class="table table-bordered table-responsive" style="width:100%;">
 						<thead>
 							<tr>
-								<th style="width: 15%;">Tanggal</th>
-								<th style="width: 35%;">Tema</th>
-								<th style="width: 25%;">Tuan Rumah</th>
-								<th style="width: 20%;">Pendamping</th>
-								<th style="width: 10%;min-width: 50px;"></th>
+								<th style="width: 13%;">Tanggal</th>
+								<th style="width: 30%;">Tema</th>
+								<th style="width: 22%;">Tuan Rumah</th>
+								<th style="width: 23%;">Pendamping</th>
+								<th style="width: 12%;min-width: 80px;"></th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -110,7 +110,10 @@
 							<input class="form-control form_modal_pa time-picker" id="pa_jam_selesai" jamMenit="true" name="pa_jam_selesai" type="text" placeholder="hh:mm" >
 						</div>
 					</div>
-
+					<div class="form-group">
+							<label>Persembahan</label>
+							<input type="text" name="pa_persembahan" id="pa_persembahan" class="form-control rupiah" required>
+					</div>
 					<div class="form-group">
 						<label><strong>Skala Acara</strong></label>
 						<select class="form-control" id="pa_skala" name="pa_skala" >
@@ -166,6 +169,95 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_view" tabindex="-1" role="dialog" aria-labelledby="modal_group_label" aria-hidden="true">
+      <div class="modal-dialog modal-lg" style="min-width: 90%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">PA - <span id="modal_view_label"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="form_pa">
+          <div class="modal-body">
+          	<div class="row">
+          		<div class="col-md-4">
+                    <div class="form-group">
+                    	<label><strong>Tema</strong></label>
+                    	<input type="text" name="view_pa_tema" id="view_pa_tema" class="form-control view_form_modal_pa" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                    	<label><strong>Bahan Alkitab</strong></label>
+                    	<input type="text" name="view_pa_ayat" id="view_pa_ayat" class="form-control view_form_modal_pa" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                    	<label><strong>Pendamping</strong></label>
+                    	<input type="text" name="pa_pendamping" id="view_pa_pendamping" class="form-control view_form_modal_pa" required readonly>
+                    </div>
+
+                    <div class="form-group">
+                    	<label><strong>Lokasi</strong></label>
+                    	<textarea rows="2" name="view_pa_lokasi" id="view_pa_lokasi" class="form-control view_form_modal_pa" required readonly></textarea>
+                    </div>
+          		</div>
+          		<div class="col-md-4">
+          			<div class="form-group">
+                        <label><strong>Deskripsi</strong></label>
+                        <textarea id="view_pa_deskripsi" rows="4" name="view_pa_deskripsi" class="view_form_modal_pa form-control" placeholder="Deskripsi Acara" readonly></textarea>
+                    </div>
+          			<div class="row">
+						<div class="col-sm-12">
+							<label style="margin-bottom: 0px !important;"><strong>Mulai</strong></label>
+						</div>
+						<div class="form-group col-sm-8">
+							<label for="city">Tanggal</label>
+							<input class="form-control date-picker view_form_modal_pa" id="view_pa_tanggal_mulai" name="view_pa_tanggal_mulai" type="text"  placeholder="yyyy-mm-dd" readonly required>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="postal-code">Jam</label>
+							<input class="form-control view_form_modal_pa time-picker" id="view_pa_jam_mulai" name="view_pa_jam_mulai" jamMenit="true" type="text" placeholder="hh:mm" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label style="margin-bottom: 0px !important;"><strong>Selesai</strong></label>
+						</div>
+						<div class="form-group col-sm-8">
+							<label for="city">Tanggal</label>
+							<input class="form-control date-picker view_form_modal_pa" id="view_pa_tanggal_selesai" name="view_pa_tanggal_selesai" type="text" placeholder="yyyy-mm-dd"  readonly required>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="postal-code">Jam</label>
+							<input class="form-control view_form_modal_pa time-picker" id="view_pa_jam_selesai" jamMenit="true" name="view_pa_jam_selesai" type="text" placeholder="hh:mm" readonly>
+						</div>
+					</div>
+          		</div>
+          		<div class="col-md-4">
+          			<div class="form-group">
+							<label>Persembahan</label>
+							<input type="text" name="view_pa_persembahan" id="view_pa_persembahan" class="form-control rupiah" required>
+					</div>
+          			<div class="form-group">
+						<label><strong>Tuan Rumah</strong></label>
+						<select class="form-control view_form_modal_pa Jselect2" id="view_pa_tuan_rumah" multiple="multiple" name="view_pa_tuan_rumah[]" readonly disabled>
+						</select>
+					</div>
+          			<div class="form-group">
+						<label><strong>Peserta</strong></label>
+						<select class="form-control view_form_modal_pa Jselect2" id="view_pa_peserta" multiple="multiple" name="view_pa_peserta[]" readOnly disabled>
+						</select>
+					</div>
+          		</div>
+          	</div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 @endsection
 
 
@@ -189,9 +281,13 @@
 			                        {mData: "pendamping"},
 			                        {
 			                        	mRender: function(data,type,obj){
-			                        		let e = "<span class='btn btn-warning btn-sm btn_update_pa' data-id='"+obj.id_agenda+"' data-id_pa ='"+obj.id+"'><i class='fa fa-edit'></i></span>";
+			                        		let e = "<span class='btn btn-sm btn-success btn-view' data-id='"+obj.id_agenda+"' ><i class='fa fa-eye'></i></span><span style='margin-left:2px;' class='btn btn-warning btn-sm btn_update_pa' data-id='"+obj.id_agenda+"' data-id_pa ='"+obj.id+"'><i class='fa fa-edit'></i></span>";
+			                        		let classAnggota = 'success';
+			                        		if(obj.total_peserta > 0){
+			                        			classAnggota = 'info';
+			                        		}
 			                        		if(obj.id != null){
-			                        			e += "<span style='margin-left:2px;' class='btn btn-info btn-sm btn_peserta' data-nama='"+obj.nama+"' data-id='"+obj.id_agenda+"'><i class='fa fa-group'></i></span>";
+			                        			e += "<span style='margin-left:2px;' class='btn btn-"+classAnggota+" btn-sm btn_peserta' data-nama='"+obj.nama+"' data-id='"+obj.id_agenda+"'><i class='fa fa-group'></i></span>";
 			                        			
 			                        		}
 			                        		return e;
@@ -242,6 +338,7 @@
 		                    	$('#pa_jam_mulai').val(result.jam_mulai);
 		                    	$('#pa_tanggal_selesai').val(result.tanggal_selesai);
 		                    	$('#pa_jam_selesai').val(result.jam_selesai);
+		                    	$('#pa_persembahan').val(result.persembahan);
 		                    	$('#pa_skala').val(result.skala).trigger('change');
 		                    }
 				        });
@@ -253,9 +350,8 @@
 	          		$(document).on("click","#btn_submit_modal_pa",function(e){
 	          			e.stopImmediatePropagation();
 						if($('#form_pa').valid()){
-
 								var dataForm  = $('#form_pa').serialize();
-								dataForm = dataForm+"&_token={{csrf_token()}}"; 
+								dataForm = dataForm+"&_token={{csrf_token()}}&persembahan="+ $("#pa_persembahan").unmask(); 
 								var url = "{{url('/')}}/app/update_pa";
 								$.ajax({
 					                    url: url,
@@ -283,6 +379,7 @@
 		                    success:function(result){
 		                    	if(result.tuan_rumah[0] != null){
 		                    		let e = "";
+		                    		$("#pa_tuan_rumah").empty();
 		                    		result.tuan_rumah.forEach(function(value,index) {
 										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
 									});
@@ -294,6 +391,7 @@
 		                    		result.peserta.forEach(function(value,index) {
 										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
 									});
+									$("#pa_peserta").empty();	
 									$("#pa_peserta").append(e);	
 		                    	}
 		                    }
@@ -374,6 +472,57 @@
 					            });
 						}
 	          		});
+
+
+	          		$(document).on("click",".btn-view",function(){
+	          			let id = $(this).data('id');
+						$.ajax({
+		                    url: "{{url('/')}}/app/get_pa-view",
+		                    type:'POST',
+		                    data:  {id:id, _token : "{{csrf_token()}}"} ,
+		                    dataType : "json",
+		                    success:function(result){
+		                    	$('#modal_view_label').text(result.nama);
+		                    	$('#view_pa_nama').val(result.nama);
+		                    	$('#view_pa_tema').val(result.tema);
+		                    	$('#view_pa_ayat').val(result.ayat);
+		                    	$('#view_pa_pendamping').val(result.pendamping);
+		                    	$('#view_pa_lokasi').val(result.lokasi);
+		                    	$('#view_pa_deskripsi').val(result.deskripsi);
+		                    	$('#view_pa_tanggal_mulai').val(result.tanggal_mulai);
+		                    	$('#view_pa_jam_mulai').val(result.jam_mulai);
+		                    	$('#view_pa_tanggal_selesai').val(result.tanggal_selesai);
+		                    	$('#view_pa_jam_selesai').val(result.jam_selesai);
+		                    	$('#view_pa_persembahan').val(result.persembahan);
+
+		                    	$('.rupiah').priceFormat({
+								      prefix: 'Rp. ',
+								      centsSeparator: ',',
+								      thousandsSeparator: '.',
+								      centsLimit: 0
+								});
+
+		                    	if(result.people.tuan_rumah[0] != null){
+		                    		let e = "";
+		                    		$("#view_pa_tuan_rumah").empty();
+		                    		result.people.tuan_rumah.forEach(function(value,index) {
+										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
+									});
+									$("#view_pa_tuan_rumah").append(e);
+		                    	}
+
+		                    	if(result.people.peserta){
+		                    		let e = "";
+		                    		result.people.peserta.forEach(function(value,index) {
+										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
+									});
+									$("#view_pa_peserta").empty();	
+									$("#view_pa_peserta").append(e);	
+		                    	}
+		                    }
+				        });
+	          			$("#modal_view").modal("show");
+	          		});
 				}
 	      };
 
@@ -384,5 +533,11 @@
 	  });  
 	</script>
 	<style type="text/css">
+		.view_form_modal_pa[readonly]{
+			background-color: #fff;
+			border: 0px;
+			border-bottom : 2px solid #a2a2a2;
+			margin-top: -10px;
+		}
 	</style>
 @endsection

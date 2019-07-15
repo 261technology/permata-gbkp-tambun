@@ -28,6 +28,7 @@
 
     {{-- Custom CSS --}}
     <link href="{{url('assets/template/coreui')}}/harisa/main.css" rel="stylesheet">
+    <link href="{{url('assets/css')}}/main.css" rel="stylesheet">
 
     <!-- CoreUI and necessary plugins-->
     <script src="{{url('assets/template/coreui')}}/node_modules/jquery/dist/jquery.min.js"></script>

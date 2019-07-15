@@ -14,32 +14,32 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/pa"> 
-                <i class="nav-icon icon-puzzle"></i> Pen. Alkitab
-                <span class="badge badge-warning">dev.</span></a>
+                <i class="nav-icon icon-puzzle"></i> Pen. Alkitab</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/pp">
-                <i class="nav-icon icon-puzzle"></i> Perp. Permata
-                <span class="badge badge-warning">dev.</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/kas">
-                <i class="nav-icon icon-puzzle"></i> Iuran Kas
-                <span class="badge badge-warning">dev.</span></a>
-            </li>
-            <li class="nav-item nav-dropdown open">
+            <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
               <i class="nav-icon fa fa-dollar"></i> Keuangan</a>
               <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}/app/keuangan/pemasukan">
-                <i class="nav-icon icon-list"></i> Pemasukan</a>
+                  <a class="nav-link" href="{{url('/')}}/app/keuangan/pemasukan">
+                  <i class="nav-icon icon-list"></i> Pemasukan</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}/app/keuangan/pengeluarann">
-                <i class="nav-icon icon-list"></i> Pengeluaran
-                <span class="badge badge-warning">dev.</span></a>
-                </a>
+                  <a class="nav-link" href="{{url('/')}}/app/keuangan/pengeluarann">
+                  <i class="nav-icon icon-list"></i> Pengeluaran
+                  <span class="badge badge-warning">dev.</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item nav-dropdown">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon fa fa-file"></i> Laporan</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url('/')}}/app/laporan/iuran kas">
+                  <i class="nav-icon icon-list"></i> Iuran Kas</a>
+                  <span class="badge badge-warning">dev.</span> 
                 </li>
               </ul>
             </li>

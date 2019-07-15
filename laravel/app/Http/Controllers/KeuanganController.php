@@ -10,6 +10,7 @@ use App\Helpers\Harisa;
 use Session;
 use Excel;
 use File;
+use DB;
 
 
 class keuanganController extends Controller
@@ -51,6 +52,21 @@ class keuanganController extends Controller
         $sektor = Input::get('sektor');
 
         $output         = $model->get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor);  
+        $output['draw'] = $request->input('draw');
+
+        echo json_encode($output); 
+    }
+
+    public function datatable_persembahan_pa(Request $request){
+        $model  = new Keuangan();
+        $length         = $request->input('length');
+        $start          = $request->input('start');
+        $searchValue    = trim(strtoupper($_POST['search']['value']));
+        $orderColumn    = $_POST['order']['0']['column'];
+        $orderDir       = $_POST['order']['0']['dir'];
+        $order          = $request->input('order');
+
+        $output         = $model->get_datatable_persembahan_pa($length, $start, $searchValue, $orderColumn, $orderDir, $order);  
         $output['draw'] = $request->input('draw');
 
         echo json_encode($output); 
@@ -100,5 +116,43 @@ class keuanganController extends Controller
         }
         echo json_encode($result);
 
+    }
+
+
+    // Kantin
+    function addPemasukanKantin(Request $request){
+        $result['data'] = 'failed';
+        $data['tanggal'] = $request->input('kantin_tanggal');
+        $data['pemasukan'] = $request->input('pemasukan');
+        $data['tujuan'] = $request->input('kantin_tujuan');
+        $data['keterangan'] = $request->input('kantin_keterangan');
+
+        $id_kantin = DB::table('kantin')->insertGetId($data);
+
+        foreach ($request->input('kantin_petugas') as $key => $value) {
+             $data_petugas['peran']         = 'petugas';
+             $data_petugas['id_jadwal']     = $id_kantin;
+             $data_petugas['id_anggota']    = $value;
+             DB::table('aktivitas_kantin')->insert($data_petugas);
+        }
+        if($id_kantin){
+            $result['data'] = 'success';
+        }
+        echo json_encode($result);
+    }
+
+    function datatablePemasukanKantin(Request $request){
+        $model  = new Keuangan();
+        $length         = $request->input('length');
+        $start          = $request->input('start');
+        $searchValue    = trim(strtoupper($_POST['search']['value']));
+        $orderColumn    = $_POST['order']['0']['column'];
+        $orderDir       = $_POST['order']['0']['dir'];
+        $order          = $request->input('order');
+
+        $output         = $model->get_datatable_pemasukanKantin($length, $start, $searchValue, $orderColumn, $orderDir, $order);  
+        $output['draw'] = $request->input('draw');
+
+        echo json_encode($output); 
     }
 }

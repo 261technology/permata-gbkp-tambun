@@ -1,3 +1,17 @@
 .error{
 	color: red;
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+	background:  #c2e2ff !important;	
+	border : 1px solid #c2e2fd !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--multiple{
+	background-color: #fff !important;
+}
+
+div .table{
+    width: 100%;
+    overflow-y: scroll;
+    }

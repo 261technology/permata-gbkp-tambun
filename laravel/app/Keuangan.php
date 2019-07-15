@@ -40,6 +40,67 @@ class Keuangan extends Model
         return DB::table('iuran_kas')->where('id','=',$id)->delete();
     }
 
+    function get_datatable_persembahan_pa($length, $start, $searchValue, $orderColumn, $orderDir, $order){
+        $query      = DB::table('pa as a')
+                        ->select('a.*','g.nama',DB::raw('DATE_FORMAT(g.mulai, "%Y-%m-%d") as tmulai'))
+                        ->join('acara as g','a.id_acara','=','g.id');
+        $countAll   = $query->count();
+
+
+
+        if(!empty($searchValue)){
+            $query->where(function($q) use ($searchValue) {
+                  $q->whereRaw("UPPER(nama) like '%".$searchValue."%'")
+                    ->orWhereRaw("UPPER(ayat) like '%".$searchValue."%'");
+              });
+
+        } 
+
+        $fieldTable = array('tmulai','nama','persembahan',null);
+                
+        if(!empty($fieldTable[$orderColumn])){
+            $query->orderBy($fieldTable[$orderColumn],$orderDir);
+        }else{
+            $query->orderBy('nama','asc');
+        }
+        
+        return array(
+            "recordsTotal" => $countAll,
+            "recordsFiltered" => $query->count(),
+            "data" => $query->skip($start)->limit($length)->get(),
+        );
+    }
+
+    function get_datatable_pemasukanKantin($length, $start, $searchValue, $orderColumn, $orderDir, $order){
+        $query      = DB::table('kantin as m')
+                        ->select('m.*');
+        $countAll   = $query->count();
+
+
+
+        if(!empty($searchValue)){
+            $query->where(function($q) use ($searchValue) {
+                  $q->whereRaw("UPPER(tujuan) like '%".$searchValue."%'")
+                    ->orWhereRaw("UPPER(keterangan) like '%".$searchValue."%'");
+              });
+
+        } 
+
+        $fieldTable = array('tanggal','pemasukan','tujuan','keterangan');
+                
+        if(!empty($fieldTable[$orderColumn])){
+            $query->orderBy($fieldTable[$orderColumn],$orderDir);
+        }else{
+            $query->orderBy('tanggal','desc');
+        }
+        
+        return array(
+            "recordsTotal" => $countAll,
+            "recordsFiltered" => $query->count(),
+            "data" => $query->skip($start)->limit($length)->get(),
+        );
+    }
+
     function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor){
         $query      = DB::table('iuran_kas as a')
                         ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"),'b.sektor')
