@@ -36,7 +36,7 @@ class AnggotaController extends Controller
         return view('anggota.upload');
     }
 
-    function detail($id){
+    function edit($id){
         $model  = new Anggota();
         $data   = $model->get_anggota($id);
         $data = (array)$data;
@@ -45,7 +45,7 @@ class AnggotaController extends Controller
         $sektor     = Harisa::get_sektor();
         $marga      = Harisa::get_marga();
         $pendidikan = Harisa::get_pendidikan();
-        return view('anggota.detail',compact('pendidikan','data','sektor','marga','pekerjaan'));
+        return view('anggota.edit',compact('pendidikan','data','sektor','marga','pekerjaan'));
     }
 
     function profile($id){

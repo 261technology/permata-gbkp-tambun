@@ -29,4 +29,8 @@ class Harisa
     public static function get_pendidikan(){
         return DB::table('m_parameter')->where('type','=','pendidikan')->get()->toArray();
     }
+
+    public static function getUser($param){
+        return Session::get($param);
+    }
 }

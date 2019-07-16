@@ -55,11 +55,6 @@
                 <span class="badge badge-warning">dev.</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/rencana_keuangan">
-                <i class="nav-icon icon-puzzle"></i> Renc. Keuangan
-                <span class="badge badge-warning">dev.</span></a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/">
                 <i class="nav-icon fa fa-info"></i> Tentang
                 <span class="badge badge-warning">dev.</span></a>

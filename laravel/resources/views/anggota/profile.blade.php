@@ -7,13 +7,12 @@
     <div class="col-md" id="left">
       <div class="card" id="user">
         <div class="card-header">
-          <div class="col-md-12 text-right">
-            <a class="action" href="#">Edit Profile</a>     
-          </div>
         </div>
-          <img id="userImage"/>
+        <div class="card-block text-center">
+          <img class="img-avatar" src="{{url('/')}}/assets/img/avatar/{{ !empty($data->avatar) ? $data->avatar : 'telur.png' }}">
+        </div>
         <div class="card-block">
-          <h4 class="card-title">{{$data->nama}}, {{$data->umur.'Thn'}}</h4>
+          <h5 class="card-title"><strong>{{$data->nama}}</strong>, {{$data->umur.'Thn'}}</h5>
           <div class="row">
             <div class="col">
               <div class="font-weight-bold">{{$data->nama_sektor}}</div>
@@ -25,96 +24,35 @@
           </div>
           <div class="row mt-2">
             <div class="col-1"><i class="fa fa-phone"></i></div>
-            <div class="col">{{$data->telepon}}</div>
+            <div class="col">{{$data->telepon ? $data->telepon : '-'}}</div>
           </div>
           <div class="row mt-2">
             <div class="col-1"><i class="fa fa-envelope"></i></div>
             <div class="col">{{$data->email}}</div>
           </div>
         </div>
+        <div class="col-md-12 text-right">
+            <a class="btn btn-warning" href="{{url('/')}}/anggota/edit_profile">Edit Profile</a>     
+          </div>
       </div>
     </div>
     <div class="col-md">
-      <div class="row mt-4">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-header">Kewajiban</div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col">
           <div class="card">
-            <div class="card-header">Aktifitas Terakhir<a class="action" href="#">Semua Aktifitas Activity</a></div>
+            <div class="card-header">Kegiatan</div>
             <ul class="list-group">
               <li class="list-group-item">
                 <div class="row no-gutters">
                   <div class="col">
                     <div class="row no-gutters align-content-center">
-                      <div class="col icon warning"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-usd fa-stack-1x"></i></span></div>
-                      <div class="col">You have a recent payment that did not process</div>
-                    </div>
-                  </div>
-                  <div class="col right">
-                    <div class="row no-gutters justify-content-center align-items-center">
-                      <div class="view">
-                        <button class="btn btn-primary">View</button>
-                      </div>
-                      <div class="text-center">4 Hours Ago</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row no-gutters">
-                  <div class="col">
-                    <div class="row no-gutters align-content-center">
-                      <div class="col icon"><i class="fa fa-calendar-o fa-2x"></i></div>
+                      <div class="col icon"><i class="fa fa-circle-o fa-2x text-success"></i></div>
                       <div class="col">You registered for an event, Greater Atlanta Champer of Commerce 2015</div>
                     </div>
                   </div>
                   <div class="col right">
                     <div class="row no-gutters justify-content-center align-items-center">
-                      <div class="view">
-                        <button class="btn btn-primary">View</button>
-                      </div>
                       <div class="text-center">2 Days Ago</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row no-gutters">
-                  <div class="col">
-                    <div class="row no-gutters align-content-center">
-                      <div class="col icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-usd fa-stack-1x"></i></span></div>
-                      <div class="col">You made a payment in the amount of <em>$34.99</em> to your membership account</div>
-                    </div>
-                  </div>
-                  <div class="col right">
-                    <div class="row no-gutters justify-content-center align-items-center">
-                      <div class="view">
-                        <button class="btn btn-primary">View</button>
-                      </div>
-                      <div class="text-center">5 Days Ago</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row no-gutters">
-                  <div class="col">
-                    <div class="row no-gutters align-content-center">
-                      <div class="col icon"><i class="fa fa-envelope fa-2x"></i></div>
-                      <div class="col">You received a message from Bill Jones</div>
-                    </div>
-                  </div>
-                  <div class="col right">
-                    <div class="row no-gutters justify-content-center align-items-center">
-                      <div class="view">
-                        <button class="btn btn-primary">View</button>
-                      </div>
-                      <div class="text-center">7 Days Ago</div>
                     </div>
                   </div>
                 </div>

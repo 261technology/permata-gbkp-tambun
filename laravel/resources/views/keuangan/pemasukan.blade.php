@@ -18,7 +18,7 @@
                     <a class="nav-link" data-toggle="tab" href="#pa" role="tab" aria-controls="pa">PA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#kantin" role="tab" aria-controls="kantin">Kantin</a>
+                    <a class="nav-link" id="select_kantin" data-toggle="tab" href="#kantin" role="tab" aria-controls="kantin">Kantin</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -108,8 +108,7 @@
                      <div class="col-sm-8" style="margin-bottom: 15px;">
                         <div class="row">
                             <div class="col-md-4 offset-md-8 text-right">
-                                <button id="tambah_iuran" class="btn btn-success btn-md"  type="button" 
-                                data-toggle="modal" data-target="#modal_tambah_pemasukan_kantin" style="margin-bottom: 5px">
+                                <button id="tambah_pemasukan_kantin" class="btn btn-success btn-md"  type="button"  style="margin-bottom: 5px">
                                   <i class="fa fa-plus"></i>
                                   <span>Catat Pendapatan</span>
                               </button>
@@ -120,14 +119,14 @@
                 <div class="row">
                         <div class="col-md-12">
                           <label><h6 class="text-muted">Riwayat Pendapatan Kantin</h6></label>
-                          <table id="data-kantin" class="table table-striped " style="min-width: 100%;width: 100%;">
+                          <table id="data-kantin" class="table table-striped" style="width: 100%;">
                               <thead>
                                   <tr>
                                         <th style="width: 15%;">Tanggal</th>
-                                        <th style="width: 20%;">Pemasukan</th>
+                                        <th style="width: 15%;">Pemasukan</th>
                                         <th style="width: 30%;">Tujuan</th>
                                         <th style="width: 25%;">Keterangan</th>
-                                        <th style="width: 10%;"></th>
+                                        <th style="width: 15%;"></th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -192,34 +191,35 @@
 </div>
 
 <!-- Modal Tambah Iuran Kas-->
-<div class="modal fade" id="modal_tambah_pemasukan_kantin">
+<div class="modal fade" id="modal_pemasukan_kantin">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Tambah Catatan Iuran Kas</h4>
+        <h4 class="modal-title">Tambah Pendapatan Kantin</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
             <form id="form_pemasukan_kantin" action="" method="POST">
+                <input type="hidden" name="id_kantin" id="id_kantin" class="field_kantin">
                 <div class="form-group">
                     <label>Tanggal</label>
-                      <input type="text" name="kantin_tanggal" id="kantin_tanggal" class="form-control date-picker" required="required" placeholder="Tanggal penjualan" readOnly>
+                      <input type="text" name="kantin_tanggal" id="kantin_tanggal" class="form-control date-picker field_kantin" required="required" placeholder="Tanggal penjualan" readOnly>
                 </div>
 
                 <div class="form-group">
                   <label><strong>Petugas</strong></label>
-                  <select class="form-control" id="kantin_petugas" multiple="multiple" name="kantin_petugas[]" requierd>
+                  <select class="form-control field_kantin" id="kantin_petugas" multiple="multiple" name="kantin_petugas[]" requierd>
                   </select>
                 </div>
 
                 <div class="form-group">
                     <label>Pendapatan Bersih</label>
-                    <input type="text" name="kantin_pemasukan" id="kantin_pemasukan" class="form-control rupiah" placeholder="Nilai Pendapatan Persih kantin" required/>
+                    <input type="text" name="kantin_pemasukan" id="kantin_pemasukan" class="form-control rupiah field_kantin" placeholder="Nilai Pendapatan Persih kantin" required/>
                 </div>
 
                 <div class="form-group">
                     <label>Tujuan Pemasukan</label>
-                    <select class="form-control" id="kantin_tujuan" name="kantin_tujuan" requried>
+                    <select class="form-control field_kantin" id="kantin_tujuan" name="kantin_tujuan" requried>
                       <option value="kas">Kas Permata</option>
                       <option value="panitia">Kepanitiaan</option>
                       <option value="lain-lain">Lain - lain</option>
@@ -228,12 +228,12 @@
 
                 <div class="form-group">
                   <label>Keterangan</label>
-                  <textarea class="form-control" rows="3" id="kantin_keterangan" name="kantin_keterangan" placeholder="keterangan ....."></textarea>
+                  <textarea class="form-control field_kantin" rows="3" id="kantin_keterangan" name="kantin_keterangan" placeholder="keterangan ....."></textarea>
                 </div>
               
                 <div class="modal-footer">
-                   <button type="button" class="btn btn-danger btn-sm col-md-offset-4 col-md-2" data-dismiss="modal">Batal</button>
-                    <button type="button" id="simpan_pemasukan_kantin" class="btn btn-success btn-sm col-md-2">Simpan</button>
+                    <button type="button" id="simpan_pemasukan_kantin" class="btn-kantin-submit btn btn-success btn-sm col-md-2">Simpan</button>
+                    <button type="button" id="ubah_pemasukan_kantin" class="btn-kantin-submit btn btn-warning btn-sm col-md-2">Simpan</button>
                 </div>
             </form>
       </div>
@@ -335,7 +335,7 @@
                         {mData: "keterangan"},
                         {
                           'mRender' : function(data,type,obj){
-                            return "<span class='btn btn-view-kantin btn-info'><i class='fa fa-eye'></i></span><span style='margin-left:2px;' class='btn btn-edit-kantin btn-warning'><i class='fa fa-edit'></i></span>";
+                            return "<span class='btn btn-view-kantin btn-info' data-id='"+obj.id+"' ><i class='fa fa-eye'></i></span><span style='margin-left:2px;' data-id='"+obj.id+"' class='btn btn-edit-kantin btn-warning'><i class='fa fa-edit'></i></span>";
                           }
                         },
                        ] 
@@ -347,6 +347,12 @@
              tableKasInit(); 
              tablePersembahanInit(); 
              tableKantinInit(); 
+
+             $(document).on("click","#select_kantin",function(){
+                $('#data-kantin').dataTable().fnDestroy();
+                tableKantinInit();
+             });
+
              $(document).on('change','.filter_iuran_kas', function (e) {
                 e.stopImmediatePropagation();
                 $('#data-kas').dataTable().fnDestroy();
@@ -494,6 +500,101 @@
                       }
               });
 
+             $(document).on("click","#tambah_pemasukan_kantin",function(){
+                $('.btn-kantin-submit').addClass('hidden');
+                $('.field_kantin').val('');
+                $('#simpan_pemasukan_kantin').removeClass('hidden');
+                $('.field_kantin').attr('readOnly',false);
+                $('#kantin_petugas').attr('disabled',false);
+                $('#kantin_petugas').empty();
+                $("#modal_pemasukan_kantin").modal('show');
+             });
+
+             $(document).on("click",".btn-view-kantin",function(){
+                let id = $(this).data('id');
+                $('.field_kantin').val('');
+                $('.field_kantin').attr('readOnly',true);
+                $('#kantin_petugas').attr('disabled',true);
+                $.ajax({
+                        url: base_url+"/app/keuangan/get-pemasukan-kantin",
+                        method: 'post',
+                        data:{_token: "{{csrf_token()}}", id : id},
+                        dataType : "json",
+                        success:function(result){
+                          $('#kantin_tanggal').val(result.tanggal);
+                          $('#kantin_pemasukan').val(result.pemasukan);
+                          $('#kantin_keterangan').val(result.keterangan);
+                          $('#kantin_tujuan').val(result.tujuan).trigger('change');;
+                          if(result.peserta != null || result.peserta == undefined){
+                            let e = "";
+                            $("#kantin_petugas").empty();
+                            result.petugas.forEach(function(value,index) {
+                               e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
+                            });
+                            $("#kantin_petugas").append(e);
+                          }
+                        }
+                  });
+                 $('.btn-kantin-submit').addClass('hidden');
+                 $("#modal_pemasukan_kantin").modal('show');
+             });
+
+             $(document).on("click",".btn-edit-kantin",function(){
+                let id = $(this).data('id');
+                $('.field_kantin').val('');
+                $('.field_kantin').attr('readOnly',false);
+                $('#kantin_petugas').attr('disabled',false);
+                $.ajax({
+                        url: base_url+"/app/keuangan/get-pemasukan-kantin",
+                        method: 'post',
+                        data:{_token: "{{csrf_token()}}", id : id},
+                        dataType : "json",
+                        success:function(result){
+                          $('#kantin_tanggal').val(result.tanggal);
+                          $('#kantin_pemasukan').val(result.pemasukan);
+                          $('#kantin_keterangan').val(result.keterangan);
+                          $('#kantin_tujuan').val(result.tujuan).trigger('change');;
+                          if(result.peserta != null || result.peserta == undefined){
+                            let e = "";
+                            $("#kantin_petugas").empty();
+                            result.petugas.forEach(function(value,index) {
+                               e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
+                            });
+                            $("#kantin_petugas").append(e);
+                          }
+                        }
+                  });
+                 $('.btn-kantin-submit').addClass('hidden');
+                 $('#id_kantin').val(id);
+                 $('#ubah_pemasukan_kantin').removeClass('hidden');
+                 $("#modal_pemasukan_kantin").modal('show');
+             });
+
+             $(document).on("click","#ubah_pemasukan_kantin",function(e){
+                e.preventDefault();
+                if($('#form_pemasukan_kantin').valid()){
+                    let pemasukan_nominal = $('#kantin_pemasukan').unmask();
+                    let id = $('#id_kantin').val();
+                    let dataForm  = $('#form_pemasukan_kantin').serialize();
+                    dataForm = dataForm+"&_token={{csrf_token()}}&pemasukan="+pemasukan_nominal+"&id="+id;
+
+                    $.ajax({
+                        url: base_url+"/app/keuangan/update_pemasukan_kantin",
+                        method: 'post',
+                        data: dataForm,
+                        dataType : "json",
+                        success:function(result){
+                                 if(result.data.trim()=='success'){
+                                  window.location.reload();
+                                }else{
+                                  bootbox.alert("Failed!", function(){});
+                                  }
+                                return result;
+                                }
+                    });
+                  }
+             });
+
 
            }
       };
@@ -507,5 +608,16 @@
 
 <style type="text/css">
     .table>tbody>tr>td {cursor: pointer;}
+
+    .field_kantin[readonly]{
+      background-color: #fff;
+      border: 0px;
+      border-bottom : 2px solid #a2a2a2;
+      margin-top: -10px;
+    }
+
+    .select2-container--default.select2-container--disabled .select2-selection--multiple{
+      border : 0px;
+    }
 </style>
 @endsection

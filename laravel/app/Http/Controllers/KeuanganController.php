@@ -126,6 +126,7 @@ class keuanganController extends Controller
         $data['pemasukan'] = $request->input('pemasukan');
         $data['tujuan'] = $request->input('kantin_tujuan');
         $data['keterangan'] = $request->input('kantin_keterangan');
+        $data['created_by'] = Harisa::getUser('id');
 
         $id_kantin = DB::table('kantin')->insertGetId($data);
 
@@ -136,6 +137,31 @@ class keuanganController extends Controller
              DB::table('aktivitas_kantin')->insert($data_petugas);
         }
         if($id_kantin){
+            $result['data'] = 'success';
+        }
+        echo json_encode($result);
+    }
+
+    function updatePemasukanKantin(Request $request){
+        $result['data'] = 'failed';
+        $id = $request->input('id');
+        $data['tanggal'] = $request->input('kantin_tanggal');
+        $data['pemasukan'] = $request->input('pemasukan');
+        $data['tujuan'] = $request->input('kantin_tujuan');
+        $data['keterangan'] = $request->input('kantin_keterangan');
+        $data['updated_by'] = Harisa::getUser('id');
+
+                DB::table('kantin')
+                ->where('id', $id)
+                ->update($data);
+        DB::table('aktivitas_kantin')->where('id_jadwal','=',$id)->delete();
+        foreach ($request->input('kantin_petugas') as $key => $value) {
+             $data_petugas['peran']         = 'petugas';
+             $data_petugas['id_jadwal']     = $id;
+             $data_petugas['id_anggota']    = $value;
+             DB::table('aktivitas_kantin')->insert($data_petugas);
+        }
+        if($id){
             $result['data'] = 'success';
         }
         echo json_encode($result);
@@ -154,5 +180,17 @@ class keuanganController extends Controller
         $output['draw'] = $request->input('draw');
 
         echo json_encode($output); 
+    }
+
+    function getPemasukanKantin(Request $request){
+        $id     = $request->input('id');
+        $data = new keuanganController;
+        $data               = DB::table('kantin as m')->find($id);
+        $data->petugas      = DB::table('aktivitas_kantin as m')
+                                    ->select('a.id  as id_anggota','a.nama as nama_anggota')
+                                    ->join('anggotas as a','a.id','=','m.id_anggota')
+                                    ->where('m.id','=',$id)
+                                    ->get();
+        echo json_encode($data);
     }
 }

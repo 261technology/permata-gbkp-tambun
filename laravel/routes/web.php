@@ -35,7 +35,7 @@ Route::group(['middleware' => 'login'], function(){
 	// Anggota
 	Route::get('app/anggota', 'AnggotaController@index');
 	Route::get('app/anggota/profile/{id}', 'AnggotaController@profile');
-	Route::get('app/anggota/detail/{id}', 'AnggotaController@detail');
+	Route::get('app/anggota/edit/{id}', 'AnggotaController@edit');
 	Route::get('app/anggota/upload', 'AnggotaController@upload_anggota');
 	Route::post('app/anggota/upload_data_anggota', 'AnggotaController@upload_anggota_process')->name('upload_data_anggota');
 
@@ -55,6 +55,9 @@ Route::group(['middleware' => 'login'], function(){
 	Route::post('app/keuangan/delete_iuran_kas', 'KeuanganController@delete_iuran_kas');
 
 	Route::post('app/keuangan/add_pemasukan_kantin', 'KeuanganController@addPemasukanKantin');
+	Route::post('app/keuangan/update_pemasukan_kantin', 'KeuanganController@updatePemasukanKantin');
+
+	Route::post('app/keuangan/get-pemasukan-kantin', 'KeuanganController@getPemasukanKantin');
 
 	//Datatable 
 	Route::post('app/datatable_anggota', 'AnggotaController@datatable_anggota');

@@ -15,3 +15,10 @@ div .table{
     width: 100%;
     overflow-y: scroll;
     }
+.img-avatar{
+	width: 120px;
+	height: 120px;
+	border: 1px solid #436ae199;
+	border-radius: 50%;
+
+}
