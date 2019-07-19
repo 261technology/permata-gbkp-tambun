@@ -29,6 +29,7 @@
   
   <br>
   <br>
-  # :smiley::smiley: MEJUAH JUAH :smiley::smiley:
-  **don't be hesitate to give contribute to this project, together we can work for glorify the name of God.**
-  *jangan ragu untuk berkontribusi dalam proyek ini, bersama-sama kita dapat bekerja untuk memuliakan nama Tuhan.*
+  
+# :smiley::smiley: MEJUAH JUAH!! :smiley::smiley:
+###### **dont be hesitate to give contribute to this project, together we can work for glorify the name of God.**
+###### *jangan ragu untuk berkontribusi dalam proyek ini, bersama-sama kita dapat bekerja untuk memuliakan nama Tuhan.*
