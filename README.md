@@ -1,26 +1,34 @@
-# permata-gbkp-tambun
+# Permata GBKP Runggun Tambun
+*Official* Website Permata GBKP Runggun Tambun
+<br>
+:yellow_heart::bowtie:  **Mejuah-juah!!!**  :bowtie::yellow_heart:
+ 
+ <img src="./assets/img/logo_permata.png" width="200">
 
-###Clone Repo
+<br> 
+<br>
 
-git clone https://github.com/harisaginting/permata-gbkp-tambun.git
+### Usage *Cara Penggunaan*'
+* #### Clone this repo *Duplikat file ini ke repo kamu*
+  * > **git clone https://github.com/harisaginting/permata-gbkp-tambun.git**
 
+  <br>
 
+* #### Install Dependencies
+* ###### Enter Directory  
+  * > **cd permata-gbkp-tambun**
+  
+* ###### Install Laravel Depedency 
+  * > **composer install**
 
-###Enter Directory
-
-cd permata-gbkp-tambun
-
-
-###Install Dependencies
-
-#Install Laravel Depedency
-
-composer install
-
-###Enther theme directory
-
-cd assets/template/coreui
-
-###Install theme depedency
-
-npm install
+* ###### Install Theme Depedency  
+  * ###### *Enther theme directory* 
+  * > **cd assets/template/coreui**
+  * ###### *install theme depedency*
+  * > **npm install**
+  
+  <br>
+  <br>
+  # :smiley::smiley: MEJUAH JUAH :smiley::smiley:
+  **don't be hesitate to give contribute to this project, together we can work for glorify the name of God.**
+  *jangan ragu untuk berkontribusi dalam proyek ini, bersama-sama kita dapat bekerja untuk memuliakan nama Tuhan.*
