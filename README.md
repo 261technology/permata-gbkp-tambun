@@ -1,5 +1,5 @@
 # Permata GBKP Runggun Tambun
-*Official* Website Permata GBKP Runggun Tambun
+*Official* Website **Permata GBKP** Runggun Tambun
 <br>
 :yellow_heart::bowtie:  **Mejuah-juah!!!**  :bowtie::yellow_heart:
  
@@ -8,8 +8,8 @@
 <br> 
 <br>
 
-### Usage *Cara Penggunaan*'
-* #### Clone this repo *Duplikat file ini ke repo kamu*
+### Usage :
+* #### Clone this repo 
   * > **git clone https://github.com/harisaginting/permata-gbkp-tambun.git**
 
   <br>
@@ -27,7 +27,11 @@
   * ###### *install theme depedency*
   * > **npm install**
   
-  <br>
+  <br> 
+ 
+* #### Create Database permata
+  * **import permata.sql to your MySQL Database** , you can also use phpmyadmin or mysql cli
+ 
   <br>
   
 # :smiley::smiley: MEJUAH JUAH!! :smiley::smiley:
