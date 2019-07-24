@@ -17,11 +17,6 @@
     </div>
         @include('template.footer')
   </body>
-@yield('footcode')
-
-<style type="text/css">
-  .form-control[readonly].date-picker{
-    background-color: #fff !important;
-  }
-</style>
 </html>
+
+@yield('footcode')

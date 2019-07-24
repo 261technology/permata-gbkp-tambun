@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Session;
 
 class Keuangan extends Model
 {
@@ -37,7 +38,27 @@ class Keuangan extends Model
     }
 
     function delete_iuran_kas($id){
-        return DB::table('iuran_kas')->where('id','=',$id)->delete();
+        return DB::table('iuran_kas')
+            ->where('id','=',$id)
+            ->update(
+                array(
+                    'deleted' => 1,
+                    'deleted_by' => Session::get('id_anggota'),
+                    'deleted_at' => date('Y-m-d')
+                )
+            );
+    }
+
+    function deletePengeluaran($id){
+        return DB::table('pengeluaran')
+            ->where('id','=',$id)
+            ->update(
+                array(
+                    'deleted' => 1,
+                    'deleted_by' => Session::get('id_anggota'),
+                    'deleted_at' => date('Y-m-d')
+                )
+            );
     }
 
     function get_datatable_persembahan_pa($length, $start, $searchValue, $orderColumn, $orderDir, $order){
@@ -104,7 +125,8 @@ class Keuangan extends Model
     function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor){
         $query      = DB::table('iuran_kas as a')
                         ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"),'b.sektor')
-                        ->leftJoin('anggotas as b','a.id_anggota','=','b.id');
+                        ->leftJoin('anggotas as b','a.id_anggota','=','b.id')
+                        ->where('a.deleted','=',0);
         $countAll   = $query->count();
 
 
@@ -131,6 +153,33 @@ class Keuangan extends Model
             $query->orderBy($fieldTable[$orderColumn],$orderDir);
         }else{
             $query->orderBy('nama','asc');
+        }
+        
+        return array(
+            "recordsTotal" => $countAll,
+            "recordsFiltered" => $query->count(),
+            "data" => $query->skip($start)->limit($length)->get(),
+        );
+    }
+
+    function getDatatablePengeluaranKas($length, $start, $searchValue, $orderColumn, $orderDir, $order){
+        $query      = DB::table('pengeluaran as m')->where('deleted','=',0);
+        $countAll   = $query->count();
+
+        if(!empty($searchValue)){
+            $query->where(function($q) use ($searchValue) {
+                  $q->whereRaw("UPPER(nama) like '%".$searchValue."%'")
+                    ->orWhereRaw("UPPER(marga) like '%".$searchValue."%'");
+              });
+
+        } 
+
+        $fieldTable = array('nominal','tanggal','keterangan',null);
+                
+        if(!empty($fieldTable[$orderColumn])){
+            $query->orderBy($fieldTable[$orderColumn],$orderDir);
+        }else{
+            $query->orderBy('tanggal','asc');
         }
         
         return array(

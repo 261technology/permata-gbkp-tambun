@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Imports\KasImport;
 use App\Keuangan;
-use App\Helpers\Harisa;
+use Harisa;
 use Session;
 use Excel;
 use File;
@@ -35,8 +35,28 @@ class keuanganController extends Controller
         return view('keuangan.pemasukan',compact('sektor','param_iuran'));
     }
 
+    public function pengeluaran()
+    {   
+        return view('keuangan.pengeluaran');
+    }
+
     function upload_kas(){
         return view('keuangan.upload_kas');
+    }
+
+    public function datatablePengaluaranKas(Request $request){
+        $model  = new Keuangan();
+        $length         = $request->input('length');
+        $start          = $request->input('start');
+        $searchValue    = trim(strtoupper($_POST['search']['value']));
+        $orderColumn    = $_POST['order']['0']['column'];
+        $orderDir       = $_POST['order']['0']['dir'];
+        $order          = $request->input('order');
+
+        $output         = $model->getDatatablePengeluaranKas($length, $start, $searchValue, $orderColumn, $orderDir, $order);  
+        $output['draw'] = $request->input('draw');
+
+        echo json_encode($output); 
     }
 
     public function datatable_iuran_kas(Request $request){
@@ -105,12 +125,50 @@ class keuanganController extends Controller
         echo json_encode($result);
     }
 
+    function updatePengeluaran(Request $request){
+        $model          = new Keuangan();
+        $result['data'] = 'failed';
+        $data           = array();
+        $id             = $request->input('id');
+
+        $data['nominal']    = $request->input('nominal');
+        $data['tanggal']    = $request->input('tanggal');
+        $data['keterangan'] = $request->input('keterangan');
+
+
+        if(!empty($id)){
+            $data['updated_by'] = Session::get('id_anggota');
+            DB::table('pengeluaran')->where('id',$id)->update($data);
+            $result['data']  = 'success';
+            Session::flash('notification', 'Berhasil mencatat pembayaran kas');
+        }else{
+            $data['created_by'] = Session::get('id_anggota');
+            DB::table('pengeluaran')->insert($data);
+            $result['data']  = 'success';
+            Session::flash('notification', 'Berhasil mencatat pembayaran kas');
+        }
+        echo json_encode($result);
+    }
+
     function delete_iuran_kas(Request $request){
         $model          = new Keuangan();
         $result['data'] = 'failed';
         $id             = $request->input('id');
 
         if($model->delete_iuran_kas($id)){
+            $result['data']  = 'success';
+            Session::flash('notification', 'Berhasil menghapus pembayaran kas'); 
+        }
+        echo json_encode($result);
+
+    }
+
+    function deletePengeluaran(Request $request){
+        $model          = new Keuangan();
+        $result['data'] = 'failed';
+        $id             = $request->input('id');
+
+        if($model->deletePengeluaran($id)){
             $result['data']  = 'success';
             Session::flash('notification', 'Berhasil menghapus pembayaran kas'); 
         }

@@ -375,7 +375,7 @@
                       allowClear : true,
                       ajax: {
                           type: 'POST',
-                          url:base_url+"/app/json/anggota",
+                          url:base_url+"json/anggota",
                           dataType: "json",
                           data: function (params) {
                               return {
@@ -399,7 +399,7 @@
                 if($('#form_iuran_kas').valid()){
                     let iuran_nominal = $('#iuran_nominal').unmask();
                     $.ajax({
-                        url: base_url+"/app/keuangan/add_iuran_kas",
+                        url: base_url+"keuangan/add_iuran_kas",
                         method: 'post',
                         data:{_token: "{{csrf_token()}}",anggota : $('#iuran_nama').val(), nominal : iuran_nominal, tanggal_pembayaran : $('#iuran_tanggal_pembayaran').val(), keterangan : $('#iuran_keterangan').val(), tahun : $('#iuran_tahun').val()},
                         dataType : "json",
@@ -423,7 +423,7 @@
                     dataForm = dataForm+"&_token={{csrf_token()}}&pemasukan="+pemasukan_nominal;
 
                     $.ajax({
-                        url: base_url+"/app/keuangan/add_pemasukan_kantin",
+                        url: "keuangan/add_pemasukan_kantin",
                         method: 'post',
                         data: dataForm,
                         dataType : "json",
@@ -456,7 +456,7 @@
                     callback: function (result) {
                         if(result){
                           $.ajax({
-                                  url: base_url+'/app/keuangan/delete_iuran_kas',
+                                  url: base_url+'keuangan/delete_iuran_kas',
                                   method: 'post',
                                   data:{_token: "{{csrf_token()}}",id : id_iuran},
                                   dataType : "json",
@@ -516,7 +516,7 @@
                 $('.field_kantin').attr('readOnly',true);
                 $('#kantin_petugas').attr('disabled',true);
                 $.ajax({
-                        url: base_url+"/app/keuangan/get-pemasukan-kantin",
+                        url: base_url+"keuangan/get-pemasukan-kantin",
                         method: 'post',
                         data:{_token: "{{csrf_token()}}", id : id},
                         dataType : "json",
@@ -545,7 +545,7 @@
                 $('.field_kantin').attr('readOnly',false);
                 $('#kantin_petugas').attr('disabled',false);
                 $.ajax({
-                        url: base_url+"/app/keuangan/get-pemasukan-kantin",
+                        url: base_url+"keuangan/get-pemasukan-kantin",
                         method: 'post',
                         data:{_token: "{{csrf_token()}}", id : id},
                         dataType : "json",
@@ -579,7 +579,7 @@
                     dataForm = dataForm+"&_token={{csrf_token()}}&pemasukan="+pemasukan_nominal+"&id="+id;
 
                     $.ajax({
-                        url: base_url+"/app/keuangan/update_pemasukan_kantin",
+                        url: base_url+"keuangan/update_pemasukan_kantin",
                         method: 'post',
                         data: dataForm,
                         dataType : "json",

@@ -39,6 +39,8 @@ Route::group(['middleware' => 'login'], function(){
 	Route::get('app/anggota/upload', 'AnggotaController@upload_anggota');
 	Route::post('app/anggota/upload_data_anggota', 'AnggotaController@upload_anggota_process')->name('upload_data_anggota');
 
+	Route::post('app/anggota/update-process', 'AnggotaController@updateProcess');
+
 	// pa
 	Route::get('app/pa', 'AcaraController@pa');
 	Route::post('app/update_pa', 'AcaraController@update_pa');
@@ -49,10 +51,13 @@ Route::group(['middleware' => 'login'], function(){
 
 	// Keuangan
 	Route::get('app/keuangan/pemasukan', 'KeuanganController@pemasukan');
+	Route::get('app/keuangan/pengeluaran', 'KeuanganController@pengeluaran');
+	Route::post('app/keuangan/update-pengeluaran', 'KeuanganController@updatePengeluaran');
 	Route::get('app/keuangan/upload-kas', 'KeuanganController@upload_kas');
 	Route::post('app/keuangan/upload_data_kas', 'KeuanganController@upload_kas_process')->name('upload_data_kas');
 	Route::post('app/keuangan/add_iuran_kas', 'KeuanganController@add_iuran_kas');
 	Route::post('app/keuangan/delete_iuran_kas', 'KeuanganController@delete_iuran_kas');
+	Route::post('app/keuangan/delete-pengeluaran', 'KeuanganController@deletePengeluaran');
 
 	Route::post('app/keuangan/add_pemasukan_kantin', 'KeuanganController@addPemasukanKantin');
 	Route::post('app/keuangan/update_pemasukan_kantin', 'KeuanganController@updatePemasukanKantin');
@@ -65,10 +70,11 @@ Route::group(['middleware' => 'login'], function(){
 	Route::post('app/datatable_pa', 'AcaraController@datatable_pa');
 	Route::post('app/datatable_persembahan_pa', 'KeuanganController@datatable_persembahan_pa');
 	Route::post('app/datatable_pemasukan_kantin', 'KeuanganController@datatablePemasukanKantin');
+	Route::post('app/datatable-pengeluaran-kas', 'KeuanganController@datatablePengaluaranKas');
 
 	// Json
 	Route::post('app/json/anggota', 'JsonController@list_anggota');
-	Route::post('app/json/data_agenda', 'AgendaController@list_agenda');
+	Route::post('app/json/data-agenda', 'AgendaController@list_agenda');
 
 	// Agenda
 	Route::get('app/agenda', 'AgendaController@index');

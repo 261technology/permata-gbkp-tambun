@@ -22,3 +22,17 @@ div .table{
 	border-radius: 50%;
 
 }
+
+.form-control[readonly].date-picker{
+    background-color: #fff !important;
+  }
+
+ .form-control{
+ 	color: #002184;
+ 	font-weight: 600;
+ }
+
+ .form-control::placeholder{
+ 	color: #b1b1b1; 
+ 	font-weight: 400;
+ }

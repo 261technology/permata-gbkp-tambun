@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Imports\KasImport;
 use App\Acara;
-use App\Helpers\Harisa;
+use Harisa;
 use Session;
 use Excel;
 use File;

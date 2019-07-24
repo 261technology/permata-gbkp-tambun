@@ -8,6 +8,10 @@ use DB;
 class Anggota extends Model
 {
     protected $guarded = [];
+    protected $table = 'anggotas';
+
+
+
 
     function get_anggota($id){
     	return  DB::table('anggotas as a')
@@ -15,7 +19,7 @@ class Anggota extends Model
                       ->leftJoin('m_parameter as marga','a.marga','=','marga.id')
                       ->leftJoin('m_parameter as pendidikan','a.pendidikan','=','pendidikan.id')
                       ->leftJoin('m_parameter as pekerjaan','a.pekerjaan','=','pekerjaan.id')
-                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id')->where('a.id','=',$id)->first();
+                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id')->where('a.uuid','=',$id)->first();
     }
 
 

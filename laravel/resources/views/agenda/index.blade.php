@@ -105,6 +105,8 @@
 						<option value="pendalaman_alkitab">Pendalaman Alkitab</option>
 						<option value="perpulungen_permata">Perpulungen Permata</option>
 						<option value="rapat">Rapat</option>
+						<option value="event">Event</option>
+						<option value="diakonia">Diakonia</option>
 						<option value="lain-lain">lain-lain</option>
 						</select>
 					</div>
@@ -162,7 +164,7 @@
 			      editable: true,
 			      eventLimit: true, // allow "more" link when too many events
 			      events: {
-						    url: base_url+'/app/json/data_agenda',
+						    url: base_url+'json/data-agenda',
 						    method: 'POST',
 						    extraParams: {
 						      _token: "{{csrf_token()}}",
@@ -192,7 +194,7 @@
 					          },
 			      eventLimit: true, // allow "more" link when too many events
 			      events: {
-						    url: base_url+'/app/json/data_agenda',
+						    url: base_url+'json/data-agenda',
 						    method: 'POST',
 						    extraParams: {
 						      _token: "{{csrf_token()}}",
@@ -238,7 +240,6 @@
 			  	 	$('#acara_jam_mulai').val(time_start);
 			  	 	$('#acara_tanggal_selesai').val(date_end);
 			  	 	$('#acara_jam_selesai').val(time_end);
-
 			  	 	$('#acara_nama').val(event.title);
 			  	 	$('#acara_deskripsi').val(event.extendedProps.desripsi);
 			  	 	$('#acara_tipe').val(event.extendedProps.tipe).trigger('change');
@@ -320,6 +321,7 @@
 	          			$("#acara_jam_selesai").val('');
 			  	 		$(".form_modal_acara").val('');
 			  	 		$("#modal_event_label").text("Tambahkan");
+			  	 		$('#btn_delete_agenda').addClass('hidden');
 			  	 		$("#modal_event").modal("show");
 	          		});
 

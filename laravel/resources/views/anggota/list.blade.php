@@ -74,9 +74,10 @@
                                 <div class="col-sm-12">
                                     <table id="data-anggota" class="table table-responsive-sm table-bordered table-striped table-md" style="width: 100%;">
                                         <thead>
-                                            <th style="width:45%">NAMA</th>
-                                            <th style="width:20%">SEKTOR</th>
+                                            <th style="width:40%">NAMA</th>
+                                            <th style="width:15%">SEKTOR</th>
                                             <th style="width:15%">TELEPON</th>
+                                            <th style="width:10%">STATUS</th>
                                             <th style="width:10%">STATUS</th>
                                         </thead>
                                         <tbody>
@@ -134,6 +135,11 @@
                         {mData: "nama_sektor"},
                         {mData: "telepon"},
                         {mData: "status"},
+                        {
+                            mRender : function(data,type,obj){
+                                return "<a class='btn btn-info btn-sm' href='"+base_url+"anggota/profile/"+obj.uuid+"' ><i class='fa fa-eye'></i></a><a style='margin-left:5px;' class='btn btn-warning btn-sm btn-edit' href='"+base_url+"anggota/edit/"+obj.uuid+"' ><i class='fa fa-edit'></i></a>"
+                            }
+                        },
 
                        ],
                     fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
@@ -151,9 +157,6 @@
                 $('#data-anggota').dataTable().fnDestroy();
                 tableInit();
                 });
-             $(document).on("click",".r_anggota",function(){
-                window.location = "{{url('/')}}/app/anggota/profile/"+$(this).data('id');
-             });
            }
       };
 

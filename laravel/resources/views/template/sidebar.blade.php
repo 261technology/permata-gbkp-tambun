@@ -8,13 +8,30 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{url('/')}}/app/pa"> 
+                <i class="nav-icon icon-puzzle"></i> Pen. Alkitab</a>
+            </li>
+            <li class="nav-item nav-dropdown">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon fa fa-file"></i> Laporan</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url('/')}}/app/laporan/iuran kas">
+                  <i class="nav-icon icon-list"></i> Keuangan</a>
+                  <span class="badge badge-warning">dev.</span> 
+                </li>
+              </ul>
+            </li>
+            <li class="nav-title">Administasi</li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/')}}/app/agenda">
+                <i class="nav-icon fa fa-calendar"></i> Agenda
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link {{Request::segment(2) == 'anggota' ? 'active' : ''}}" href="{{url('/')}}/app/anggota">
                 <i class="nav-icon icon-people"></i> Anggota
                 <span class="badge badge-warning">dev.</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/pa"> 
-                <i class="nav-icon icon-puzzle"></i> Pen. Alkitab</a>
             </li>
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
@@ -25,29 +42,11 @@
                   <i class="nav-icon icon-list"></i> Pemasukan</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/')}}/app/keuangan/pengeluarann">
+                  <a class="nav-link" href="{{url('/')}}/app/keuangan/pengeluaran">
                   <i class="nav-icon icon-list"></i> Pengeluaran
-                  <span class="badge badge-warning">dev.</span>
                   </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#">
-              <i class="nav-icon fa fa-file"></i> Laporan</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="{{url('/')}}/app/laporan/iuran kas">
-                  <i class="nav-icon icon-list"></i> Iuran Kas</a>
-                  <span class="badge badge-warning">dev.</span> 
-                </li>
-              </ul>
-            </li>
-            <li class="nav-title">Administasi</li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/app/agenda">
-                <i class="nav-icon fa fa-calendar"></i> Agenda
-              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/anggota/keluarga">

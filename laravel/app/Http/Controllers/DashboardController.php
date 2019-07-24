@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dashboard;
-use App\Helpers\Harisa;
+use Harisa;
 use Session;
 
 class DashboardController extends Controller

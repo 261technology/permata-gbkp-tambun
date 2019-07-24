@@ -2,7 +2,7 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{{url('/app')}}">
       <img class="navbar-brand-full" src="{{url('/assets/img/logo_text_permata.png')}}" width="89" height="25" alt="Logo Permata">
       <img class="navbar-brand-minimized" src="{{url('/assets/img/logo_permata.png')}}" width="30" height="30" alt="Logo Permata">
     </a>

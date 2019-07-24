@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Imports\AnggotaImport;
 use App\Anggota;
-use App\Helpers\Harisa;
+use Harisa;
 use Session;
 use Excel;
 use File;
@@ -39,13 +39,20 @@ class AnggotaController extends Controller
     function edit($id){
         $model  = new Anggota();
         $data   = $model->get_anggota($id);
-        $data = (array)$data;
+        $anggota    = (array)$data;
 
         $pekerjaan  = Harisa::get_pekerjaan();
         $sektor     = Harisa::get_sektor();
         $marga      = Harisa::get_marga();
         $pendidikan = Harisa::get_pendidikan();
-        return view('anggota.edit',compact('pendidikan','data','sektor','marga','pekerjaan'));
+
+        // Prevent anggota lain edit sementara
+
+        if(Session::get('uuid') != $anggota['uuid']){
+            // echo 'ga boleh bukan id kamu';die;
+        }
+
+        return view('anggota.edit',compact('pendidikan','anggota','sektor','marga','pekerjaan'));
     }
 
     function profile($id){
@@ -63,10 +70,10 @@ class AnggotaController extends Controller
         if ($request->hasFile('data_anggota')) {
             $file = $request->file('data_anggota'); //GET FILE
             Excel::import(new AnggotaImport, $file); //IMPORT FILE 
-            Session::flash('notif', 'Your data has been updated');
+            Session::flash('notification', 'Your data has been updated');
             return redirect()->back();
         } 
-        Session::flash('notif', 'ERROR!!!!!!');
+        Session::flash('notification', 'ERROR!!!!!!');
         return redirect()->back();
     }
 
@@ -85,6 +92,38 @@ class AnggotaController extends Controller
         $output['draw'] = $request->input('draw');
 
         echo json_encode($output); 
+    }
+
+    function updateProcess(Request $request){
+        $data['nama'] = $request->input('nama');
+        $data['marga'] = $request->input('marga');
+        $data['jenis_kelamin'] = $request->input('jenis_kelamin');
+        $data['tempat_lahir'] = $request->input('tempat_lahir');
+        $data['tanggal_lahir'] = $request->input('tanggal_lahir');
+        $data['sekolah'] = $request->input('sekolah');
+        $data['pendidikan'] = $request->input('pendidikan');
+        $data['jurusan'] = $request->input('jurusan');
+        $data['pekerjaan'] = $request->input('pekerjaan');
+        $data['telepon'] = $request->input('telepon');
+        $data['email'] = $request->input('email');
+        $data['domisili'] = $request->input('domisili');
+        $data['alamat'] = $request->input('alamat');
+        $data['tahun_ngawan'] = $request->input('tahun_ngawan');
+        $data['lokasi_ngawan'] = $request->input('lokasi_ngawan');
+        $data['instagram'] = $request->input('instagram');
+        $data['sektor'] = $request->input('sektor');
+        $data['hobi'] = $request->input('hobi');
+        $data['kantor'] = $request->input('kantor');
+
+        $id = $request->input('id_anggota');
+
+        if (Anggota::where('id',$id)->update($data)) { 
+            Session::flash('notification', 'Your data has been updated');
+        }else{
+            Session::flash('notification', 'ERROR!!!!!!');    
+        } 
+        
+        return redirect()->back();
     }
     
 }

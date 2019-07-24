@@ -58,5 +58,5 @@
 
     <script src="{{url('assets/js/main.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        const base_url = "{{url('/')}}";
+        const base_url = "{{url('/')}}/app/";
     </script>
