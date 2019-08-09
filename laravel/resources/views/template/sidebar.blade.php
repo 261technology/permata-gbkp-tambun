@@ -8,6 +8,16 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link {{Request::segment(2) == 'anggota' ? 'active' : ''}}" href="{{url('/')}}/app/anggota">
+                <i class="nav-icon icon-people"></i> Anggota
+                <span class="badge badge-warning">dev.</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{Request::segment(2) == 'acara' ? 'active' : ''}}" href="{{url('/')}}/app/acara">
+                <i class="nav-icon icon-people"></i> Acara
+                <span class="badge badge-warning">dev.</span></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{url('/')}}/app/pa"> 
                 <i class="nav-icon icon-puzzle"></i> Pen. Alkitab</a>
             </li>
@@ -30,8 +40,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link {{Request::segment(2) == 'anggota' ? 'active' : ''}}" href="{{url('/')}}/app/anggota">
-                <i class="nav-icon icon-people"></i> Anggota
-                <span class="badge badge-warning">dev.</span></a>
+                <i class="nav-icon icon-people"></i> Anggota</a>
             </li>
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">

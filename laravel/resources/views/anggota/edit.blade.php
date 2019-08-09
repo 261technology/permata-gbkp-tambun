@@ -36,7 +36,7 @@
                                         <label>Jenis Kelamin</label>
                                         <select id="jenis_kelamin"  name="jenis_kelamin" class="form-control">
                                             <option value="Laki-laki" <?= $anggota['jenis_kelamin'] == 'Laki-laki' ? 'selected' : '';  ?>>Laki-laki</option>
-                                            <option value="Perempuan" <?= $anggota['marga'] == 'Perempuan' ? 'selected' : '';  ?>>Perempuan</option>
+                                            <option value="Perempuan" <?= $anggota['jenis_kelamin'] == 'Perempuan' ? 'selected' : '';  ?>>Perempuan</option>
                                         </select>
                                     </div>
 

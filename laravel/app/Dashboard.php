@@ -17,7 +17,7 @@ class Dashboard extends Model
                 ->get();
         $result = array();
         foreach ($data as $key => $value) {
-            $result[$key]['name'] = $value->name; 
+            $result[$key]['name'] = !empty($value->name) ? $value->name : 'undefined'; 
             $result[$key]['y'] = intval($value->y); 
         }
         return $result;

@@ -41,6 +41,9 @@ Route::group(['middleware' => 'login'], function(){
 
 	Route::post('app/anggota/update-process', 'AnggotaController@updateProcess');
 
+	// acara
+	Route::get('app/acara', 'AcaraController@index');
+
 	// pa
 	Route::get('app/pa', 'AcaraController@pa');
 	Route::post('app/update_pa', 'AcaraController@update_pa');

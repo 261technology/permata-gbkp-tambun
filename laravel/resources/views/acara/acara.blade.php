@@ -377,10 +377,9 @@
 		                    data:  {id: $(this).data('id'), _token : "{{csrf_token()}}"} ,
 		                    dataType : "json",
 		                    success:function(result){
-		                    	$("#pa_tuan_rumah").empty();
-		                    	$("#pa_peserta").empty();
 		                    	if(result.tuan_rumah[0] != null){
 		                    		let e = "";
+		                    		$("#pa_tuan_rumah").empty();
 		                    		result.tuan_rumah.forEach(function(value,index) {
 										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
 									});
@@ -391,7 +390,8 @@
 		                    		let e = "";
 		                    		result.peserta.forEach(function(value,index) {
 										   e += "<option value='"+value.id_anggota+"' selected>"+value.nama_anggota+"</option>";
-									});	
+									});
+									$("#pa_peserta").empty();	
 									$("#pa_peserta").append(e);	
 		                    	}
 		                    }
