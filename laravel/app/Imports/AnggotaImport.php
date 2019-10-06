@@ -17,25 +17,27 @@ class AnggotaImport implements ToModel, WithHeadingRow, WithChunkReading, Should
     */
     public function model(array $row)
     {   
-        // echo json_encode($row);die;
+        // echo json_encode(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(strtotime('10-10-2002')));die;
         // MODIFIKASI ARRAY NYA DENGAN MENAMBAHKAN KEY
-        return new Anggota([
+        return new Anggota([    
+            'role' => $row['role'],
+            'password' => $row['password'],
             'nama' => $row['nama'],
             'marga' => $row['marga'],
             'tempat_lahir' => $row['tempat_lahir'],
-            'tanggal_lahir' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal_lahir']),
+            'tanggal_lahir' => $row['tanggal_lahir'],
             'jenis_kelamin' => $row['jenis_kelamin'],
-            'telepon' => "'".$row['telepon']."'",
+            'telepon' => $row['telepon'],
             'email' => $row['email'],
             'alamat' => $row['alamat'],
             'domisili' => $row['domisili'],
+            'sektor' => $row['sektor'],
             'pekerjaan' => $row['pekerjaan'],
             'pendidikan' => $row['pendidikan'],
             'jurusan' => $row['jurusan'],
             'sekolah' => $row['sekolah'],
-            'kantor' => $row['kantor'],
+            'perusahaan' => $row['perusahaan'],
             'hobi' => $row['hobi'],
-            'sektor' => $row['sektor'],
             'tahun_ngawan' => $row['tahun_ngawan'],
             'lokasi_ngawan' => $row['lokasi_ngawan'],
             'instagram' => $row['instagram']

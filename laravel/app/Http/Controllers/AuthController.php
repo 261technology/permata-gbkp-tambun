@@ -29,6 +29,7 @@ class AuthController extends Controller
     }
 
     function login(){
+        // echo Hash::make('permatatambun');die;
         if(Session::get('isLogin') != 1){
             return view('authtentication.login');
         }else{

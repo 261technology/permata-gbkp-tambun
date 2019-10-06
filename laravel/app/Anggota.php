@@ -29,7 +29,8 @@ class Anggota extends Model
                       ->leftJoin('m_parameter as marga','a.marga','=','marga.id')
                       ->leftJoin('m_parameter as pendidikan','a.pendidikan','=','pendidikan.id')
                       ->leftJoin('m_parameter as pekerjaan','a.pekerjaan','=','pekerjaan.id')
-                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id');
+                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id')
+                      ->where('isAdmin',0);
         $countAll   = $query->count();
 
 

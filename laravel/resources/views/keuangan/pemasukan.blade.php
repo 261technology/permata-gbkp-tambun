@@ -249,8 +249,6 @@
 
 
 <script type="text/javascript">    
-  const iuran_pelajar = {{$param_iuran['iuran_kas_pelajar']}};
-  const iuran_pekerja = {{$param_iuran['iuran_kas_pekerja']}};
 
   var Page = function () {
       var tableKasInit = function(){                     

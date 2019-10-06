@@ -116,7 +116,7 @@ class keuanganController extends Controller
         $data['nominal']    = $request->input('nominal');
         $data['tahun']      = $request->input('tahun');
         $data['tanggal_pembayaran'] = $request->input('tanggal_pembayaran');
-        $data['keterangan'] = !empty($request->input('keterangan')) ? $request->input('keterangan') : "dibayarkan pada tanggal ".date('dd/mm/YYYY');
+        $data['keterangan'] = !empty($request->input('keterangan')) ? $request->input('keterangan') : "dibayarkan pada tanggal ".date('d m Y');
 
         if($model->add_iuran_kas($data)){
             $result['data']  = 'success';
