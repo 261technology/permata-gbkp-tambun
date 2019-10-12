@@ -25,6 +25,7 @@ div .table{
 
 .form-control[readonly].date-picker{
     background-color: #fff !important;
+  	color: #002184;
   }
 
  .form-control{

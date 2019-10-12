@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrigger extends Migration
+class createTrigger extends Migration
 {
     /**
      * Run the migrations.
@@ -31,7 +31,7 @@ class CreateTrigger extends Migration
             DECLARE tagihan int ;
             DECLARE kategori varchar(50) ;
 
-            IF(NEW.pekerjaan IN ('Pelajar','Mahasiswa')) THEN 
+            IF(NEW.pekerjaan IN (1)) THEN 
                 SET kategori = 'Pelajar';
             ELSE 
                 SET kategori = 'Pekerja';
@@ -69,7 +69,9 @@ class CreateTrigger extends Migration
                 UPDATE total_iuran_kas set nominal = (total_lama - OLD.nominal) where id_anggota = OLD.id_anggota AND tahun = OLD.tahun; 
 
                 END;
+        ");
 
+        DB::unprepared("
             CREATE TRIGGER `kurang_iuran_kas2` AFTER UPDATE ON `iuran_kas`
              FOR EACH ROW BEGIN 
             DECLARE total_lama int ;
@@ -82,24 +84,25 @@ class CreateTrigger extends Migration
                 UPDATE total_iuran_kas set nominal = ((total_lama - OLD.nominal) + NEW.nominal) where id_anggota = NEW.id_anggota AND tahun = NEW.tahun; 
             END IF;
             END;
+          ");
 
-
+          DB::unprepared("
             CREATE TRIGGER `tambah_iuran_kas` AFTER INSERT ON `iuran_kas`
              FOR EACH ROW BEGIN 
             DECLARE total_lama int ;
-            DECLARE ada integer;
+            DECLARE ada int;
 
             SELECT nominal into total_lama from total_iuran_kas where id_anggota = NEW.id_anggota and tahun = NEW.tahun; 
 
             SELECT count(*) INTO ada FROM total_iuran_kas where id_anggota = NEW.id_anggota AND tahun = NEW.tahun;
 
             IF(ada <> 0) THEN 
-                UPDATE total_iuran_kas set nominal = (total_lama + NEW.nominal) where id_anggota = NEW.id_anggota     AND tahun = NEW.tahun; 
+              UPDATE total_iuran_kas set nominal = (total_lama + NEW.nominal) where id_anggota = NEW.id_anggota     AND tahun = NEW.tahun; 
             ELSE 
-                INSERT INTO total_iuran_kas (id_anggota,nominal,tahun) VALUES (NEW.id_anggota, NEW.nominal, NEW.tahun); 
+              INSERT INTO total_iuran_kas (id_anggota,nominal,tahun) VALUES (NEW.id_anggota, NEW.nominal, NEW.tahun); 
             END IF;
-            END;
-        ");
+            END
+          ");
 
 
     }
@@ -114,10 +117,8 @@ class CreateTrigger extends Migration
          DB::unprepared('DROP TRIGGER `delete_total_kas`');
          DB::unprepared('DROP TRIGGER `tambah_tagihan_kas_anggota`');
          DB::unprepared('DROP TRIGGER `uuid`');
-         DB::unprepared('
-                        DROP TRIGGER `kurang_iuran_kas`;
-                        DROP TRIGGER `kurang_iuran_kas2`;
-                        DROP TRIGGER `tambah_iuran_kas`;
-                        ');
+         DB::unprepared('DROP TRIGGER `kurang_iuran_kas` ');
+         DB::unprepared('DROP TRIGGER `kurang_iuran_kas2` ');
+         DB::unprepared('DROP TRIGGER `tambah_iuran_kas` ');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -8,6 +8,11 @@ use DB;
 class Dashboard extends Model
 {
     protected $guarded = [];
+
+    function getAnggotaByStatus($sektor, $status){
+        return DB::table('anggotas')->where('status',$status)->where('sektor',$sektor)->get();
+    }
+
 
     function getChartAnggota(){
         $data = DB::table('anggotas')

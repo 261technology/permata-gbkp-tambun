@@ -21,6 +21,7 @@ class CreateIuranKasTable extends Migration
             $table->integer('nominal');
             $table->integer('tahun');
             $table->string('keterangan')->nullable();
+            $table->integer('deleted')->nullable()->default(0);
         });
     }
 

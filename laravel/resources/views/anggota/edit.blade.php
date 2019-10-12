@@ -47,7 +47,7 @@
 
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control date-picker date-picker-blue" readOnly required="true" value="{{$anggota['tanggal_lahir']}}" placeholder="klik untuk menambahkan tanggal">
+                                        <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control date-picker date-picker-normal" readOnly required="true" value="{{$anggota['tanggal_lahir']}}" placeholder="klik untuk menambahkan tanggal">
                                     </div>
 
                                     <div class="form-group">
@@ -90,7 +90,7 @@
 
                                     <div class="form-group">
                                         <label>Kantor</label>
-                                        <input type="text" name="kantor" id="kantor" placeholder="Kosongkan belum bila bukan pegawai" class="form-control" value="{{$anggota['kantor']}}">
+                                        <input type="text" name="kantor" id="kantor" placeholder="Kosongkan belum bila bukan pegawai" class="form-control" value="{{$anggota['perusahaan']}}">
                                     </div>
 
                                     <div class="form-group">
@@ -101,7 +101,7 @@
                                               +62
                                             </span>
                                           </div>
-                                            <input class="form-control" id="telepon" type="number" name="telepon" placeholder="Telepon" required="true" value="{{$anggota['telepon']}}">
+                                            <input class="form-control" id="telepon" type="number" name="telepon" placeholder="Telepon" value="{{$anggota['telepon']}}">
                                         </div>
                                       </div>
 

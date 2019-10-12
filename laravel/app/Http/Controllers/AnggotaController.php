@@ -95,6 +95,7 @@ class AnggotaController extends Controller
     }
 
     function updateProcess(Request $request){
+        // echo json_encode($request->all());die;
         $data['nama'] = $request->input('nama');
         $data['marga'] = $request->input('marga');
         $data['jenis_kelamin'] = $request->input('jenis_kelamin');
@@ -113,7 +114,7 @@ class AnggotaController extends Controller
         $data['instagram'] = $request->input('instagram');
         $data['sektor'] = $request->input('sektor');
         $data['hobi'] = $request->input('hobi');
-        $data['kantor'] = $request->input('kantor');
+        $data['perusahaan'] = $request->input('kantor');
 
         $id = $request->input('id_anggota');
 

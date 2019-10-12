@@ -37,5 +37,7 @@ class mParameterTableSeeder extends Seeder
         	DB::table('m_parameter')->insert(['type' => 'pendidikan','nama' => 'S1','tahun' => date('Y')]);
         	DB::table('m_parameter')->insert(['type' => 'pendidikan','nama' => 'S2','tahun' => date('Y')]);
         	DB::table('m_parameter')->insert(['type' => 'pendidikan','nama' => 'S3','tahun' => date('Y')]);
+            DB::table('m_parameter')->insert(['type' => 'iuran_kas_pelajar','nama' => '60000','tahun' => date('Y')]);
+            DB::table('m_parameter')->insert(['type' => 'iuran_kas_pekerja','nama' => '120000','tahun' => date('Y')]);
     }
 }

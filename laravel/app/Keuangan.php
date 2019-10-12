@@ -40,13 +40,7 @@ class Keuangan extends Model
     function delete_iuran_kas($id){
         return DB::table('iuran_kas')
             ->where('id','=',$id)
-            ->update(
-                array(
-                    'deleted' => 1,
-                    'deleted_by' => Session::get('id_anggota'),
-                    'deleted_at' => date('Y-m-d')
-                )
-            );
+            ->delete();
     }
 
     function deletePengeluaran($id){

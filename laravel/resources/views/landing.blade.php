@@ -1,16 +1,11 @@
 <!DOCTYPE HTML>
-<!--
-  Solid State by HTML5 UP
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
   <head>
-    <title>Solid State by HTML5 UP</title>
+    <title>PERMATA GBKP TAMBUN</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{url('/')}}/assets/template/solid-state/assets/css/main-custom.css" />
-    <noscript><link rel="stylesheet" href="{{url('/')}}/assets/template/solid-state/assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="{{url('/')}}/assets/landing/plugin/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="{{url('/')}}/assets/landing/main.css" />
   </head>
   <body class="is-preload">
 
@@ -19,9 +14,9 @@
 
         <!-- Header -->
           <header id="header" class="alt">
-            <h1><a href="index.html">Solid State</a></h1>
+            <h1><a href="index.html">KITA PERMATA</a></h1>
             <nav>
-              <a href="#menu">Menu</a>
+              <a href="#menu">Login</a>
             </nav>
           </header>
 
@@ -171,7 +166,7 @@
       </div>
 
     <!-- Scripts -->
-      <script src="{{url('/')}}/assets/template/solid-state/assets/js/jquery.min.js"></script>
+      <script src="{{url('/')}}/assets/landing/plugin/jquery.min.js"></script>
       <script src="{{url('/')}}/assets/template/solid-state/assets/js/jquery.scrollex.min.js"></script>
       <script src="{{url('/')}}/assets/template/solid-state/assets/js/browser.min.js"></script>
       <script src="{{url('/')}}/assets/template/solid-state/assets/js/breakpoints.min.js"></script>
