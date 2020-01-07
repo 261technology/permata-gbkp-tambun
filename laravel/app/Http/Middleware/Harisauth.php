@@ -17,7 +17,7 @@ class Harisauth
     public function handle($request, Closure $next)
     {
          if(Session::get('isLogin') != 1){
-            return redirect('/login');
+            return redirect('/application/login');
         }else{
             return $next($request);
         }
