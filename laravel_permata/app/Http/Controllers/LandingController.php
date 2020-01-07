@@ -29,9 +29,9 @@ class LandingController extends Controller
         // Session::flash('email', 'harisaginting@gmail.com');
         // Session::flash('url', 'https://kitapermata.com');
 
-        $runggun = Config::where('type', 'runggun')->get();
+        // $runggun = Config::where('type', 'runggun')->get();
 
-        return view('frontend.register', compact('runggun'));
+        return view('frontend.register');
     }
 
 }

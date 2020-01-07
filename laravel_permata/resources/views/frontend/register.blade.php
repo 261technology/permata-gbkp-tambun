@@ -99,9 +99,7 @@
                           <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
                             <label class="text-left" for="runggun">Runggun</label>
                             <select class="form-control" type="text" name="runggun" id="runggun" placeholder="Runggun">
-                              @foreach ($runggun as $key => $value)
-                                <option value="{{ $value->id }}" selected>{{ $value->nama }}</option>
-                              @endforeach
+                                <option value="tambun" selected>Tambun</option>
                             </select>
                           </div>
 
