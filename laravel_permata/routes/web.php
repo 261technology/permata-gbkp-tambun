@@ -120,5 +120,6 @@ Route::group(['prefix' => '/event'], function () {
 	Route::get('/', 'EventController@index');
 	Route::get('/rakor3', 'EventController@rakor3');
 	Route::get('/rakor3/set-attendance/{phone?}/{present?}', 'EventController@rakor3setattendance');
+	Route::get('/rakor3/scanner/', 'EventController@rakor3scanner');
 	Route::get('/rakor3/{phone}', 'EventController@rakor3attendance');
 });

@@ -9,6 +9,7 @@
 @endsection
 
 @section('nav-top')
+    @if(Session::has('email'))
     <!-- Navbar -->        
      <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
         <div class="container">
@@ -20,14 +21,17 @@
         </div>
       </nav>
     <!-- End Navbar -->
+   @endif
 @endsection
 
 @section('nav-bottom')
+    @if(Session::has('email'))
     <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom" style="background: #fafafa00;">
         <div class="row text-center">
             <a class="col-4 offset-4 btn btn-sm nav-link-bottom btn-{{$user->attend == 1 ? 'danger' : 'success'}} text-white" href="{{url('/')}}/event/rakor3/set-attendance/{{$user->phone}}/{{$user->attend == 1 ? '0' : '1'}}">{{$user->attend == 1 ? 'Set Unpresent' : 'Set Present'}}</a>
         </div>
     </nav>
+    @endif
 @endsection
 
 @section('content')
@@ -36,7 +40,7 @@
       <div id="page-wrapper">
               <section id="profile" class="wrapper alt spotlight style2">
                 <div class="w-100 text-center">
-                    <img height="50px" src="{{url('/')}}/img/logo_text_permata.png">
+                    <img height="50px" src="{{url('/')}}/img/logo_permata.png">
                 </div>
                 <div class="inner">
                   <div class="content">

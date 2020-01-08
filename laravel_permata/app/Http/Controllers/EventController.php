@@ -50,4 +50,9 @@ class EventController extends Controller
     
         return redirect()->action('EventController@rakor3attendance',array('phone'=>$phone))->with('message', 'data kehadiran enggo iperbarui!');
     }
+
+    function rakor3scanner(){
+        // echo json_encode(Session::get('email'));
+        return view('event.rakor3.scanner');
+    }
 }

@@ -14,7 +14,7 @@
       <div id="page-wrapper">
               <section id="profile" class="wrapper alt spotlight style2">
                 <div class="w-100 text-center">
-                    <img height="50px" src="{{url('/')}}/img/logo_text_permata.png">
+                    <img height="50px" src="{{url('/')}}/img/logo_permata.png">
                 </div>
                 <div class="inner">
                   <div class="content">
@@ -44,7 +44,11 @@
 <script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
   $(document).on("click","#btn-qr",function(e){
-      $("#frame-qr").attr("src", "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + $("#phone.val"));
+      if($("#phone").val() != ''){
+        $("#frame-qr").attr("src", "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://kitapermata.com/event/rakor3/" + $("#phone").val());
+      }else{
+        $("#frame-qr").attr("src", "");
+      }
   });
 </script>
 @endsection
