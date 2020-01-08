@@ -270,7 +270,7 @@
 					    callback: function (result) {
 					        if(result == true){
 					        	$.ajax({
-					                    url: "{{url('/')}}/app/agenda/update_jam_agenda",
+					                    url: "{{url('/')}}/application/agenda/update_jam_agenda",
 					                    type:'POST',
 					                    data: {id:id, mulai : start, selesai : end, _token: "{{csrf_token()}}"},
 					                    dataType : "json",
@@ -297,7 +297,7 @@
 
 								var dataForm  = $('#form_event').serialize();
 								dataForm = dataForm+"&_token={{csrf_token()}}"; 
-								var url = "{{url('/')}}/app/agenda/update_agenda";
+								var url = "{{url('/')}}/application/agenda/update_agenda";
 								$.ajax({
 					                    url: url,
 					                    type:'POST',
@@ -343,7 +343,7 @@
 						    callback: function (result) {
 						        if(result == true){
 						        	$.ajax({
-						                    url: "{{url('/')}}/app/agenda/delete_agenda",
+						                    url: "{{url('/')}}/application/agenda/delete_agenda",
 						                    type:'POST',
 						                    data: {id:id, _token: "{{csrf_token()}}", nama : nama},
 						                    dataType : "json",

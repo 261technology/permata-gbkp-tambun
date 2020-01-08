@@ -51,11 +51,12 @@ class AuthController extends Controller
 
         if($login){
             Session::flash('notification','Selamat datang '.Session::get('nama').' !!!');
-            return redirect(url('/').'/app');
+            
         }else{
             Session::flash('notification','Email atau password anda salah');
-            return redirect(url('/').'/login');
         }
+
+        return redirect(url('/').'/application');
 
     }
 
@@ -81,7 +82,7 @@ class AuthController extends Controller
 
     function logout(){
         Session::flush();
-        return redirect(url('/login'));
+        return redirect(url('/application/login'));
     }
 
     function register(){

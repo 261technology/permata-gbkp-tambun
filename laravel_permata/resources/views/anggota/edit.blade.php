@@ -6,7 +6,7 @@
       <h4>Data Anggota</h4>
     </div>
     <div class="card-body">
-      <form id="form_update" method="post" action="{{url('/')}}/app/anggota/update-process">
+      <form id="form_update" method="post" action="{{url('/')}}/application/anggota/update-process">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     @csrf

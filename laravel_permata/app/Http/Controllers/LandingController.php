@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Config;
-use App\Model\Member;
+use App\Models\Config;
+use App\Models\Member;
 use Session;
 
 class LandingController extends Controller

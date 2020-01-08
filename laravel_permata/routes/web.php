@@ -114,3 +114,11 @@ Route::group(['prefix' => '/application'], function () {
 		Route::post('/agenda/delete_agenda', 'AgendaController@delete_agenda');
 	});
 });
+
+// ================== 	CUSTOM  ==============================
+Route::group(['prefix' => '/event'], function () {
+	Route::get('/', 'EventController@index');
+	Route::get('/rakor3', 'EventController@rakor3');
+	Route::get('/rakor3/set-attendance/{phone?}/{present?}', 'EventController@rakor3setattendance');
+	Route::get('/rakor3/{phone}', 'EventController@rakor3attendance');
+});

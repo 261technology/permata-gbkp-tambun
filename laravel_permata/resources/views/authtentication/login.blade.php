@@ -36,7 +36,7 @@
                   <div class="card p-4">
                       <div class="card-body">
                           <!-- <img src="{{url('/')}}/assets/img/logo_text_permata.png" alt="logo permata" style="width: 150px;margin-bottom: 10px;"> -->
-                          <form method="post" action="{{url('/')}}/login_process">
+                          <form method="post" action="{{url('/')}}/application/login_process">
                             @csrf
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">

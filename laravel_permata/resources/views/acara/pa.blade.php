@@ -270,7 +270,7 @@
 			                    serverSide: true,
 			                    dom: '<f<t>ip>',
 			                    ajax: { 
-			                        'url'  :"{{url('/')}}/app/datatable_pa", 
+			                        'url'  :"{{url('/')}}/application/datatable_pa", 
 			                        'type' :'POST',
 			                        'data' : { _token: "{{csrf_token()}}", status : $('#status').val(),sku:$('#sku').val() },
 			                        },
@@ -320,7 +320,7 @@
 	          			$("#pa_id").val($(this).data('id_pa'));
 	          			let id = $(this).data('id');
 						$.ajax({
-		                    url: "{{url('/')}}/app/get_pa",
+		                    url: "{{url('/')}}/application/get_pa",
 		                    type:'POST',
 		                    data:  {id:id, _token : "{{csrf_token()}}"} ,
 		                    dataType : "json",
@@ -352,7 +352,7 @@
 						if($('#form_pa').valid()){
 								var dataForm  = $('#form_pa').serialize();
 								dataForm = dataForm+"&_token={{csrf_token()}}&persembahan="+ $("#pa_persembahan").unmask(); 
-								var url = "{{url('/')}}/app/update_pa";
+								var url = "{{url('/')}}/application/update_pa";
 								$.ajax({
 					                    url: url,
 					                    type:'POST',
@@ -372,7 +372,7 @@
 	          			$("#acara_id_peserta").val($(this).data('id'));
 	          			$("#modal_pa_peserta_label").text($(this).data('nama'));
 	          			$.ajax({
-		                    url: "{{url('/')}}/app/get-peserta-pa",
+		                    url: "{{url('/')}}/application/get-peserta-pa",
 		                    type:'POST',
 		                    data:  {id: $(this).data('id'), _token : "{{csrf_token()}}"} ,
 		                    dataType : "json",
@@ -457,7 +457,7 @@
 
 								var dataForm  = $('#form_pa_peserta').serialize();
 								dataForm = dataForm+"&_token={{csrf_token()}}"; 
-								var url = "{{url('/')}}/app/update-peserta-pa";
+								var url = "{{url('/')}}/application/update-peserta-pa";
 								$.ajax({
 					                    url: url,
 					                    type:'POST',
@@ -477,7 +477,7 @@
 	          		$(document).on("click",".btn-view",function(){
 	          			let id = $(this).data('id');
 						$.ajax({
-		                    url: "{{url('/')}}/app/get_pa-view",
+		                    url: "{{url('/')}}/application/get_pa-view",
 		                    type:'POST',
 		                    data:  {id:id, _token : "{{csrf_token()}}"} ,
 		                    dataType : "json",

@@ -257,7 +257,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: { 
-                        'url'  :"{{url('/')}}/app/datatable_iuran_kas", 
+                        'url'  :"{{url('/')}}/application/datatable_iuran_kas", 
                         'type' :'POST',
                         'data' : { _token: "{{csrf_token()}}", tahun : $('#filter_tahun_iuran_kas').val(), sektor : $('#filter_sektor_iuran_kas').val() },
                         },
@@ -292,7 +292,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: { 
-                        'url'  :"{{url('/')}}/app/datatable_persembahan_pa", 
+                        'url'  :"{{url('/')}}/application/datatable_persembahan_pa", 
                         'type' :'POST',
                         'data' : { _token: "{{csrf_token()}}"},
                         },
@@ -316,7 +316,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: { 
-                        'url'  :"{{url('/')}}/app/datatable_pemasukan_kantin", 
+                        'url'  :"{{url('/')}}/application/datatable_pemasukan_kantin", 
                         'type' :'POST',
                         'data' : { _token: "{{csrf_token()}}"},
                         },

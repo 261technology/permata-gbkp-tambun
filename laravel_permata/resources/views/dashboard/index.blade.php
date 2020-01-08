@@ -118,10 +118,10 @@ Highcharts.chart('chart_pekerjaan', {
 	        type: 'pie'
 	    },
 	    title: {
-	        text: 'Browser market share, January, 2018'
+	        text: 'Anggota per-sektor'
 	    },
 	    subtitle: {
-	        text: 'Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+	        text: 'PERMATA GBKP RUNGGUN TAMBUN'
 	    },
 	    plotOptions: {
 	        pie: {

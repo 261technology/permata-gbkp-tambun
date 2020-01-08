@@ -96,7 +96,7 @@
                                     <span>Download excel</span>
                                 </button>
 
-                                <a href="{{url('/app/anggota/upload')}}" style="margin-left:5px;" class="btn btn-brand btn-success float-right" type="button" style="margin-bottom: 4px">
+                                <a href="{{url('/application/anggota/upload')}}" style="margin-left:5px;" class="btn btn-brand btn-success float-right" type="button" style="margin-bottom: 4px">
                                     <i class="fa fa-plus"></i>
                                     <span>Upload Excel</span>
                                 </a>
@@ -126,7 +126,7 @@
                     serverSide: true,
                     dom: '<f<t>ip>',
                     ajax: { 
-                        'url'  :"{{url('/')}}/app/datatable_anggota", 
+                        'url'  :"{{url('/')}}/application/datatable_anggota", 
                         'type' :'POST',
                         'data' : { _token: "{{csrf_token()}}", status : $('#status').val(),sku:$('#sku').val() },
                         },

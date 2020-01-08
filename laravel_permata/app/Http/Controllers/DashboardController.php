@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\model\Dashboard;
-use App\model\Config;
+use App\Models\Dashboard;
+use App\Models\Config;
 use Harisa;
 use Session;
 
