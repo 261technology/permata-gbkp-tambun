@@ -21,7 +21,7 @@
                     <label class="content-header text-center">SCAN QR CODE</label>
                     <div class="w-100 text-left" style="font-size: 0.7em">bila scanner tidak muncul, harap menggunakan aplikasi QR scanner pihak ke-3</div>
                     <div class="row">
-                       <canvas></canvas>
+                       <canvas style="margin:auto !important;"></canvas>
                   </div>
               </section>
 
