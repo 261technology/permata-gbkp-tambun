@@ -36,7 +36,7 @@
 <script src="{{url('/')}}/vendor/WebCodeCam.js"></script>
 <script src="{{url('/')}}/vendor/qrcodelib.js"></script>
 <script type="text/javascript">
-  var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
+  // var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
   var arg = {
       resultFunction: function(result) {
         window.location.href = result;
