@@ -2,9 +2,25 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>Permata</title>
+    <title>PERMATA GBKP RUNGGUN TAMBUN</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name=”description” content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara.">
+    <meta name="google" content="notranslate" />
+    <meta name="google-site-verification" content="tW0WUpvfArHS_Vuvfmi0lCd59v4QOMco7yGOmqZwxkg" />
+
+
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Beranda - Persadan Man Anak Gerejanta | PERMATA GBKP" />
+    <meta property="og:description" content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara." />
+    <meta property="og:url" content="https://kitapermata.com" />
+    <meta property="og:site_name" content="PERMATA GBKP RUNGGUN TAMBUN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara." />
+    <meta name="twitter:title" content="PERMATA GBKP RUNGGUN TAMBUN" />
+    <meta name="twitter:image" content="https://kitapermata.com/img/logo_permata.png" />
 
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -19,6 +35,7 @@
     <script src="{{url('/')}}/vendor/bootstrap.min.js"></script>
 
     <!-- Icon -->
+    <link rel="icon" href="{{url('/')}}/img/logo32x32.png" sizes="32x32" />
     <link rel="stylesheet" href="{{url('/')}}/vendor/fontawesome-all.min.css" />
     @yield('header-css')
 
