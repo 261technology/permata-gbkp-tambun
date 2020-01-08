@@ -41,7 +41,7 @@
   var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
   var arg = {
       resultFunction: function(result) {
-        window.location.href = result;
+        window.location.href = result.code;
       }
   };
   var decoder = new WebCodeCamJS("canvas").buildSelectMenu('select', 'environment|back').init(arg).play();
