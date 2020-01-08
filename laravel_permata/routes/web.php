@@ -58,6 +58,8 @@ Route::group(['prefix' => '/application'], function () {
 
 
 	Route::group(['middleware' => 'login'], function(){
+		Route::get('/rakor3export', 'EventController@rakor3export');
+
 		// Dashboard
 		Route::get('/', 'DashboardController@index')->name('application');
 
@@ -116,6 +118,9 @@ Route::group(['prefix' => '/application'], function () {
 });
 
 // ================== 	CUSTOM  ==============================
+Route::group(['middleware' => 'login'], function(){
+		Route::get('/rakor3export', 'EventController@rakor3export');
+});
 Route::group(['prefix' => '/event'], function () {
 	Route::get('/', 'EventController@index');
 	Route::get('/rakor3', 'EventController@rakor3');

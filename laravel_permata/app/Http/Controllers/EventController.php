@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use Excel;
+use App\Exports\eventExport;
 use Harisa;
 use Session;
 use DB;
@@ -54,5 +56,15 @@ class EventController extends Controller
     function rakor3scanner(){
         // echo json_encode(Session::get('email'));
         return view('event.rakor3.scanner');
+    }
+
+    function rakor3export(){
+        // $data = DB::table('event_rakor3')
+        //             ->select(DB::raw("CASE WHEN attend = 1 THEN date_updated ELSE 'belum hadir' END AS Attendance"),
+        //                     "name as Nama","klasis as Klasis","jabatan as Jabatan","gender as Gender",
+        //                     "phone as Nomor Handphone","room AS Kamar")->get();
+                    // echo json_encode($data);die;
+        return Excel::download(new eventExport, 'kehadiran.xlsx');
+        // return Excel::download($data, 'kehadiran.xlsx');
     }
 }
