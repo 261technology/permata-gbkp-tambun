@@ -62,7 +62,7 @@ var WebCodeCamJS = function(element) {
             flipVertical: false,
             flipHorizontal: false,
             zoom: 0,
-            decoderWorker: 'vendor/DecoderWorker.js',
+            decoderWorker: './vendor/DecoderWorker.js',
             brightness: 0,
             autoBrightnessValue: 0,
             grayScale: 0,

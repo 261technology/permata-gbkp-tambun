@@ -25,6 +25,7 @@
                        <hr>
                       <select></select>
                   </div>
+                  <span id="scan-result"></span>
               </section>
 
       </div>
@@ -41,6 +42,7 @@
   var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
   var arg = {
       resultFunction: function(result) {
+        $("#scan-result").html(result.code);
         window.location.href = result.code;
       }
   };
