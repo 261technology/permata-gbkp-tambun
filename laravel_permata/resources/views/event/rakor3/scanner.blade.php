@@ -14,7 +14,7 @@
       <div id="page-wrapper">
               <section id="profile" class="wrapper alt spotlight style2">
                 <div class="w-100 text-center">
-                    <img height="50px" src="{{url('/')}}/img/logo_text_permata.png">
+                    <img height="50px" src="{{url('/')}}/img/logo_permata.png">
                 </div>
                 <div class="inner">
                   <div class="content">
@@ -42,6 +42,9 @@
         window.location.href = result;
       }
   };
-  new WebCodeCamJS("canvas").init(arg).play();
+  var decoder = new WebCodeCamJS("canvas").buildSelectMenu('select', 'environment|back').init(arg).play();
+  document.querySelector('select').addEventListener('change', function(){
+    decoder.stop().play();
+  });
 </script>
 @endsection
