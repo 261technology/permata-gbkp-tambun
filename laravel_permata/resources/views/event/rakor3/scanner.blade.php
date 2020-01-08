@@ -19,7 +19,7 @@
                 <div class="inner">
                   <div class="content">
                     <label class="content-header text-center">SCAN QR CODE</label>
-                    <div class="w-100 text-left" style="font-size: 0.7em">bila scanner tidak muncul, harap menggunakan aplikasi QR scanner pihak ke-3</div>
+                    <div class="w-100 text-left" style="font-size: 0.7em">bila <b>scanner tidak dapat digunakan</b>, harap menggunakan aplikasi QR scanner pihak ke-3</div>
                     <div class="row">
                        <canvas style="margin:auto !important;"></canvas>
                        <hr>
@@ -39,6 +39,7 @@
 <script src="{{url('/')}}/vendor/WebCodeCam.js"></script>
 <script src="{{url('/')}}/vendor/qrcodelib.js"></script>
 <script type="text/javascript">
+  $("#scan-result").html('test');
   var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
   var arg = {
       resultFunction: function(result) {
