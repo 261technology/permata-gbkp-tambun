@@ -22,6 +22,8 @@
                     <div class="w-100 text-left" style="font-size: 0.7em">bila scanner tidak muncul, harap menggunakan aplikasi QR scanner pihak ke-3</div>
                     <div class="row">
                        <canvas style="margin:auto !important;"></canvas>
+                       <hr>
+                      <select></select>
                   </div>
               </section>
 
@@ -36,7 +38,7 @@
 <script src="{{url('/')}}/vendor/WebCodeCam.js"></script>
 <script src="{{url('/')}}/vendor/qrcodelib.js"></script>
 <script type="text/javascript">
-  // var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
+  var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
   var arg = {
       resultFunction: function(result) {
         window.location.href = result;
