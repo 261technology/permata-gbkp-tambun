@@ -43,15 +43,14 @@
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/browser.min.js"></script>
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/breakpoints.min.js"></script>
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/util.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127183385-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-127183385-2');
-    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KR3W8NF');</script>
 
     <script>
         window.Laravel = {!! json_encode([
@@ -64,6 +63,10 @@
     @yield('header-js')
 </head>
     <body class="is-preload ">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR3W8NF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     @yield('nav-top')
     @yield('content')
     @yield('nav-bottom')
