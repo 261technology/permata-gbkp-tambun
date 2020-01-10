@@ -43,6 +43,15 @@
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/browser.min.js"></script>
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/breakpoints.min.js"></script>
     <script src="{{url('/')}}/assets/template/solid-state/assets/js/util.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127183385-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-127183385-2');
+    </script>
 
     <script>
         window.Laravel = {!! json_encode([
