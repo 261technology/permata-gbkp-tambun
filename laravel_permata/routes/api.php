@@ -16,3 +16,23 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::any('/', function (Request $request) {
+    echo "kitapermata.com webservice";
+});
+
+
+Route::namespace('Api')->prefix('v1')->group(function(){
+	 Route::any('/', function(){
+	 		echo "kitapermata.com webservice version 1";
+	 });
+
+	 Route::post('register', 'AuthController@register');
+	 Route::post('login', 'Api\AuthController@login');
+	 
+	 
+	 Route::group(['middleware' => 'auth:api'], function(){
+	 	Route::post('getUser', 'Api\AuthController@getUser');
+	 });
+});

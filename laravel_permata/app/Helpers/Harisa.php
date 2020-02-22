@@ -33,4 +33,9 @@ class Harisa
     public static function getUser($param){
         return Session::get($param);
     }
+
+
+    public static function apiResponse($status,$data,$message){
+        return response()->json(['status'=>$status, 'data' => $data , 'message' => $message], $status);
+    }
 }

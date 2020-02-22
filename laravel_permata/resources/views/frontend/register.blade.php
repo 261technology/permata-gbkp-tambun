@@ -7,7 +7,7 @@
 
 @section('header-js')
     <!-- Jquery Validaion -->
-    <script src="{{url('/')}}/landing/plugin/jqueryvalidation.min.js" ></script>
+    <script src="{{url('/')}}/assets/landing/plugin/jqueryvalidation.min.js" ></script>
 @endsection
 
 @section('nav-top')
@@ -128,7 +128,7 @@
 @endsection
   
 @section('footer-js')  
-<script src="{{url('/')}}/template/solid-state/assets/js/main.js"></script>
+<script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
   $('#form-register').validate({
       rules: {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use App\Anggota;
+use App\Models\Anggota;
 use Harisa;
 use Illuminate\Support\Facades\Hash;
 use Session;
