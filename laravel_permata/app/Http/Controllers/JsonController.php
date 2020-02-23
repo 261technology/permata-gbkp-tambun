@@ -28,7 +28,7 @@ class JsonController extends Controller
     }
 
     public function list_anggota(Request $request){
-       $data =   DB::table('anggotas')
+       $data =   DB::table('anggota')
                     ->select('id','nama');
 
         if(!empty($request->Input('q'))){
@@ -41,7 +41,7 @@ class JsonController extends Controller
     function select2Anggota(Request $request){
         $q = $request->input('q');
         
-        $query = DB::table('anggotas')->select('id','nama');
+        $query = DB::table('anggota')->select('id','nama');
         if(!empty($q)){
             $query->whereRaw("UPPER(nama) LIKE '%".strtoupper($q)."%'");
         }

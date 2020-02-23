@@ -119,7 +119,7 @@ class Keuangan extends Model
     function get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor){
         $query      = DB::table('iuran_kas as a')
                         ->select('a.*','b.nama',DB::raw("case when b.pekerjaan in ('Pelajar','Mahasiswa') THEN 'Pelajar' ELSE 'Pekerja' END AS status_pekerja"),'b.sektor')
-                        ->leftJoin('anggotas as b','a.id_anggota','=','b.id');
+                        ->leftJoin('anggota as b','a.id_anggota','=','b.id');
                         // ->where('a.deleted','=',0);
         $countAll   = $query->count();
 

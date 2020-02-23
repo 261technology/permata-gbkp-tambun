@@ -62,7 +62,7 @@ class AuthController extends Controller
 
     function validate_login($email,$password){
         $result     = false;
-        $user     = DB::table('anggotas as user') 
+        $user     = DB::table('anggota as user') 
                                 ->select('user.*','user.id as id_anggota','m_role.nama as role_name','user.role as role_id')
                                 ->join('m_role','m_role.id','=','user.role')
                                 ->where('user.email','=',$email)
@@ -118,7 +118,7 @@ class AuthController extends Controller
 
 
 
-        $id_anggota = DB::table('anggotas')->insertGetId($data);
+        $id_anggota = DB::table('anggota')->insertGetId($data);
         
         if(!empty($id_anggota)){
             Session::flash('notification', 'Anda berhasil mendaftar silahkan hubungi pengurus runggun untuk mengaktifkan akun anda');
@@ -134,7 +134,7 @@ class AuthController extends Controller
 
     function checkEmailAvaliable(Request $request){
         $email = $request->input('email');
-        $q = DB::table('anggotas')->select(DB::raw('count(id) as total'))->WhereRaw("UPPER(email) like '%".strtoupper($email)."%'")->first();
+        $q = DB::table('anggota')->select(DB::raw('count(id) as total'))->WhereRaw("UPPER(email) like '%".strtoupper($email)."%'")->first();
         $data['result'] = 'unavailable';
         if($q->total > 0 ){
             $data['result'] = 'available';

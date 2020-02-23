@@ -10,14 +10,14 @@ class Export extends Model
     protected $guarded = [];
 
     function getAnggotaByStatus($sektor, $status){
-        return DB::table('anggotas')->where('status',$status)->where('sektor',$sektor)->get();
+        return DB::table('anggota')->where('status',$status)->where('sektor',$sektor)->get();
     }
 
 
     function getChartAnggota(){
-        $data = DB::table('anggotas')
-                ->select(DB::raw("IFNULL(count(anggotas.id),0) as y"),'param.nama as name')
-                ->leftJoin("m_parameter as param",'param.id','=','anggotas.sektor')
+        $data = DB::table('anggota')
+                ->select(DB::raw("IFNULL(count(anggota.id),0) as y"),'param.nama as name')
+                ->leftJoin("m_parameter as param",'param.id','=','anggota.sektor')
                 ->groupBy('sektor')
                 ->get();
         $result = array();
