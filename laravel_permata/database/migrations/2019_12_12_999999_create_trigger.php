@@ -14,7 +14,7 @@ class createTrigger extends Migration
     public function up()
     {
         DB::unprepared('
-            CREATE TRIGGER `delete_total_kas` BEFORE DELETE ON `anggotas`
+            CREATE TRIGGER `delete_total_kas` BEFORE DELETE ON `anggota`
              FOR EACH ROW BEGIN 
             DECLARE tagihan int ;
             DECLARE kategori varchar(50) ;
@@ -26,7 +26,7 @@ class createTrigger extends Migration
         ');
 
         DB::unprepared("
-            CREATE TRIGGER `tambah_tagihan_kas_anggota` AFTER INSERT ON `anggotas`
+            CREATE TRIGGER `tambah_tagihan_kas_anggota` AFTER INSERT ON `anggota`
              FOR EACH ROW BEGIN 
             DECLARE tagihan int ;
             DECLARE kategori varchar(50) ;
@@ -51,7 +51,7 @@ class createTrigger extends Migration
         ");
 
         DB::unprepared("
-            CREATE TRIGGER `uuid` BEFORE INSERT ON `anggotas`
+            CREATE TRIGGER `uuid` BEFORE INSERT ON `anggota`
              FOR EACH ROW BEGIN 
             IF new.uuid IS NULL THEN
                 SET new.uuid = uuid();

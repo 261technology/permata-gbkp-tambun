@@ -13,65 +13,9 @@ use Illuminate\Support\Facades\Mail;
 
 class MemberController extends Controller
 {
-
-    public function registerProcess(Request $request)
-    {	
-    	$isExist 				= Anggota::where('email', $request->input('email'))->first();
-    	$result['result'] 		= 'error';
-        $urlActivation 			= str_replace('-', '',Uuid::uuid4()).$request->input('firstname');
-        $urlResetPassword 		= str_replace('-', '',Uuid::uuid4()).sha1($request->input('password'));
-
-        if(!empty($isExist)){
-        	if($isExist->is_active == 1){
-        		$result['result'] 	= 'active';
-        		$result['data']		= $request->input('firstname');
-        		$result['url']		= $urlResetPassword;
-      			$result['email']	= $request->input('email');
-        	}else{
-        		$result['result'] 	= 'inactive';
-        		$result['data']		= $request->input('firstname');
-      			$result['email']	= $request->input('email');
-      			$result['url']		= $urlActivation;
-        	} 
-        }else{       	
-        	$member = new Anggota;
-        	$member->nama_depan 	    = ucwords($request->input('firstname'));
-        	$member->nama_belakang 	    = ucwords($request->input('lastname'));
-        	$member->email 		        = strtolower($request->input('email'));
-        	$member->password 	        = Hash::make($request->input('password'));
-        	$member->url_activation		= $urlActivation;
-        	$member->url_reset_password	= $urlResetPassword;
-        	$member->runggun	        = $request->input('runggun');
-        	$member->created_at 	    = Carbon::now();
-        	$member->updated_at 	    = Carbon::now();
-        	$member->save();
-
-        	$this->sendEmailRegister($request->input('email'),$request->input('firstname'),$urlActivation);	
-      		$result['result'] 	        = 'success';
-      		$result['data']		        = $request->input('firstname');
-      		$result['email']	        = $request->input('email');
-      		$result['url']		        = null;
-      		return redirect('login')->with($result);
-        }
-        return redirect()->back()->with($result);
-    }
-
-
-    function sendEmailRegister($email,$name,$urlActivation){
-    	$to_name 	= $name;
-		$to_email 	= array($email);
-		$data = array('name' => $name, 'url_validation' => $urlActivation);
-
-		return Mail::send('email.register', $data, function($message) use ($to_name, $to_email,$data) {		
-			$message->to($to_email, $to_name)->subject('Mejuah-juah '.ucwords($data['name']));
-			$message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
-		});
-    }
-
     function activation($code_activation){
-    	$update = Anggotawhere('url_activation', $code_activation)
-          					->update(['is_active' => 1]);
-        $result['activation'] = null;
+        $user       = Anggota::where('url_activation', $code_activation)->first();
+        $update     = Anggota::where('email', $user["email"])->update(['status' => "AKTIF", 'url_activation' => str_replace('-', '',Uuid::uuid4()).$user["email"]]);
         if($update){
         	$result['activation'] 	= true;
         	 return redirect('login')->with($result);

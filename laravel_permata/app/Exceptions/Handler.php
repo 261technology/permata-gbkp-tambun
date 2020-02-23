@@ -34,6 +34,11 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404 || $exception->getStatusCode() == 405) {
+                echo json_encode(array('message' => 'ga ada route ini bos'));die;
+            }
+        }
         parent::report($exception);
     }
 

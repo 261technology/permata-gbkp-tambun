@@ -62,7 +62,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // Custom Middleware
-        'login' => \App\Http\Middleware\Harisauth::class
+        'login' => \App\Http\Middleware\Harisauth::class,
+        'harisa-api' => \App\Http\Middleware\Harisaapi::class
     ];
 
     /**

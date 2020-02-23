@@ -28,11 +28,12 @@ Route::namespace('Api')->prefix('v1')->group(function(){
 	 		echo "kitapermata.com webservice version 1";
 	 });
 
-	 Route::post('register', 'AuthController@register');
-	 Route::post('login', 'Api\AuthController@login');
+	 Route::post('register'	, 'AuthController@register');
+	 Route::post('login'	, 'AuthController@login');
 	 
 	 
-	 Route::group(['middleware' => 'auth:api'], function(){
-	 	Route::post('getUser', 'Api\AuthController@getUser');
+	 Route::group(['middleware' => 'harisa-api'], function(){
+	 	Route::get('user', 'UserController@get');
+	 	Route::post('user', 'UserController@update');
 	 });
 });

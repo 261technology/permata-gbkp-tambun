@@ -61,7 +61,7 @@ class AuthController extends Controller
     }
 
     function validate_login($email,$password){
-        $result = false;
+        $result     = false;
         $user     = DB::table('anggotas as user') 
                                 ->select('user.*','user.id as id_anggota','m_role.nama as role_name','user.role as role_id')
                                 ->join('m_role','m_role.id','=','user.role')
