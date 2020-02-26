@@ -8,10 +8,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('/')}}/event/rakor3/scanner">
-                <i class="nav-icon icon-puzzle"></i> Rapat Kordinasi 3</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link {{Request::segment(2) == 'anggota' ? 'active' : ''}}" href="{{url('/')}}/application/anggota">
                 <i class="nav-icon icon-people"></i> Anggota
                 <span class="badge badge-warning">dev.</span></a>

@@ -58,5 +58,7 @@
 
     <script src="{{url('assets/js/main.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        const base_url = "{{url('/')}}/application/";
+        const base_url  = "{{url('/')}}/application/";
+        const global    = $(document);
+        const csrf      = "{{ csrf_token() }}";
     </script>

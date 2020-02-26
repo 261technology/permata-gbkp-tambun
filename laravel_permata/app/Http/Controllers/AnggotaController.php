@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use App\Imports\AnggotaImport;
 use App\Models\Anggota;
 use Harisa;
@@ -86,7 +85,7 @@ class AnggotaController extends Controller
         $orderDir       = $_POST['order']['0']['dir'];
         $order          = $request->input('order');
         
-        $status = Input::get('status');
+        $status         = $request->input('status');
 
         $output         = $model->get_datatable($length, $start, $searchValue, $orderColumn, $orderDir, $order,$status);  
         $output['draw'] = $request->input('draw');

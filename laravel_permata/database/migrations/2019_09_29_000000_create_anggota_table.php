@@ -19,7 +19,7 @@ class CreateAnggotaTable extends Migration
             $table->integer('role')->default(2);
             $table->string('email')->nullable()->unique();
             $table->string('runggun')->nullable();
-            $table->string('password');
+            $table->string('password')->default('$2y$10$ItWUDs5mbIn0bPjwsFvDTeEeqY26ZVcBC2eotNNZ0NUut5QmelPgu');
             $table->string('nama');
             $table->string('nama_depan')->nullable();
             $table->string('nama_belakang')->nullable();
@@ -30,7 +30,7 @@ class CreateAnggotaTable extends Migration
             $table->string('jenis_kelamin',20)->nullable()->default('L');
             $table->string('telepon')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('domisili_provinsi')->nullable();
+            $table->string('domisili_kelurahan')->nullable();
             $table->string('domisili_kota')->nullable();
             $table->integer('dengan_orang_tua')->default(0);
             $table->integer('pekerjaan')->nullable();

@@ -49,20 +49,22 @@ Route::group(['as' => 'frontend.'], function () {
 
 
 // ================== 	BACKEND  ==============================
+
+Route::namespace('Backend')->prefix('application')->middleware('login')->group(function(){
+	 // Dashboard
+		Route::get('/', 'DashboardController@index')->name('application');
+});
+
 Route::group(['prefix' => '/application'], function () {
-	Route::get('/register', 'AuthController@register')->name('register');
-	Route::get('/login', 'AuthController@login')->name('login');
-	Route::get('/logout', 'AuthController@logout')->name('logout');
-	Route::post('/login_process', 'AuthController@loginProcess')->name('login_process');
-	Route::post('/register_process', 'AuthController@registerProcess')->name('register_process');
+	// Route::get('/register', 'AuthController@register')->name('register');
+	// Route::get('/login', 'AuthController@login')->name('login');
+	// Route::get('/logout', 'AuthController@logout')->name('logout');
+	// Route::post('/login_process', 'AuthController@loginProcess')->name('login_process');
+	// Route::post('/register_process', 'AuthController@registerProcess')->name('register_process');
 
 
 	Route::group(['middleware' => 'login'], function(){
 		Route::get('/rakor3export', 'EventController@rakor3export');
-
-		// Dashboard
-		Route::get('/', 'DashboardController@index')->name('application');
-
 		// Anggota
 		Route::get('/anggota', 'AnggotaController@index');
 		Route::get('/anggota/profile/{id}', 'AnggotaController@profile');

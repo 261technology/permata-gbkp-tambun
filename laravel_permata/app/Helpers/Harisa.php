@@ -34,6 +34,17 @@ class Harisa
         return Session::get($param);
     }
 
+    public static function getConfigByName($name){
+        $id = null;
+        $data = DB::table('m_parameter')->whereRaw("UPPER(nama) = '".trim($name)."'")->first();   
+        
+        if(!empty($data->id)){
+            $id = $data->id;
+        }
+        return intval($id);
+
+    }
+
 
     public static function apiResponse($status,$data,$message){
         return response()->json(['status'=>$status, 'data' => $data , 'message' => $message], $status);

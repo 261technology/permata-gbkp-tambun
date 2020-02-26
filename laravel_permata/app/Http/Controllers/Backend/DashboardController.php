@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dashboard;
 use App\Models\Config;
@@ -10,16 +11,6 @@ use Session;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -31,9 +22,9 @@ class DashboardController extends Controller
         $config     = new Config();
         
         $chart              =   array();
-        $status             =   array('aktif','tidak aktif');
+        $status             =   array('aktif','tidak aktif','terdaftar');
         $color1             =   array('#1d23aa ', '#0d23da', '#2f7ed8', '#3d6ae8', '#4e5fe8','#4f9fe8', '#5a9fff', '#77a1e5', '#c42525', '#a6c96a');
-        $color2             =   array('#0f0','#f00');
+        $color2             =   array('#04c100','#f9c237','#d94c42');
         $sektor             =   $config->getConfig('sektor');
         $nama_sektor        =   $config->getConfig('sektor',true);
         $pekerjaan          =   $config->getConfig('pekerjaan');
