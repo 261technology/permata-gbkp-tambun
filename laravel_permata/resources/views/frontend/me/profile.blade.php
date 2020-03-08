@@ -2,7 +2,7 @@
 
 @section('header-css')
 <link rel="stylesheet" href="{{url('/')}}/landing/main.css" />
-<link rel="stylesheet" href="{{url('/')}}/landing/login.css" />
+<link rel="stylesheet" href="{{url('/')}}/landing/profile.css" />
 @endsection
 
 @section('header-js')
@@ -15,8 +15,6 @@
           <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
             <ul class="nav navbar-nav ml-auto scroll">
               <li class="nav-item"><a href="{{url('/')}}" class="nav-link pl-10">Back</a></li>
-              <li class="nav-item"><a href="{{url('/login')}}" class="nav-link active pl-10">Login</a></li>
-              <li class="nav-item"><a href="{{url('/register')}}" class="nav-link pl-10">Register</a></li>
               </ul>
           </div>
         </div>
@@ -27,9 +25,7 @@
 @section('nav-bottom')
     <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
         <div class="row w-100 text-center">
-            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/')}}"> Home</a>
-            <a class="col-4 btn btn-sm nav-link-bottom active" href="{{url('/login')}}">Login</a>
-            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/register')}}">Register</a>
+            <a class="col-4 offset-4 btn btn-sm nav-link-bottom " href="{{url('/')}}"> Home</a>
         </div>
     </nav>
 @endsection
@@ -38,53 +34,36 @@
     <!-- Page Wrapper -->
       <div id="page-wrapper">
 
-              <section id="login" class="wrapper alt spotlight style2">
+              <section id="profile" class="wrapper alt spotlight style2">
                 <div class="inner">
                   <div class="content">
-                    <label class="content-header text-center">Login</label>
+                    <label class="content-header text-left">{{$user->nama_depan.' '.$user->nama_belakang}}</label>
                     <div class="row">
-                      @if(Session::has('activation'))
-                        <div class="offset-md-3 col-md-6 col-sm-12 text-left">
-                          <div class="alert alert-success alert-block" style="font-weight:100">
-                            Selamat kamu telah berhasil mengaktifkan akun kamu, silahkan login
-                          </div>
-                        </div>
-                        @endif
-
-                        @if(Session::has('result'))
-                          <div class="offset-md-3 col-md-6 col-sm-12 text-left">
-                            <div class="alert alert-{{ Session::get('result') == 'success' ? 'success' :  'warning' }} alert-block" style="font-weight:100">
-                              @switch(Session::get('result'))
-                                    @case('success')
-                                        <p>Selamat kamu telah berhasil mendaftar sebagai anggota kitapermata.com, silahkan cek email kamu untuk mengaktifkan akun agar kamu dapat login.
-                                        </p>
-                                        @break
-
-                                    @case('password')
-                                        <p>
-                                        </p> 
-                                        @break
-                                    @default
-                                @endswitch
-
-                            </div>
-                          </div>
-                        @endif
+                      @csrf
                       <div class="col-md-6 offset-md-3 col-sm-12">
-                        <label class="text-left" for="name">email</label>
-                        <input class="form-control" type="text" name="username" id="name" />
+                        <label class="text-left" for="email">email</label>
+                        <input class="form-control" required value="{{$user->email}}" />
                       </div>
                       <div class="col-md-6 offset-md-3 col-sm-12 mt-4">
-                        <label class="text-left" for="name">password</label>
-                        <input class="form-control" type="password" name="username" id="name" />
+                        <label class="text-left" >Nama Depan</label>
+                        <input class="form-control" value="{{$user->nama_depan}}" />
                       </div>
-                      <div class="mt-2 col-md-6 offset-md-3 col-sm-12 text-right">
-                        <a href="{{url('/')}}/member/forgot-password">reset password?</a>
+                       <div class="col-md-6 offset-md-3 col-sm-12 mt-4">
+                        <label class="text-left" >Nama Belakang</label>
+                        <input class="form-control" value="{{$user->nama_belakang}}" />
                       </div>
-                    </div>
-                    <div class="col-12 text-center mt-3">
-                      <button class="btn btn-primary btn-sm btn-submit-login">&nbsp;&nbsp;Login&nbsp;&nbsp;</button>
-                    </div>
+                      <div class="col-md-6 offset-md-3 col-sm-12 mt-4">
+                        <label class="text-left" >Marga</label>
+                        <input class="form-control" value="{{$user->nama_marga}}" />
+                      </div>
+                      <div class="col-md-6 offset-md-3 col-sm-12 mt-4">
+                        <label class="text-left" >Jenis Kelamin</label>
+                        <input class="form-control" value="{{$user->jenis_kelamin =='L' ? 'Laki-laki' : 'Perempuan' }}" />
+                      </div>
+                      <div class="col-md-6 offset-md-3 col-sm-12 mt-4">
+                        <label class="text-left" >Runggun</label>
+                        <input class="form-control" value="{{$user->runggun }}" />
+                      </div>
                   </div>
                 </div>
               </section>
@@ -96,7 +75,7 @@
 @endsection
   
 @section('footer-js')  
-<script src="{{url('/')}}/template/solid-state/assets/js/main.js"></script>
+<script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
 </script>
 @endsection

@@ -48,6 +48,7 @@ class CreateAnggotaTable extends Migration
             $table->string('url_activation')->nullable();
             $table->string('url_reset_password')->nullable();
             $table->string('token')->nullable();
+            $table->integer('denganOrangtua')->default(1);
             $table->integer('isDeleted')->default(0);
             $table->timestamps();
         });

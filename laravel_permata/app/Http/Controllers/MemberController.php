@@ -10,9 +10,58 @@ use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Illuminate\Support\Facades\Mail;
+use Session;
 
 class MemberController extends Controller
-{
+{   
+    public function profile()
+    {   
+        $email          = session::get('email');
+        $model          = new Anggota();
+        $user           = $model->get_anggota($email);
+        // echo json_encode($user);die;
+        return view('frontend.me.profile',compact('user'));
+    }
+
+    function login(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required', 
+        ]);
+
+        $email    = $request->email;
+        $password = $request->password;
+        $cek      = Anggota::where('email','=',$email)->first();
+        
+        if(!empty($cek)){
+            if (Hash::check($password, $cek->password)) {
+                $model          = new Anggota();
+                $user           = $model->get_anggota($email);
+                $token          = str_replace('-', '',Uuid::uuid4()).date('dmY'); 
+                $updatedToken   = Anggota::where('email', $email)->update(['token' => $token ]);
+
+                foreach ($user as $key => $value) {
+                        if($key != 'role' && $key != 'password'){
+                            Session::put($key,$value);
+                        }
+                }
+                Session::put('isLogin',1);
+                Session::flash('notification','Selamat datang '.Session::get('nama_depan').' !!!');
+                return redirect(url('/').'/member');
+            }else{
+                Session::flash('notification','Email atau password anda salah');
+                Session::put('alert','warning');
+                return redirect(url('/').'/login');
+            }
+        }else{
+            Session::flash('notification',$email.' belum terdaftar');
+            Session::put('alert','warning');    
+            return redirect(url('/').'/login');
+        }
+
+    }
+
+
     function activation($code_activation){
         $user       = Anggota::where('url_activation', $code_activation)->first();
         $update     = Anggota::where('email', $user["email"])->update(['status' => "AKTIF", 'url_activation' => str_replace('-', '',Uuid::uuid4()).$user["email"]]);

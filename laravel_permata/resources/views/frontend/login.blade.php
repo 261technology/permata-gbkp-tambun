@@ -42,7 +42,7 @@
                 <div class="inner">
                   <div class="content">
                     <label class="content-header text-center">Login</label>
-                    <form class="row" action="{{url('/')}}/me/login-process" method="POST">
+                    <form class="row" action="{{url('/')}}/member/login-process" method="POST">
                       @if(Session::has('activation'))
                         <div class="offset-md-3 col-md-6 col-sm-12 text-left">
                           <div class="alert alert-success alert-block" style="font-weight:100">
@@ -51,22 +51,10 @@
                         </div>
                         @endif
 
-                        @if(Session::has('result'))
+                        @if(Session::has('alert'))
                           <div class="offset-md-3 col-md-6 col-sm-12 text-left">
-                            <div class="alert alert-{{ Session::get('result') == 'success' ? 'success' :  'warning' }} alert-block" style="font-weight:100">
-                              @switch(Session::get('result'))
-                                    @case('success')
-                                        <p>Selamat kamu telah berhasil mendaftar sebagai anggota kitapermata.com, silahkan cek email kamu untuk mengaktifkan akun agar kamu dapat login.
-                                        </p>
-                                        @break
-
-                                    @case('password')
-                                        <p>
-                                        </p> 
-                                        @break
-                                    @default
-                                @endswitch
-
+                            <div class="alert alert-{{ Session::get('alert') == 'success' ? 'success' :  'warning' }} alert-block" style="font-weight:100">
+                              {{Session::get('notification')}}
                             </div>
                           </div>
                         @endif
@@ -97,7 +85,7 @@
 @endsection
   
 @section('footer-js')  
-<script src="{{url('/')}}/template/solid-state/assets/js/main.js"></script>
+<script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
 </script>
 @endsection

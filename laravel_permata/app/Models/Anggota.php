@@ -41,7 +41,7 @@ class Anggota extends Model
                         'a.telepon',
                         'a.instagram',
                         'a.alamat',
-                        'a.domisili_provinsi',
+                        'a.domisili_kelurahan',
                         'a.domisili_kota',
                         'a.avatar'
                       )

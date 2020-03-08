@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dashboard;
+use App\Models\Anggota;
 use App\Models\Config;
 use Harisa;
 use Session;
@@ -18,18 +19,30 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $model      = new Dashboard();
-        $config     = new Config();
-        
+        $config             = new Config();   
+        $chartAnggota                  = $this->chartAnggota();
+        $totalAnggota                  = array();
+        $totalAnggota["all"]           = Anggota::where("role",2)->count();
+        $totalAnggota["aktif"]         = Anggota::where("role",2)->where("status","AKTIF")->count();
+        $totalAnggota["tidak-aktif"]   = Anggota::where("role",2)->where("status","TIDAK AKTIF")->count();
+        $totalAnggota["terdaftar"]     = Anggota::where("role",2)->where("status","TERDAFTAR")->count();
+        $sektor                        = $config->getConfig('sektor',true);
+
+        return view('dashboard.index',compact('sektor','chartAnggota','totalAnggota')); 
+    }
+
+
+    function chartAnggota(){
+        $chartAnggota       =   array();
+        $color1             =   array('#1d23aa ', '#0d23da', '#2f7ed8', '#3d6ae8', '#4e5fe8','#4f9fe8', '#5a9fff', '#77a1e5', '#c42525', '#a6c96a');
+        $model              = new Dashboard();
+        $config             = new Config();        
         $chart              =   array();
         $status             =   array('aktif','tidak aktif','terdaftar');
-        $color1             =   array('#1d23aa ', '#0d23da', '#2f7ed8', '#3d6ae8', '#4e5fe8','#4f9fe8', '#5a9fff', '#77a1e5', '#c42525', '#a6c96a');
+        
         $color2             =   array('#04c100','#f9c237','#d94c42');
         $sektor             =   $config->getConfig('sektor');
-        $nama_sektor        =   $config->getConfig('sektor',true);
         $pekerjaan          =   $config->getConfig('pekerjaan');
-        $chartAnggota       =   array();
-
         $chart = array();
         foreach ($sektor as $key => $value) {
             $drilldown['name'] = $value->nama;
@@ -53,21 +66,13 @@ class DashboardController extends Controller
             $chart['color']     = $color1[$key];
             array_push($chartAnggota, $chart);
         }
-        // echo json_encode($chartAnggota);die;
-        // echo json_encode($sektor)
 
-        // $chartPekerjaan                 =   array();
-        // $chartPekerjaan['pekerjaan']['pelajar']    = array();
-        // $chartPekerjaan['pekerjaan']['pekerja']    = array();
-        // foreach ($pekerjaan as $key => $value) {
-        //     // if($value->nama == 'Pelajar/Mahasiswa');
-        //     //     array_push($chartPekerjaan['pekerjaan']['pela'], $value->nama);
-        //     // }else{
+        $result = array(
+            "color" => $color1,
+            "chart" => $chartAnggota
+        );
 
-        //     // }
-        // }
+        return $result;
+    }
 
-        // echo json_encode($chartPekerjaan);die;
-        return view('dashboard.index',compact('nama_sektor','sektor','chartAnggota','color1')); 
-    }  
 }

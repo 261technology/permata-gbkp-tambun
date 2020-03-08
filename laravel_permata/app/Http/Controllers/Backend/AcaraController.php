@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Imports\KasImport;
@@ -88,7 +89,7 @@ class AcaraController  extends Controller
         $orderDir       = $_POST['order']['0']['dir'];
         $order          = $request->input('order');
         
-        $status = Input::get('status');
+        $status         = $request->input('status');
 
         $output         = $model->get_datatable_pa($length, $start, $searchValue, $orderColumn, $orderDir, $order,$status);  
         $output['draw'] = $request->input('draw');

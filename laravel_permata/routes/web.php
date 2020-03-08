@@ -41,30 +41,33 @@ Route::group(['as' => 'frontend.'], function () {
         Route::post('/reset-password-proccess/', 'MemberController@resetPasswordProcess');
 	});
 
-    Route::group(['prefix' => '/me'], function () {
-        Route::get('/profile/', 'AccountController@profile');
-        Route::post('/login-process/', 'AccountController@login');
+    Route::group(['prefix' => '/member'], function () {
+        Route::get('/', 'MemberController@profile');
+        Route::get('/profile/', 'MemberController@profile');
+        Route::post('/login-process/', 'MemberController@login');
     });
 });
 
 
 // ================== 	BACKEND  ==============================
 
-Route::namespace('Backend')->prefix('application')->middleware('login')->group(function(){
-	 // Dashboard
-		Route::get('/', 'DashboardController@index')->name('application');
-});
+Route::namespace('Backend')->prefix('application')->group(function(){
+	Route::get('/register', 'AuthController@register')->name('register');
+	Route::get('/login', 'AuthController@login')->name('login');
+	Route::get('/logout', 'AuthController@logout')->name('logout');
+	Route::post('/login_process', 'AuthController@loginProcess')->name('login_process');
+	Route::post('/register_process', 'AuthController@registerProcess')->name('register_process');
 
-Route::group(['prefix' => '/application'], function () {
-	// Route::get('/register', 'AuthController@register')->name('register');
-	// Route::get('/login', 'AuthController@login')->name('login');
-	// Route::get('/logout', 'AuthController@logout')->name('logout');
-	// Route::post('/login_process', 'AuthController@loginProcess')->name('login_process');
-	// Route::post('/register_process', 'AuthController@registerProcess')->name('register_process');
+	// Email
+	Route::get('/email/send-minggu', 'EmailController@sendEmailMinggu');
+	Route::get('/email/send-birthday', 'EmailController@sendEmailBirthday');
 
 
 	Route::group(['middleware' => 'login'], function(){
-		Route::get('/rakor3export', 'EventController@rakor3export');
+		// Dashboard
+		Route::get('/', 'DashboardController@index')->name('application');
+		// Route::get('/rakor3export', 'EventController@rakor3export');
+		
 		// Anggota
 		Route::get('/anggota', 'AnggotaController@index');
 		Route::get('/anggota/profile/{id}', 'AnggotaController@profile');
@@ -116,7 +119,18 @@ Route::group(['prefix' => '/application'], function () {
 		Route::post('/agenda/update_agenda', 'AgendaController@update_agenda');
 		Route::post('/agenda/update_jam_agenda', 'AgendaController@update_jam_agenda');
 		Route::post('/agenda/delete_agenda', 'AgendaController@delete_agenda');
+
+		// Agenda
+		Route::get('/email', 'EmailController@index');
+		Route::post('/email/send-broadcast', 'EmailController@sendEmailBroadcast');
 	});
+});
+
+Route::group(['prefix' => '/application'], function () {
+	
+
+
+	
 });
 
 // ================== 	CUSTOM  ==============================

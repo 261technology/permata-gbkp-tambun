@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use App\Imports\KasImport;
 use App\Keuangan;
 use Harisa;
@@ -68,8 +68,8 @@ class keuanganController extends Controller
         $orderDir       = $_POST['order']['0']['dir'];
         $order          = $request->input('order');
         
-        $tahun  = Input::get('tahun');
-        $sektor = Input::get('sektor');
+        $tahun  = $request->input('tahun');
+        $sektor = $request->input('sektor');
 
         $output         = $model->get_datatable_iuran_kas($length, $start, $searchValue, $orderColumn, $orderDir, $order,$tahun,$sektor);  
         $output['draw'] = $request->input('draw');

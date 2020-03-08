@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\AnggotaImport;
 use App\Models\Anggota;
@@ -51,7 +52,7 @@ class AnggotaController extends Controller
             // echo 'ga boleh bukan id kamu';die;
         }
 
-        return view('anggota.edit',compact('pendidikan','anggota','sektor','marga','pekerjaan'));
+        return view('anggota.edit',compact('pendidikan','anggota','sektor','marga','pekerjaan','total'));
     }
 
     function profile($id){

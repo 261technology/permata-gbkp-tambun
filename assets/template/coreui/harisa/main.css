@@ -202,3 +202,29 @@ thead{
 .border-right-history{
 	border-right: 2px solid #a3a3a3 !important;
 }
+
+ .bg-success{
+ 	background: #6ac313 !important;
+ 	color: #fff !important;
+ }
+
+ .bg-danger{
+ 	background: #d94b41 !important;
+ 	color: #fff !important;
+ }
+
+ .bg-warning{
+ 	background: #f9c237 !important;
+ 	color: #fff !important;
+ }
+
+ .bg-primary{
+ 	background: #4360df !important;
+ 	color: #fff !important;
+ }
+
+ .bg-disabled{
+ 	color: #fff !important;
+ 	background: #7f7f7f !important; 
+ 	border-color: #9f9f9f !important; 
+ }
