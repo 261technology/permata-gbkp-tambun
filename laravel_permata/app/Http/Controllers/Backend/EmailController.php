@@ -67,7 +67,7 @@ class EmailController extends Controller
              $data      = $model->get_anggota($value["email"]);
              $dataArr   = json_decode(json_encode($data),true); 
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
-                $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
+                $message->to($data->email, $data->nama_depan)->subject("Selamat Ulang Tahun".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
                 $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
