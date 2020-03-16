@@ -36,7 +36,7 @@ class EmailController extends Controller
              Mail::send('email.broadcast', $dataArr, function($message) use ($data,$subject) {     
                 $message->to($data->email, $data->nama_depan)->subject($subject);
                 $message->cc(array('harisaginting@gmail.com'));
-                $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
+                $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
         }
     }
@@ -52,7 +52,7 @@ class EmailController extends Controller
              Mail::send('email.selamat-hari-minggu', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
-                $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
+                $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
         }
 
@@ -69,7 +69,7 @@ class EmailController extends Controller
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Ulang Tahun".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
-                $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
+                $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
         }
 
@@ -86,7 +86,7 @@ class EmailController extends Controller
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
-                $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
+                $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
         }
 
