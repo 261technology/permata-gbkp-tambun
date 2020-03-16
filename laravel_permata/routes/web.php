@@ -59,6 +59,7 @@ Route::namespace('Backend')->prefix('application')->group(function(){
 	Route::post('/register_process', 'AuthController@registerProcess')->name('register_process');
 
 	// Email
+	Route::get('/email/test', 'EmailController@sendEmailTest');
 	Route::get('/email/send-minggu', 'EmailController@sendEmailMinggu');
 	Route::get('/email/send-birthday', 'EmailController@sendEmailBirthday');
 

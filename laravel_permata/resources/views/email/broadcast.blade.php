@@ -110,7 +110,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td align="center" class="footercopy">
-                <a href="{{url('/')}}">&reg; PERMATA GBKP RUNGGUN TAMBUN {{date('Y')}}</a>
+                <a href="https://www.kitapermata.com/">&reg; PERMATA GBKP RUNGGUN TAMBUN {{date('Y')}}</a>
               </td>
             </tr>
           </table>

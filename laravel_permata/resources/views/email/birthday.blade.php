@@ -155,7 +155,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td align="center" class="footercopy">
-                <a href="http://kitapermata.com">&reg; <strong>PERMATA GBKP RUNGGUN TAMBUN</strong> {{date('Y')}}</a>
+                <a href="https://www.kitapermata.com/">&reg; <strong>PERMATA GBKP RUNGGUN TAMBUN</strong> {{date('Y')}}</a>
               </td>
             </tr>
           </table>
