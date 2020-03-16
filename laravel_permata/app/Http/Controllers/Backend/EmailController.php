@@ -66,7 +66,6 @@ class EmailController extends Controller
              $model     = new Anggota();
              $data      = $model->get_anggota($value["email"]);
              $dataArr   = json_decode(json_encode($data),true); 
-             echo json_encode($data);die;
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
@@ -84,7 +83,6 @@ class EmailController extends Controller
              $model     = new Anggota();
              $data      = $model->get_anggota($value["email"]);
              $dataArr   = json_decode(json_encode($data),true); 
-             echo json_encode($data);die;
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
