@@ -9,34 +9,14 @@
     <script src="{{url('/')}}/assets/landing/plugin/jqueryvalidation.min.js" ></script>
 @endsection
 
-@section('nav-top')
-    <!-- Navbar -->        
-     <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
-        <div class="container">
-          <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
-            <ul class="nav navbar-nav ml-auto scroll">
-              <li class="nav-item"><a href="{{url('/')}}" class="nav-link pl-10">Home</a></li>
-              </ul>
-          </div>
-        </div>
-      </nav>
-    <!-- End Navbar -->
-@endsection
 
-@section('nav-bottom')
-    <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
-        <div class="row w-100 text-center">
-            <a class="col-12 btn btn-sm nav-link-bottom " href="{{url('/')}}"> HOME</a>
-        </div>
-    </nav>
-@endsection
-
-<style type="text/css">
+@section('content')
+    <style type="text/css">
   .hidden{
     display: none;
   }
   .content-header{
-    font-size: 1.2em !important;
+    font-size: 1em !important;
     font-family: Montserrat !important;
   }
 
@@ -208,8 +188,6 @@
   animation: lol 3s 500ms infinite ease-in-out;
 }
 </style>
-
-@section('content')
     <!-- Page Wrapper -->
       <div id="page-wrapper">
               <div class="cs-loader" id="loader">
@@ -230,7 +208,7 @@
                     <label class="content-header text-center pl-3"> <img src="{{url('/')}}/img/logo_permata.png" alt="logo permata gbkp" class="logo">INFORMASI VIRUS COVID-19</label>
                     <div class="row">
                       <div class="col-12 text-left">
-                        <label>Kondisi bas wilayah Indonesia gundari : </label>
+                        <label style="font-size:0.6em;">Kondisi bas wilayah Indonesia gundari : </label>
                       </div>
                     </div>
                     <div class="row">                      
@@ -266,9 +244,14 @@
                         </div>
                       </div>
                       <div class="col-12 text-right">
-                        <label style="font-size: 0.7em;font-family: sans-serif;">data terakhir iperbarui bas<br><strong id="summaryLastUpdated"></strong><br> bas <a href="https://kawalcovid19.id/">kawalcovid.id</a> </label>
+                        <label style="font-size: 0.5em;font-family: sans-serif;">data terakhir iperbarui bas<br><strong id="summaryLastUpdated"></strong><br> bas <a href="https://kawalcovid19.id/">kawalcovid.id</a> </label>
                       </div>
 
+                      <div class="col-12 mt-2">
+                        <a href="https://www.instagram.com/p/B99QNEFDKWq/" target="_blank">
+                          <img src="{{url('/')}}/img/permata-gbkp-donasi-apd.jpg" alt="permata gbkp donasi apd"  style="width: 100%;">
+                        </a>
+                      </div>
 
                       <div class="col-12 mt-2">
                          <strong>Informasi Sideban : </strong>

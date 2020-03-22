@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>PERMATA GBKP RUNGGUN TAMBUN</title>
+    <title>PERMATA GBKP RUNGGUN TAMBUN {{$title ??''}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name=”description” content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara.">
