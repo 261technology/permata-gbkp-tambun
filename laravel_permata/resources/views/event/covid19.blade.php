@@ -16,14 +16,17 @@
     display: none;
   }
   .content-header{
-    font-size: 1em !important;
+    font-size: 0.95em !important;
     font-family: Montserrat !important;
+    color: #fbee35;
+    font-weight: 700;
   }
 
   .logo{
     position: absolute;
-    height: 1.7em !important;
-    left: 0px;
+    height: 2.2em !important;
+    left: 5px;
+    top: 5px;
   }
 
   .card-1{
