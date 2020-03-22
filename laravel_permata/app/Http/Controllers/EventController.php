@@ -59,12 +59,13 @@ class EventController extends Controller
     }
 
     function rakor3export(){
-        // $data = DB::table('event_rakor3')
-        //             ->select(DB::raw("CASE WHEN attend = 1 THEN date_updated ELSE 'belum hadir' END AS Attendance"),
-        //                     "name as Nama","klasis as Klasis","jabatan as Jabatan","gender as Gender",
-        //                     "phone as Nomor Handphone","room AS Kamar")->get();
-                    // echo json_encode($data);die;
         return Excel::download(new eventExport, 'kehadiran.xlsx');
-        // return Excel::download($data, 'kehadiran.xlsx');
     }
+
+    function covid19(){
+        return view('event.covid19');
+    }
+
+
+
 }

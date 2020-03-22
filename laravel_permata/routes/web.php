@@ -32,6 +32,8 @@ Route::group(['as' => 'frontend.'], function () {
     Route::post('/register-process', 'MemberController@registerProcess');
     Route::get('/home', function () {return redirect()->route('frontend.home');});
 
+     Route::get('/covid19', 'EventController@covid19')->name('covid-19');
+
     Route::group(['prefix' => '/member'], function () {
 	    Route::get('/activation/{code_activation}', 'MemberController@activation');
 	    Route::get('/forgot-password/', 'MemberController@forgotPassword');

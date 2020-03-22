@@ -67,7 +67,7 @@ class EmailController extends Controller
              $data      = $model->get_anggota($value["email"]);
              $dataArr   = json_decode(json_encode($data),true); 
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
-                $message->to($data->email, $data->nama_depan)->subject("Selamat Ulang Tahun".$data->nama_depan);
+                $message->to($data->email, $data->nama_depan)->subject("Selamat Ulang Tahun ".$data->nama_depan);
                 $message->cc(array('harisaginting@gmail.com'));
                 $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
@@ -78,13 +78,15 @@ class EmailController extends Controller
 
     public function sendEmailTest()
     {   
-        $user       = Anggota::whereNotNull("email")->where("email","harisaginting@gmail.com")->get()->toArray();
+        $user       = Anggota::whereNotNull("email")->get()->toArray();
         foreach ($user as $key => $value) {
+
              $model     = new Anggota();
              $data      = $model->get_anggota($value["email"]);
+             // echo json_encode($data);die;
              $dataArr   = json_decode(json_encode($data),true); 
-             Mail::send('email.birthday', $dataArr, function($message) use ($data){     
-                $message->to($data->email, $data->nama_depan)->subject("Selamat Hari Minggu ".$data->nama_depan);
+             Mail::send('email.custom', $dataArr, function($message) use ($data){     
+                $message->to($data->email, $data->nama_depan)->subject("Halo ".$data->nama_depan. " jaga diri ya!");
                 $message->cc(array('harisaginting@gmail.com'));
                 $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
