@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Config;
 use App\Models\Member;
 use Session;
+use Harisa;
 
 class LandingController extends Controller
 {
@@ -24,14 +25,8 @@ class LandingController extends Controller
 
     public function register()
     {
-        // Session::flash('result', 'active');
-        // Session::flash('data','Harisa' );
-        // Session::flash('email', 'harisaginting@gmail.com');
-        // Session::flash('url', 'https://kitapermata.com');
-
-        // $runggun = Config::where('type', 'runggun')->get();
-
-        return view('frontend.register');
+        $marga      = Harisa::get_marga();
+        return view('frontend.register',compact('marga'));
     }
 
 }

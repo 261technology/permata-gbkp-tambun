@@ -47,39 +47,13 @@
                       <form id="form-register" method="POST" action="{{url('/register-process')}}">
                         {{csrf_field()}}
                         <div class="row">
-                          @if(Session::has('result'))
-                            <div class="offset-md-3 col-md-6 col-sm-12 text-left">
-                              @if(Session::get('result') == 'success')
-                                <div class="alert alert-success alert-block" style="font-weight:100">
-                              @else
-                                <div class="alert alert-{{ Session::get('result') == 'active' ? 'danger' :  'warning' }} alert-block" style="font-weight:100">
-                              @endif
-                                
-                                 @switch(Session::get('result'))
-                                    @case('active')
-                                        <p>
-                                          Oops akun dengan email <strong class="text-dark">{{Session::get('email')}} 
-                                          </strong> telah terdaftar dan aktif, silahkan klik tombol lupa password untuk mereset password kamu
-                                          <div class="row text-center">
-                                            <div class="col-12">
-                                              <a href="{{url('/')}}/duh-lupa-password" class="btn btn-primary btn-sm">Lupa Password</a>
-                                            </div>
-                                          </div>
-                                        </p> 
-                                        @break
-
-                                    @case('inactive')
-                                        <p>
-                                          Oops akun dengan email <strong class="text-dark">{{Session::get('email')}} 
-                                          </strong>telah terdaftar, silahkan cek email kamu untuk mengaktifkan akun ini
-                                        </p> 
-                                        @break
-
-                                    @default
-                                @endswitch
+                            @if(Session::has('alert'))
+                              <div class="offset-md-3 col-md-6 col-sm-12 text-left">
+                                <div class="alert alert-{{ Session::get('alert') == 'success' ? 'success' :  'warning' }} alert-block" style="font-weight:100">
+                                  {{Session::get('notification')}}
+                                </div>
                               </div>
-                            </div>
-                          @endif
+                            @endif
                           <div class="col-md-6 offset-md-3 col-sm-12">
                             <label class="text-left" for="name">Nama</label>
                             <div class="row">
@@ -91,6 +65,16 @@
                               </div>
                             </div>
                           </div>
+
+                          <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
+                            <label class="text-left" for="email">Marga</label>
+                            <select class="form-control" type="text" name="marga" id="marga" placeholder="marga">
+                              @foreach($marga as $key => $value )
+                                <option value="{{$value->id}}">{{$value->nama}}</option>
+                              @endforeach;
+                            </select>
+                          </div>
+
                           <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
                             <label class="text-left" for="email">E-mail</label>
                             <input class="form-control" type="text" name="email" id="email" placeholder="email" />
@@ -109,13 +93,13 @@
                           </div>
 
                           <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
-                            <label class="text-left" for="password_confirmation">Confirmation Password</label>
+                            <label class="text-left" for="password_confirmation">Konfirmasi Password</label>
                             <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" placeholder="konfirmasi password" />
                           </div>
                         </div>
                       </form>
                     <div class="col-12 text-center mt-3">
-                      <button id="btn-submit-register" type="button" class="btn btn-primary btn-sm btn-submit">submit</button>
+                      <button id="btn-submit-register" type="button" class="btn btn-primary btn-sm btn-submit">DAFTAR</button>
                     </div>
                   </div>
                 </div>

@@ -11,6 +11,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Illuminate\Support\Facades\Mail;
 use Session;
+use Validator;
 
 class MemberController extends Controller
 {   
@@ -42,20 +43,20 @@ class MemberController extends Controller
 
                 foreach ($user as $key => $value) {
                         if($key != 'role' && $key != 'password'){
-                            Session::put($key,$value);
+                            Session::flash($key,$value);
                         }
                 }
-                Session::put('isLogin',1);
+                Session::flash('isLogin',1);
                 Session::flash('notification','Selamat datang '.Session::get('nama_depan').' !!!');
                 return redirect(url('/').'/member');
             }else{
                 Session::flash('notification','Email atau password anda salah');
-                Session::put('alert','warning');
+                Session::flash('alert','warning');
                 return redirect(url('/').'/login');
             }
         }else{
             Session::flash('notification',$email.' belum terdaftar');
-            Session::put('alert','warning');    
+            Session::flash('alert','warning');    
             return redirect(url('/').'/login');
         }
 
@@ -80,10 +81,10 @@ class MemberController extends Controller
 
     function forgotPasswordProcess(Request $request){
         $email 	= $result['email'] 	= $request->input('email');
-        $data 	= Anggotaselect('url_reset_password as url','firstname')->whereEmail($email)->first();
+        $data 	= Anggota::select('url_reset_password as url','nama_depan')->whereEmail($email)->first();
         if(!empty($data)){
-        	$result['name'] 	= $data->firstname;
-        	$this->sendEmailResetPassword($email,$data->firstname, $data->url);
+        	$result['name'] 	= $data->nama_depan;
+        	$this->sendEmailResetPassword($email,$data->nama_depan, $data->url);
         	$result['status'] 	='success';
         }else{
         	$result['status'] 	='not-found';
@@ -104,7 +105,7 @@ class MemberController extends Controller
 
     function resetPassword($code = null){
     	if(!empty($code)){
-    		$user = Anggotaselect('firstname as name','email')->whereUrlResetPassword($code)->first();
+    		$user = Anggota::select('nama_depan as name','email')->whereUrlResetPassword($code)->first();
 	    	if(!empty($user)){
 	    		return view('frontend.reset_password', compact('user','code'));
 	    	}	
@@ -113,11 +114,11 @@ class MemberController extends Controller
     }
 
     function resetPasswordProcess(Request $request){
-    	$member 	= new Member;
+    	$member 	= new Anggota;
         $password 	= Hash::make($request->input('password'));
 
 
-       	$update = Anggotawhere('email', $request->input('email'))
+       	$update = Anggota::where('email', $request->input('email'))
           					->update(['password' => $password]);
         $user['email']  = $request->input('email');
         $code 			= $request->input('code');
@@ -130,4 +131,77 @@ class MemberController extends Controller
         }
     }
 
+
+
+##REGISTER
+    public function registerProcess(Request $request)
+    {   
+        // echo json_encode($request->all());die;
+
+         $requestData   = $request->all();
+         $validator     = Validator::make($requestData, [ 
+                  'firstname'   => 'required',
+                  'lastname'    => 'required',
+                  'email'       => 'required|email',
+                  'password'    => 'required',    
+                  'password_confirmation'  => 'required|same:password', 
+                  'runggun'     => 'required',  
+                  'marga'       => 'required',
+        ]); 
+
+        if($validator->fails()) {          
+            Session::flash('notification','Terjadi kesalahan');
+            Session::flash('alert','danger');
+            echo json_encode($validator->messages()->get('*'));die;
+            return redirect(url('/').'/register');
+        }
+
+
+        $isExist                = Anggota::where('email', $request->input('email'))->first();
+
+        
+        $result['result']       = 'error';
+        $urlActivation          = str_replace('-', '',Uuid::uuid4()).$requestData["email"];
+        $urlResetPassword       = str_replace('-', '',Uuid::uuid4()).$requestData["email"];
+        $fullname               = ucwords($requestData["firstname"]). " ".ucwords($requestData["lastname"]);
+
+        if(!empty($isExist)){
+            Session::flash('notification','Email '.$requestData["email"].' telah terdaftar');
+            Session::flash('alert','warning');
+            return redirect(url('/').'/register');
+        }else{          
+            $member = new Anggota;
+            $member->nama               = $fullname;
+            $member->nama_depan         = ucwords($requestData["firstname"]);
+            $member->nama_belakang      = ucwords($requestData["lastname"]);
+            $member->email              = strtolower($request->input('email'));
+            $member->password           = Hash::make($request->input('password'));
+            $member->url_activation     = $urlActivation;
+            $member->url_reset_password = $urlResetPassword;
+            $member->runggun            = strtoupper($request->input('runggun'));
+            $member->marga              = strtolower($request->input('marga'));
+            $member->created_at         = Carbon::now();
+            $member->updated_at         = Carbon::now();
+            $member->save();
+
+            $this->sendEmailRegister($requestData["email"],$fullname,$urlActivation);   
+            Session::flash('notification','Email '.$requestData["email"].' telah berhasil didaftarkan silahkan cek email kamu');
+            Session::flash('alert','success');
+            return redirect(url('/').'/register');
+        }
+    }
+
+    function sendEmailRegister($email,$name,$urlActivation){
+        $to_name    = $name;
+        $to_email   = array($email);
+        $monitoring = array('harisaginting@gmail.com','konsolidasi@kitapermata.com');
+        $data       = array('name' => $name, 'url_validation' => $urlActivation);
+
+        return Mail::send('email.register', $data, function($message) use ($to_name, $to_email,$data,$monitoring) {     
+            $message->to($to_email, $to_name)->subject('Mejuah-juah '.ucwords($data['name']));
+            $message->cc($monitoring);
+            $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
+        });
+    }
+##END REGISTER
 }

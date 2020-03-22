@@ -7,7 +7,7 @@
 
 @section('header-js')
     <!-- Jquery Validaion -->
-    <script src="{{url('/')}}/landing/plugin/jqueryvalidation.min.js" ></script>
+    <script src="{{url('/')}}/assets/landing/plugin/jqueryvalidation.min.js" ></script>
 @endsection
 
 @section('nav-top')

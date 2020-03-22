@@ -296,44 +296,6 @@
 @section('footer-js')  
 <script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
-  $('#form-register').validate({
-      rules: {
-          firstname : "required",
-          email     : {
-                      required: true,
-                      email: true
-                      },
-          password: {
-                      required : true,
-                      minlength: 8
-                    },
-          password_confirmation: {
-                    required: true,
-                    equalTo: "#password"
-                  }
-        },
-      messages: {
-          firstname: {
-              required: "harus diisi"
-          },
-          email: {
-              required: "harus diisi",
-              email: "pastikan email kamu benar",
-          },
-          password: {
-              required: "harus diisi"
-          },
-          password: {
-              required: "harus diisi",
-              minlength: "password harus terdiri minimal dari 8 karakter"
-          },
-          password_confirmation: {
-              required: "harus diisi",
-              equalTo: "pastikan konfirmasi password kamu benar"
-          }
-      }
-    });
-
 var Page = (() => {
     const fetchDataTerkini = () => {
        $.ajax({
@@ -355,13 +317,6 @@ var Page = (() => {
       return {
         init: () => {
           fetchDataTerkini();
-
-          global.on("click","#btn-submit-register",function(e){
-              if($('#form-register').valid()){
-                $("#form-register")[0].submit();
-              }               
-          });
-
       }
     };
 })();
