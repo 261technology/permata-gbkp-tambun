@@ -8,41 +8,13 @@
 @section('header-js')
 @endsection
 
-@section('nav-top')
-    <!-- Navbar -->        
-     <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
-        <div class="container">
-          <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
-            <ul class="nav navbar-nav ml-auto scroll row" style="min-width: 500px;">
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="#banner" class="nav-link pl-10">Home</a></li>
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="#one" class="nav-link pl-10">Visi</a></li>
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="#two" class="nav-link pl-10">Misi</a></li>
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="#three" class="nav-link pl-10">Tentang</a></li>
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="#four" class="nav-link pl-10">Berita</a></li>
-              <li class="nav-item col-2 text-center pl-0 pr-0"><a href="{{url('/')}}/login" class="nav-link pl-10">Login</a></li>
-              </ul>
-          </div>
-        </div>
-      </nav>
-    <!-- End Navbar -->
-@endsection
-
-@section('nav-bottom')
-    <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
-        <div class="row w-100 text-center">
-            <a class="btn btn-sm col-6 nav-link-bottom {{ Request::segment(1) == '' ? 'active' : '' }}" href="{{url('/')}}"> Home</a>
-            <a class="btn btn-sm col-6 nav-link-bottom {{ Request::segment(1) == 'login' ? 'active' : '' }}" href="{{url('/login')}}">Login</a>
-        </div>
-    </nav>
-@endsection
-
 @section('content')
     <!-- Page Wrapper -->
       <div id="page-wrapper">
         <!-- Banner -->
           <section id="banner">
             <div class="inner">
-              <div class="logo"><img src="{{url('/')}}/img/logo_permata.png" alt="logo permata" height="100"></div>
+              <div class="logo"><img src="{{url('/')}}/img/logo_permata.png" alt="LOGO PERMATA GBKP" height="100"></div>
               <h2>PERMATA GBKP RUNGGUN TAMBUN</h2>
               <p>Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara.</p>
             </div>
@@ -90,60 +62,15 @@
                   </div>
                 </div>
               </section>
-
-            <!-- Four -->
-              <!-- <section id="four" class="wrapper alt style1">
-                <div class="inner">
-                  <h2 class="major">Vitae phasellus</h2>
-                  <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-                  <section class="features">
-                    <article>
-                      <a href="#" class="image"><img src="{{url('/')}}/assets/template/solid-state/images/pic04.jpg" alt="" /></a>
-                      <h3 class="major">Sed feugiat lorem</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                      <a href="#" class="special">Learn more</a>
-                    </article>
-                    <article>
-                      <a href="#" class="image"><img src="{{url('/')}}/assets/template/solid-state/images/pic05.jpg" alt="" /></a>
-                      <h3 class="major">Nisl placerat</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                      <a href="#" class="special">Learn more</a>
-                    </article>
-                    <article>
-                      <a href="#" class="image"><img src="{{url('/')}}/assets/template/solid-state/images/pic06.jpg" alt="" /></a>
-                      <h3 class="major">Ante fermentum</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                      <a href="#" class="special">Learn more</a>
-                    </article>
-                    <article>
-                      <a href="#" class="image"><img src="{{url('/')}}/assets/template/solid-state/images/pic07.jpg" alt="" /></a>
-                      <h3 class="major">Fusce consequat</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-                      <a href="#" class="special">Learn more</a>
-                    </article>
-                  </section>
-                  <ul class="actions">
-                    <li><a href="#" class="button">Browse All</a></li>
-                  </ul>
-                </div>
-              </section>
-
-          </section> -->
-
         <!-- Footer -->
           <section id="footer">
             <div class="inner">
-              <h2 class="major">Yuk Kami Lebih Dekat</h2>
-              <!-- <p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p> -->
+              <h2 class="major">Yuk Kenal PERMATA GBKP Lebih Dekat</h2>
               <ul class="contact mb-0">
-                <!-- <li class="icon solid fa-phone">(000) 000-0000</li>
-                <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-                <li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-                <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li> -->
                 <li class="icon brands fa-instagram "><a style="color:#c2c1d8" href="https://www.instagram.com/permatatambun">Instagram @permatatambun</a></li>
               </ul>
               <ul class="copyright">
-                <li>&copy; <strong>PERMATA</strong> GBKP RUNGGUN TAMBUN 2020</li>
+                <li>&copy; <strong>PERMATA GBKP</strong> RUNGGUN TAMBUN 2020</li>
               </ul>
             </div>
           </section>

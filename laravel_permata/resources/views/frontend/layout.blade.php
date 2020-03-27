@@ -2,24 +2,24 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <title>PERMATA GBKP RUNGGUN TAMBUN {{$title ??''}}</title>
+    <title>{{$title ?? 'PERMATA GBKP | RUNGGUN TAMBUN'}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name=”description” content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara.">
+    <meta name=”description” content="{{$description ??'PERMATA GBKP Runggun Tambun adalah salah satu persekutuan kategorial bagi Pemuda GBKP di Runggun Tambun. Kehadiran PERMATA ditengah-tengah GBKP Runggun Tambun adalah sebagai tanda kasih setia Allah terhadap kesinambungan gerejaNya ditengah-tengah dunia ini.'}}">
     <meta name="google" content="notranslate" />
     <meta name="google-site-verification" content="tW0WUpvfArHS_Vuvfmi0lCd59v4QOMco7yGOmqZwxkg" />
 
 
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Beranda - Persadan Man Anak Gerejanta | PERMATA GBKP" />
+    <meta property="og:title" content="{{$title ?? 'PERMATA GBKP RUNGGUN TAMBUN'}}" />
     <meta property="og:description" content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara." />
     <meta property="og:url" content="https://kitapermata.com" />
     <meta property="og:site_name" content="PERMATA GBKP RUNGGUN TAMBUN" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="PERMATA GBKP RUNGGUN TAMBUN Bersekutu Melayani Mewujudnyatakan Kehendak ALLAH Ditengah-tengah Gereja, Keluarga, Masyarakat, Bangsa dan Negara." />
-    <meta name="twitter:title" content="PERMATA GBKP RUNGGUN TAMBUN" />
+    <meta name="twitter:title" content="{{$title ?? 'PERMATA GBKP RUNGGUN TAMBUN'}}" />
     <meta name="twitter:image" content="https://kitapermata.com/img/logo_permata.png" />
 
     <!-- Fonts -->
@@ -65,10 +65,30 @@
     </script>
     @yield('header-js')
 </head>
-    <body class="is-preload ">
-    @yield('nav-top')
+    <div class="loader-page hidden" id="landing-loader">
+        <img src="{{url('/img/loader-bar.gif')}}">
+        <span class="loader-page-text">Timai kentisik ya...</span>
+    </div>
+    <body class="is-preload">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
+        <div class="container">
+          <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
+            <ul class="nav navbar-nav ml-auto scroll">
+              <li class="nav-item"><a href="{{url('/')}}" class="nav-link pl-10">Beranda</a></li>
+              <li class="nav-item"><a href="{{url('/info')}}" class="nav-link pl-10">Informasi</a></li>
+              <li class="nav-item"><a href="{{url('/login')}}" class="nav-link pl-10">Profil</a></li>
+              </ul>
+          </div>
+        </div>
+    </nav>
     @yield('content')
-    @yield('nav-bottom')
+    <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
+        <div class="row text-center">
+            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/info')}}"><i class="fa fa-info-circle"></i></a>
+            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/')}}"><i class="fa fa-home"></i></a>
+            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/login')}}"><i class="fa fa-user-circle"></i></a>
+        </div>
+    </nav>
     @yield('footer-js')
     </body>
 </html>

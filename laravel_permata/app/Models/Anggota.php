@@ -13,6 +13,7 @@ class Anggota extends Model
     function get_anggota($email = null, $uuid = null){
     	$user =   DB::table('anggota as a')
                       ->select(
+                        'a.uuid',
                         'a.email',
                         'a.nama',
                         'a.nama_depan',
@@ -30,6 +31,7 @@ class Anggota extends Model
                         'a.perusahaan',
                         'a.pendidikan',
                         'pendidikan.nama as nama_pendidikan',
+                        'a.jurusan',
                         'a.sekolah',
                         'a.marga',
                         'marga.nama as nama_marga',
@@ -41,22 +43,28 @@ class Anggota extends Model
                         'a.telepon',
                         'a.instagram',
                         'a.alamat',
-                        'a.domisili_kelurahan',
+                        'a.domisili_kecamatan',
+                        'kecamatan.nama_kecamatan as kecamatan',
                         'a.domisili_kota',
+                        'kabupaten.nama_kabkota as kota',
+                        'a.domisili_provinsi',
+                        'provinsi.nama_propinsi as provinsi',
                         'a.avatar'
                       )
                       ->leftJoin('m_parameter as marga','a.marga','=','marga.id')
                       ->leftJoin('m_parameter as pendidikan','a.pendidikan','=','pendidikan.id')
                       ->leftJoin('m_parameter as pekerjaan','a.pekerjaan','=','pekerjaan.id')
-                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id');
+                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id')
+                      ->leftJoin('m_provinsi  as provinsi','a.domisili_provinsi','=','provinsi.id_propinsi')
+                      ->leftJoin('m_kabkota   as kabupaten','a.domisili_kota','=','kabupaten.id_kabkota')
+                      ->leftJoin('m_kecamatan as kecamatan','a.domisili_kecamatan','=','kecamatan.id_kecamatan');
       if(!empty($uuid)){
-        $user->where('a.uuid','=',$id);
+        $user->where('a.uuid','=',$uuid);
       }
 
       if(!empty($email)){
         $user->where('a.email','=',$email);
-      }
-                        
+      }                        
       return $user->first();
     }
 

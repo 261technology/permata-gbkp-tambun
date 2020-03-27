@@ -27,23 +27,29 @@ Route::post('json/select2-anggota', 'JsonController@select2Anggota');
  */
 Route::group(['as' => 'frontend.'], function () {
     Route::get('/', 'LandingController@index')->name('home');
-    Route::get('/login', 'LandingController@login')->name('login');
-    Route::get('/register', 'LandingController@register')->name('register');
-    Route::post('/register-process', 'MemberController@registerProcess');
     Route::get('/home', function () {return redirect()->route('frontend.home');});
 
-     Route::get('/covid19', 'EventController@covid19')->name('covid-19');
+    Route::get('/login', 'LandingController@login')->name('login');
+    Route::get('/edit-profile', 'MemberController@editProfile')->name('edit-profile');
+    Route::post('/edit-profile-progress', 'MemberController@editProfileProgress')->name('edit-profile');
+    Route::post('/upload-photo-profile', 'MemberController@uploadPhotoProgress')->name('upload-photo-profile');
+    Route::get('/logout', 'MemberController@logout')->name('logout');
+    Route::get('/register', 'LandingController@register')->name('register');
+    Route::post('/register-process', 'MemberController@registerProcess');
+
+    Route::get('/info', 'LandingController@information')->name('info');
+
+    // EVENT
+    Route::get('/covid19', 'EventController@covid19')->name('covid-19');
 
     Route::group(['prefix' => '/member'], function () {
 	    Route::get('/activation/{code_activation}', 'MemberController@activation');
-	    Route::get('/forgot-password/', 'MemberController@forgotPassword');
+	    Route::get('/forgot-password/', 'LandingController@forgotPassword');
 	    Route::post('/forgot-password/', 'MemberController@forgotPasswordProcess');
 	    
 	    Route::get('/reset-password/{code}', 'MemberController@resetPassword');
         Route::post('/reset-password-proccess/', 'MemberController@resetPasswordProcess');
-	});
-
-    Route::group(['prefix' => '/member'], function () {
+	
         Route::get('/', 'MemberController@profile');
         Route::get('/profile/', 'MemberController@profile');
         Route::post('/login-process/', 'MemberController@login');
@@ -65,6 +71,8 @@ Route::namespace('Backend')->prefix('application')->group(function(){
 	Route::get('/email/send-minggu', 'EmailController@sendEmailMinggu');
 	Route::get('/email/send-birthday', 'EmailController@sendEmailBirthday');
 
+	// Util
+	Route::get('/refresh-data', 'UtilityController@refreshUserData');
 
 	Route::group(['middleware' => 'login'], function(){
 		// Dashboard

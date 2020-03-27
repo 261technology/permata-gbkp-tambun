@@ -11,9 +11,9 @@ class Config extends Model
 
     public function getConfig($type , $name = null){
         if(empty($name)){
-            return DB::table('m_parameter')->where('type',$type)->get();    
+            return DB::table('m_parameter')->where('type',$type)->orderBy('nama','asc')->get();    
         }else{
-            $data = DB::table('m_parameter')->select('nama')->where('type',$type)->get();
+            $data = DB::table('m_parameter')->select('nama')->where('type',$type)->orderBy('nama','asc')->get();
             
             $result = array();
             foreach ($data as $key => $value) {

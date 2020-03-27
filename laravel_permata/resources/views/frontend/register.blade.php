@@ -10,32 +10,6 @@
     <script src="{{url('/')}}/assets/landing/plugin/jqueryvalidation.min.js" ></script>
 @endsection
 
-@section('nav-top')
-    <!-- Navbar -->        
-     <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
-        <div class="container">
-          <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
-            <ul class="nav navbar-nav ml-auto scroll">
-              <li class="nav-item"><a href="{{url('/')}}" class="nav-link pl-10">Home</a></li>
-              <li class="nav-item"><a href="{{url('/login')}}" class="nav-link pl-10">Login</a></li>
-              <li class="nav-item"><a href="{{url('/register')}}" class="nav-link active pl-10">Register</a></li>
-              </ul>
-          </div>
-        </div>
-      </nav>
-    <!-- End Navbar -->
-@endsection
-
-@section('nav-bottom')
-    <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
-        <div class="row w-100 text-center">
-            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/')}}"> Home</a>
-            <a class="col-4 btn btn-sm nav-link-bottom" href="{{url('/login')}}">Login</a>
-            <a class="col-4 btn btn-sm nav-link-bottom active" href="{{url('/register')}}">Register</a>
-        </div>
-    </nav>
-@endsection
-
 @section('content')
     <!-- Page Wrapper -->
       <div id="page-wrapper">
@@ -83,7 +57,17 @@
                           <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
                             <label class="text-left" for="runggun">Runggun</label>
                             <select class="form-control" type="text" name="runggun" id="runggun" placeholder="Runggun">
-                                <option value="tambun" selected>Tambun</option>
+                                <option value="TAMBUN" selected>Tambun</option>
+                            </select>
+                          </div>
+
+                          <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
+                            <label class="text-left" for="sektor">Sekotor</label>
+                            <select class="form-control" type="text" name="sektor" id="sektor" placeholder="Sektor">
+                                @foreach($sektor as $key => $value )
+                                  <option
+                                   value="{{$value->id}}">{{$value->nama}}</option>
+                                  @endforeach
                             </select>
                           </div>
 

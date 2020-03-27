@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\AnggotaImport;
 use App\Models\Anggota;
+use Carbon\Carbon;
 use Harisa;
 use Session;
 use Excel;
@@ -38,19 +39,13 @@ class AnggotaController extends Controller
 
     function edit($id){
         $model  = new Anggota();
-        $data   = $model->get_anggota($id);
+        $data   = $model->get_anggota(null,$id);
         $anggota    = (array)$data;
 
         $pekerjaan  = Harisa::get_pekerjaan();
         $sektor     = Harisa::get_sektor();
         $marga      = Harisa::get_marga();
         $pendidikan = Harisa::get_pendidikan();
-
-        // Prevent anggota lain edit sementara
-
-        if(Session::get('uuid') != $anggota['uuid']){
-            // echo 'ga boleh bukan id kamu';die;
-        }
 
         return view('anggota.edit',compact('pendidikan','anggota','sektor','marga','pekerjaan','total'));
     }
@@ -95,30 +90,41 @@ class AnggotaController extends Controller
     }
 
     function updateProcess(Request $request){
-        // echo json_encode($request->all());die;
-        $data['nama'] = $request->input('nama');
-        $data['marga'] = $request->input('marga');
-        $data['jenis_kelamin'] = $request->input('jenis_kelamin');
-        $data['tempat_lahir'] = $request->input('tempat_lahir');
-        $data['tanggal_lahir'] = $request->input('tanggal_lahir');
-        $data['sekolah'] = $request->input('sekolah');
-        $data['pendidikan'] = $request->input('pendidikan');
-        $data['jurusan'] = $request->input('jurusan');
-        $data['pekerjaan'] = $request->input('pekerjaan');
-        $data['telepon'] = $request->input('telepon');
-        $data['email'] = $request->input('email');
-        $data['domisili'] = $request->input('domisili');
-        $data['alamat'] = $request->input('alamat');
-        $data['tahun_ngawan'] = $request->input('tahun_ngawan');
-        $data['lokasi_ngawan'] = $request->input('lokasi_ngawan');
-        $data['instagram'] = $request->input('instagram');
-        $data['sektor'] = $request->input('sektor');
-        $data['hobi'] = $request->input('hobi');
-        $data['perusahaan'] = $request->input('kantor');
+        $data['nama']               = $request->input('nama_depan')." ".$request->input('nama_belakang');
+        $data['nama_depan']         = $request->input('nama_depan');
+        $data['nama_belakang']      = $request->input('nama_belakang');
+        $data['marga']              = $request->input('marga');
 
-        $id = $request->input('id_anggota');
+        $data['jenis_kelamin']      = $request->input('jenis_kelamin');
+        $data['tempat_lahir']       = $request->input('tempat_lahir');
+        $data['tanggal_lahir']      = $request->input('tanggal_lahir');
 
-        if (Anggota::where('id',$id)->update($data)) { 
+        $data['telepon']            = $request->input('telepon');
+        $data['alamat']             = $request->input('alamat');
+        $data['email']              = $request->input('email');
+
+        $data['sekolah']            = $request->input('sekolah');
+        $data['pendidikan']         = $request->input('pendidikan');
+        $data['jurusan']            = $request->input('jurusan');
+        $data['pekerjaan']          = $request->input('pekerjaan');
+        
+        $data['domisili_provinsi']  = $request->input('domisili_provinsi');
+        $data['domisili_kota']      = $request->input('domisili_kabupaten');
+        $data['domisili_kecamatan'] = $request->input('domisili_kecamatan');
+        
+        $data['tahun_ngawan']       = $request->input('tahun_ngawan');
+        $data['runggun_ngawan']     = $request->input('lokasi_ngawan');
+        $data['instagram']          = $request->input('instagram');
+        $data['sektor']             = $request->input('sektor');
+        $data['hobi']               = $request->input('hobi');
+        $data['perusahaan']         = $request->input('kantor');
+        $data['dengan_orang_tua']             = $request->input('dengan_orang_tua');
+        $data['status']             = $request->input('status');
+        $data['updated_at']         = Carbon::now();
+
+        $id                         = $request->input('id_anggota');
+
+        if (Anggota::where('uuid',$id)->update($data)) { 
             Session::flash('notification', 'Your data has been updated');
         }else{
             Session::flash('notification', 'ERROR!!!!!!');    

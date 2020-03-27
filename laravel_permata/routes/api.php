@@ -29,11 +29,16 @@ Route::namespace('Api')->prefix('v1')->group(function(){
 	 });
 
 	 Route::post('register'	, 'AuthController@register');
-	 Route::post('login'	, 'AuthController@login');
-	 
+	 Route::post('login'	, 'AuthController@login');	 
 	 
 	 Route::group(['middleware' => 'harisa-api'], function(){
 	 	Route::get('user', 'UserController@get');
 	 	Route::post('user', 'UserController@update');
 	 });
+});
+
+Route::namespace('Backend')->prefix('v1')->group(function(){
+	 Route::get('get-provinsi', 'UtilityController@getProvinsi');
+	 Route::get('get-kabupaten', 'UtilityController@getKabupaten');
+	 Route::get('get-kecamatan', 'UtilityController@getKecamatan');
 });

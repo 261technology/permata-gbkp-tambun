@@ -10,18 +10,107 @@ use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Illuminate\Support\Facades\Mail;
+use Harisa;
 use Session;
 use Validator;
 
 class MemberController extends Controller
 {   
+
     public function profile()
     {   
         $email          = session::get('email');
+        if(empty($email)) {
+            return redirect(url('/').'/login');
+        }
         $model          = new Anggota();
         $user           = $model->get_anggota($email);
+
         // echo json_encode($user);die;
+
         return view('frontend.me.profile',compact('user'));
+    }
+
+    public function editProfile()
+    {   
+        $email          = session::get('email');
+        if(empty($email)) {
+            return redirect(url('/').'/login');
+        }
+
+        $model  = new Anggota();
+        $data   = $model->get_anggota($email);
+        $anggota    = (array)$data;
+
+        $pekerjaan  = Harisa::get_pekerjaan();
+        $sektor     = Harisa::get_sektor();
+        $marga      = Harisa::get_marga();
+        $pendidikan = Harisa::get_pendidikan();
+
+        $model      = new Anggota();
+        $user       = $model->get_anggota($email);
+
+        if(empty($anggota["email"])) {
+            return redirect(url('/').'/login');
+        }
+        return view('frontend.me.edit-profile',compact('pendidikan','anggota','sektor','marga','pekerjaan','total'));
+    }
+
+    function editProfileProgress(Request $request){
+        $data['nama']               = $request->input('nama_depan')." ".$request->input('nama_belakang');
+        $data['nama_depan']         = $request->input('nama_depan');
+        $data['nama_belakang']      = $request->input('nama_belakang');
+        $data['marga']              = $request->input('marga');
+
+        $data['jenis_kelamin']      = $request->input('jenis_kelamin');
+        $data['tempat_lahir']       = $request->input('tempat_lahir');
+        $data['tanggal_lahir']      = $request->input('tanggal_lahir');
+
+        $data['telepon']            = $request->input('telepon');
+        $data['alamat']             = $request->input('alamat');
+
+        $data['sekolah']            = $request->input('sekolah');
+        $data['pendidikan']         = $request->input('pendidikan');
+        $data['jurusan']            = $request->input('jurusan');
+        $data['pekerjaan']          = $request->input('pekerjaan');
+        
+        $data['domisili_provinsi']  = $request->input('domisili_provinsi');
+        $data['domisili_kota']      = $request->input('domisili_kabupaten');
+        $data['domisili_kecamatan'] = $request->input('domisili_kecamatan');
+        
+        $data['tahun_ngawan']       = $request->input('tahun_ngawan');
+        $data['runggun_ngawan']     = $request->input('lokasi_ngawan');
+        $data['instagram']          = $request->input('instagram');
+        $data['sektor']             = $request->input('sektor');
+        $data['hobi']               = $request->input('hobi');
+        $data['perusahaan']         = $request->input('kantor');
+        $data['dengan_orang_tua']             = $request->input('dengan_orang_tua');
+        $data['updated_at']         = Carbon::now();
+
+        $id                         = $request->input('id_anggota');
+
+        if (Anggota::where('email',Session::get("email"))->update($data)) { 
+            Session::flash('notification', 'Your data has been updated');
+        }else{
+            Session::flash('notification', 'ERROR!!!!!!');    
+        } 
+        
+        return redirect()->back();
+    }
+
+    function uploadPhotoProgress(Request $request){
+        $image          = explode(",", $request->input("foto"));
+        $data['email']  = $request->input("email");                  
+        $data['avatar'] = !empty($image[1]) ? $image[1] : null;
+        $data['updated_at']         = Carbon::now();
+
+
+        if (!empty($data["email"]) && !empty($image[1]) ) { 
+            Anggota::where('email',Session::get("email"))->update($data);
+            echo "success";
+        }else{
+            echo "error";    
+        } 
     }
 
     function login(Request $request){
@@ -43,10 +132,11 @@ class MemberController extends Controller
 
                 foreach ($user as $key => $value) {
                         if($key != 'role' && $key != 'password'){
-                            Session::flash($key,$value);
+                            Session::put($key,$value);
                         }
                 }
-                Session::flash('isLogin',1);
+                Session::put('nama',$user->nama_depan." ".$user->nama_belakang);
+                Session::put('isLogin',1);
                 Session::flash('notification','Selamat datang '.Session::get('nama_depan').' !!!');
                 return redirect(url('/').'/member');
             }else{
@@ -62,6 +152,11 @@ class MemberController extends Controller
 
     }
 
+    function logout(){
+        Session::flush();
+        return redirect(url('/login'));
+    }
+
 
     function activation($code_activation){
         $user       = Anggota::where('url_activation', $code_activation)->first();
@@ -73,12 +168,7 @@ class MemberController extends Controller
         	return redirect('home');
         }
     }
-
-
-   function forgotPassword(){
-        return view('frontend.forgot_password');
-    }
-
+    
     function forgotPasswordProcess(Request $request){
         $email 	= $result['email'] 	= $request->input('email');
         $data 	= Anggota::select('url_reset_password as url','nama_depan')->whereEmail($email)->first();
@@ -146,6 +236,7 @@ class MemberController extends Controller
                   'password'    => 'required',    
                   'password_confirmation'  => 'required|same:password', 
                   'runggun'     => 'required',  
+                  'sektor'      => 'required',  
                   'marga'       => 'required',
         ]); 
 
@@ -179,6 +270,7 @@ class MemberController extends Controller
             $member->url_activation     = $urlActivation;
             $member->url_reset_password = $urlResetPassword;
             $member->runggun            = strtoupper($request->input('runggun'));
+            $member->sektor             = $request->input('sektor');
             $member->marga              = strtolower($request->input('marga'));
             $member->created_at         = Carbon::now();
             $member->updated_at         = Carbon::now();

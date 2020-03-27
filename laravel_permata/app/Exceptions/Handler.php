@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
     {
         if ($this->isHttpException($exception)) {
             if ($exception->getStatusCode() == 404 || $exception->getStatusCode() == 405) {
-                echo json_encode(array('message' => 'ga ada route ini bos'));die;
+                echo json_encode(array('message' => 'halaman si daramindu la dat'));die;
             }
         }
         parent::report($exception);

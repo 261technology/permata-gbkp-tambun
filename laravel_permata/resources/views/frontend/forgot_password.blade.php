@@ -8,32 +8,6 @@
 @section('header-js')
 @endsection
 
-@section('nav-top')
-    <!-- Navbar -->        
-     <nav class="navbar navbar-light navbar-expand-lg fixed-top d-none d-sm-block" id="navbar-top">
-        <div class="container">
-          <div class="collapse navbar-collapse justify-content-end scroll" id="myNavbar">
-            <ul class="nav navbar-nav ml-auto scroll">
-              <li class="nav-item"><a href="{{url('/')}}" class="nav-link pl-10">Back</a></li>
-              <li class="nav-item"><a href="{{url('/login')}}" class="nav-link active pl-10">Login</a></li>
-              <li class="nav-item"><a href="{{url('/register')}}" class="nav-link pl-10">Register</a></li>
-              </ul>
-          </div>
-        </div>
-      </nav>
-    <!-- End Navbar -->
-@endsection
-
-@section('nav-bottom')
-    <nav class="navbar fixed-bottom navbar-light d-block d-sm-none" id="navbar-bottom">
-        <div class="row w-100 text-center">
-            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/')}}"> Home</a>
-            <a class="col-4 btn btn-sm nav-link-bottom active" href="{{url('/login')}}">Login</a>
-            <a class="col-4 btn btn-sm nav-link-bottom " href="{{url('/register')}}">Register</a>
-        </div>
-    </nav>
-@endsection
-
 @section('content')
     <!-- Page Wrapper -->
       <div id="page-wrapper">

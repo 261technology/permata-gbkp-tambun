@@ -30,8 +30,9 @@ class CreateAnggotaTable extends Migration
             $table->string('jenis_kelamin',20)->nullable()->default('L');
             $table->string('telepon')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('domisili_kelurahan')->nullable();
+            $table->string('domisili_kecamatan')->nullable();
             $table->string('domisili_kota')->nullable();
+            $table->string('domisili_provinsi')->nullable();
             $table->integer('dengan_orang_tua')->default(0);
             $table->integer('pekerjaan')->nullable();
             $table->integer('pendidikan')->nullable();

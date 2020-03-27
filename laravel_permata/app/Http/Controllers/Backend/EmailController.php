@@ -68,7 +68,7 @@ class EmailController extends Controller
              $dataArr   = json_decode(json_encode($data),true); 
              Mail::send('email.birthday', $dataArr, function($message) use ($data){     
                 $message->to($data->email, $data->nama_depan)->subject("Selamat Ulang Tahun ".$data->nama_depan);
-                $message->cc(array('harisaginting@gmail.com'));
+                $message->cc(array('harisaginting@gmail.com','pranatameliala@yahoo.co.id','nellaaginta@gmail.com','mikhatarigan28@gmail.com'));
                 $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
         }
