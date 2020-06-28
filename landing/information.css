@@ -29,8 +29,10 @@
 }
 
 .avatar{
-	width: 6.2em;
+	min-height: 6.2em;
+	max-height: 6.2em;
 	height: 6.2em;
+	max-width: 6.2em;
 	margin: 0.2em;
 	border-radius: 50%;
 }
@@ -113,6 +115,13 @@ label{
 	width: 6.5em;
 	margin: 2px 3px 7px 3px;
 	border-radius: 10px;
+}
+
+.info-location{
+	font-size: 0.6em;
+    font-weight: 700;
+    padding-right: 5px !important;
+    margin-bottom: -0.2em !important;
 }
 
 

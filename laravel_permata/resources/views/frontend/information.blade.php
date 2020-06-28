@@ -2,7 +2,17 @@
 
 @section('header-css')
 <link rel="stylesheet" href="{{url('/')}}/landing/main.css" />
-<link rel="stylesheet" href="{{url('/')}}/landing/information.css?v{{date('s')}}" />
+<link rel="stylesheet" href="{{url('/')}}/landing/information.css?v=askdjfhjdk" />
+
+<style type="text/css">
+  .bg-dalam-bekasi{
+    background: #3d6ae8;
+  }
+
+  .bg-luar-bekasi{
+    background: #454886;
+  }
+</style>
 @endsection
 
 @section('header-js')
@@ -44,6 +54,20 @@
                         </div>
                       </div>
 
+                      <div class="card col-md-6 col-sm-12 bg-dalam-bekasi pl-0 pr-0 mb-1 text-center">
+                        <div class="card-body p-1">
+                          <div class="text-left"><strong class="label-sub-anggota">Domisili Bekasi</strong></div>
+                          <div><span class="label-sub-anggota-count"><?= $totalDalamBekasi ?></span></div>
+                        </div>
+                      </div>
+
+                      <div class="card col-md-6 col-sm-12 bg-luar-bekasi pl-0 pr-0 mb-1 text-center">
+                        <div class="card-body p-1">
+                          <div class="text-left"><strong class="label-sub-anggota">Domisili Diluar Bekasi</strong></div>
+                          <div><span class="label-sub-anggota-count"><?= $totalLuarBekasi ?></span></div>
+                        </div>
+                      </div>
+
                       <div class="card bg-success col-md-4 pl-0 pr-0 text-center">
                         <div class="card-body p-1">
                           <div class="text-left"><strong class="label-sub-anggota">AKTIF</strong></div>
@@ -53,8 +77,8 @@
 
                       <div class="card col-md-4 bg-warning pl-0 pr-0 text-center">
                         <div class="card-body p-1">
-                          <div class="text-left"><strong class="label-sub-anggota">TIDAK AKTIF</strong></div>
-                          <div><span class="label-sub-anggota-count"><?= $totalAnggota["tidak-aktif"] ?></span></div>
+                          <div class="text-left"><strong class="label-sub-anggota">PASIF</strong></div>
+                          <div><span class="label-sub-anggota-count"><?= $totalAnggota["pasif"] ?></span></div>
                         </div>
                       </div>
 
@@ -67,7 +91,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-9 col-sm-12 container-chart-anggota">
+                  <div class="col-md-9 col-sm-12 container-chart-anggota pt-4">
                     <div id="chart-anggota"></div>
                   </div>
                 
@@ -82,11 +106,20 @@
                    <h4>SEKTOR {{$vSektor}}</h4>
                    <div class="row anggota-sektor">
                      @foreach ($anggotaBySektor[$vSektor] as $vAnggota)
+                     <?php if($vAnggota->email != 'mvikral@gmail.com') :  ?>
                      <div class="container-person <?= $vAnggota->status == 'AKTIF' ? 'bg-success':''; ?> <?= $vAnggota->status == 'TIDAK AKTIF' ? 'bg-warning':''; ?> <?= $vAnggota->status == 'TERDAFTAR' ? 'bg-danger':''; ?>">
+                        <div class="w-100 text-right pb-0 mb-0 info-location">
+                        <?php if(!empty($vAnggota->kota)) :  ?>  
+                        <i class="fa fa-location-arrow"></i>&nbsp;&nbsp;{{ $vAnggota->kota ?? '-'}}
+                        <?php  else: ?>
+                          &nbsp;
+                        <?php  endif; ?>
+                        </div>
                         <img src="<?= !empty($vAnggota->avatar) ? "data:image/png;base64,".$vAnggota->avatar : url('/').'/img/avatar/default.png' ?>" alt="PERMATA GBKP {{$vAnggota->nama_depan}}"  class="avatar">
 
                         <div class="person-name">{{$vAnggota->nama_depan .' '.$vAnggota->nama_belakang }}</div>
                      </div>
+                     <?php endif; ?>
                      @endforeach
                    </div>
                  </div>

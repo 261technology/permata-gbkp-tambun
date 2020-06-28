@@ -291,7 +291,7 @@
                         </div>
                       </div>
                       <div class="col-12 text-right">
-                        <label style="font-size: 0.5em;font-family: sans-serif;">data terakhir iperbarui bas<br><strong id="summaryLastUpdated"></strong><br> bas <a href="https://kawalcovid19.id/">kawalcovid.id</a> </label>
+                        <label style="font-size: 0.5em;font-family: sans-serif;">data terakhir iperbarui <br><strong id="summaryLastUpdated"></strong><br> sumberna ibuat bas <a href="https://kawalcovid19.id/">kawalcovid.id</a> </label>
                       </div>
 
                       <div class="col-12 mt-0">
@@ -308,6 +308,10 @@
                       <div class="col-12 mt-3">
                        <strong>Informasi Seputar GBKP : </strong>
                        <ul class="list-group">
+                          <a href="https://gbkp.or.id/2020/03/liturgi-ibadah-keluarga-28-maret-2020/" target="_blank" class="list-group-item">Liturgi Ibadah Keluarga Tanggal 28 Maret 2020</a>
+
+                          <a href="https://gbkp.or.id/wp-content/uploads/2020/03/Liturgi-Ibadah-Keluarga-27-Maret-2020.pdf" target="_blank" class="list-group-item">Liturgi Ibadah Keluarga Tanggal 27 Maret 2020</a>
+
                           <a href="https://www.youtube.com/watch?v=aEiovKP83Dg" target="_blank" class="list-group-item">Streaming Khotbah GBKP Runggun Tambun, Minggu 22 Maret 2020</a>
 
                           <a href="https://gbkp.or.id/wp-content/uploads/2020/03/0307-20-Pencegahan-Penyebaran-Virus-Corona.pdf" target="_blank" class="list-group-item">Surat Pastoral Pengelayasi Wabah Virus Corona</a>
@@ -345,9 +349,15 @@
                           </div>
                       </div>
 
-                      <div class="col-sm-12 col-md-4 offset-md-4 mt-3">
+                      <div class="col-sm-12 col-md-4 offset-md-2 mt-3">
                         <video class="video-warning" max-height="00"  poster="{{url('/')}}/img/logo_permata.png" controls>
                             <source src="{{url('/')}}/img/warningcovid.mp4" type="video/mp4">
+                        </video>
+                      </div>
+
+                      <div class="col-sm-12 col-md-4  mt-3">
+                        <video class="video-warning" max-height="00"  poster="{{url('/')}}/img/logo_permata.png" controls>
+                            <source src="{{url('/')}}/img/warning-covid-pt-benyamin-tarigan.mp4" type="video/mp4">
                         </video>
                       </div>
 

@@ -65,6 +65,7 @@ class AuthController extends Controller
         $user     = DB::table('anggota as user') 
                                 ->select('user.*','user.id as id_anggota','m_role.nama as role_name','user.role as role_id')
                                 ->join('m_role','m_role.id','=','user.role')
+                                ->where('user.role',1)
                                 ->where('user.email','=',$email)
                                 ->first();
 

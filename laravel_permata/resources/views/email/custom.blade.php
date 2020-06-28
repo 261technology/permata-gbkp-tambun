@@ -92,11 +92,14 @@
         <td class="innerpadding borderbottom">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
+              <td class="h5">
+                ShallooOoom, Mejuah-juah {{$nama_depan ?? '<name>'}} 
+              </td>
+            </tr>
+            <tr>
               <td>
-                <p style="color:000 !important;">
-                <strong>Shaloom {{$nama_depan}} {{$nama_belakang ?? ''}} </strong>
-                <br>
-                 @switch($jenis_kelamin)
+                <p>
+                <strong>Selamat hari Minggu</strong> @switch($jenis_kelamin)
                       @case('L')
                           Ma 
                           @break
@@ -128,43 +131,49 @@
                       @default
                           Iting 
                   @endswitch
+
                   yang paling 
                   @switch($jenis_kelamin)
                       @case('L')
-                          Ganteng 
+                          Ganteng seganteng-gantengnya, <br>si adi cirem mis lego udan ndai. 
                           @break
 
                       @case('P')
-                          Cantek
+                          Cantek secantek-canteknya, <br> si adi cirem manisna danci naluken cimpa.
                           @break
-
                       @default
                           Manizz
                   @endswitch
-                  ga keluar kan malam minggu ini? ditengah <i>pandemic <b>COVID-19</b></i> gimana kondisi kamu? semoga baik-baik saja ya.
-                  <br>ingat berdasarkan anjuran pemerintah saat ini sangat diharapkan semua warga negara melakukan
-                  kegiatan <i>social distancing</i> atau penjagaan jarak antara sesama manusia, demi menjaga penyebaran
-                  virus covid-19 agar tidak semakin mewabah di negara tercinta kita ini, kurangi kegiatan diluar juga ya  
-                  kalo ga penting-penting banget ga usah keluar, <?= $pekerjaan == null || $pekerjaan == '' || $pekerjaan == 16 ? 'Sekolah kamu libur kan' : 'Pekerjaan kamu juga sebisa mungkin dilakukan dari rumah ya :(' ?>
-                  jaga juga kebersihan diri sendiri, kalaupun harus pergi ke tempat yang ramai usahakan pakai masker dan waspada.
-                  <br>Yuk Jaga Diri Sendiri Jaga Sekitar, <b>KAMU BISA <?= strtoupper($nama_depan) ?> !</b> 
+
+                  Tidak terasa ya kita sudah sampai di hari Paskah pada tahun 2020 ini, wah puji Tuhan yah.
                   <br>
                   <br>
-                  <br>Oia untuk informasi kegiatan ibadah di gedung GBKP Runggun Tambun untuk besok di tiadakan
-                  untuk metodenya kemungkinan akan diganti secara streaming, nantikan informasi selanjutnya di 
-                  grup whatsapp <b>PERMATA GBKP RUNGGUN TAMBUN</b> ataupun di grup whatsapp <b>GBKP Rg. Tambun</b> ya {{$nama_depan}}                
+                  walau kita masih harus <i>physical distancing</i> tapi kita sama Tuhan gabole dong <i>ngedistancing</i> ,
+                  <br>
+                  masih tetap jaga doa dan ikutin kebaiktian yang secara online kan, gaboleh engga ya anak Tuhan selalu ingat Tuhan.
+                  <br>
+                  tetap pantau group permata atau runggun di whatsapp ya untuk info seputar ibadah online.
                   <br>
                   <br>
-                   <strong>Cheers. God Bless You!</strong>. 
-                   <br>
-                   <br>
-                   <br>
-                   <strong>Permata GBKP Runggun Tambun</strong>
+                  Tetap #dirumahAja juga ya, tetap tenang jaga kesehatan ingat <b>"Sebab, barangsiapa yang berseru kepada nama Tuhan, akan diselamatkan." <i>Roma 10:13</i></b>.
+                  <br>
+                  <br>
+                  nah di hari paskah ini mimin mau ngasih tau ada suatu pujian pengharapan dari sebagian teman-teman permata kita loh, Yuk klik tombol dibawah ini buat lihat videonya >_o 
+                </td>
+            </tr>
+             <tr>
+                <td style="text-align: center;"><a href="https://www.kitapermata.com/yt/berkat-kemuliaanmu"><button style="background: #53b343;color: #fff;font-size: 16px;border: 2px solid #4aa63a;padding: 5px 15px;border-radius: 5px;margin: auto;">Berkat Kemuliaanmu On Youtube</button></a></td>
+            </tr>
+            <tr>
+              <td>
+                <br>
+                <strong>Stay at Home, STAY SAFE. GOD NEVER LEAVE US, Bless You</strong>
+                  <!-- , jangan lupa untuk gereja ya hari ini. -->
+                  <br>
+                    <!-- Tetap pantau juga kegiatan permata di minggu ini dari group whatsapp kita atau boleh tanya pengurus permata, dengan senang hati mereka akan menjawab. -->
+                    Semangat, jangan lelah jangan letih. Tuhan bersama anak-anakNya yang percaya yang berusaha. 
                   </p>
               </td>
-              <tr>
-                <td style="text-align: center;"><a href="https://gbkp.or.id/wp-content/uploads/2020/03/0307-20-Pencegahan-Penyebaran-Virus-Corona.pdf"><button style="background: #53b343;color: #fff;font-size: 12px;border: 2px solid #4aa63a;padding: 5px 15px;border-radius: 5px;margin: auto;margin-top: 10px;">Surat Edaran Moderamen GBKP</button></a></td>
-            </tr>
             </tr>
           </table>
         </td>
@@ -175,7 +184,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td align="center" class="footercopy">
-                <a href="https://www.kitapermata.com/">&reg; <strong>PERMATA GBKP RUNGGUN TAMBUN</strong> {{date('Y')}}</a>
+                <a href="https://www.kitapermata.com/">&reg; PERMATA GBKP RUNGGUN TAMBUN {{date('Y')}}</a>
               </td>
             </tr>
           </table>

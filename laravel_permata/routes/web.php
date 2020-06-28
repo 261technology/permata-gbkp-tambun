@@ -37,10 +37,15 @@ Route::group(['as' => 'frontend.'], function () {
     Route::get('/register', 'LandingController@register')->name('register');
     Route::post('/register-process', 'MemberController@registerProcess');
 
-    Route::get('/info', 'LandingController@information')->name('info');
+    Route::get('/info', 	'LandingController@information')->name('info');
+    Route::get('/artikel', 	'LandingController@artikel')->name('artikel');
 
     // EVENT
     Route::get('/covid19', 'EventController@covid19')->name('covid-19');
+    Route::get('/khotbah', function () {return redirect("https://www.youtube.com/watch?v=3Dr55xXF_Uk");});
+    
+    Route::get('/yt/berkat-kemuliaanmu', function () {return redirect("https://www.youtube.com/watch?v=0U03DMJtkKI");});
+    Route::get('/yt/berkat-kemurahanmu', function () {return redirect("https://www.youtube.com/watch?v=0U03DMJtkKI");});
 
     Route::group(['prefix' => '/member'], function () {
 	    Route::get('/activation/{code_activation}', 'MemberController@activation');
@@ -83,6 +88,7 @@ Route::namespace('Backend')->prefix('application')->group(function(){
 		Route::get('/anggota', 'AnggotaController@index');
 		Route::get('/anggota/profile/{id}', 'AnggotaController@profile');
 		Route::get('/anggota/edit/{id}', 'AnggotaController@edit');
+		Route::get('/anggota/delete/{id}', 'AnggotaController@delete');
 		Route::get('/anggota/upload', 'AnggotaController@upload_anggota');
 		Route::post('/anggota/upload_data_anggota', 'AnggotaController@upload_anggota_process')->name('upload_data_anggota');
 
@@ -90,6 +96,9 @@ Route::namespace('Backend')->prefix('application')->group(function(){
 
 		// acara
 		Route::get('/acara', 'AcaraController@index');
+
+		// artikel
+		Route::get('/artikel', 'ArtikelController@index');
 
 		// pa
 		Route::get('/pa', 'AcaraController@pa');

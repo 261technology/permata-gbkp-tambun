@@ -13,6 +13,11 @@
                 <span class="badge badge-warning">dev.</span></a>
             </li>
             <li class="nav-item">
+              <a class="nav-link {{Request::segment(2) == 'artikel' ? 'active' : ''}}" href="{{url('/')}}/application/artikel">
+                <i class="nav-icon fa fa-file"></i> Artikel
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link {{Request::segment(2) == 'acara' ? 'active' : ''}}" href="{{url('/')}}/application/acara">
                 <i class="nav-icon icon-people"></i> Acara
                 <span class="badge badge-warning">dev.</span></a>

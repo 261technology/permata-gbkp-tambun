@@ -131,13 +131,24 @@
                       @default
                           Iting 
                   @endswitch
-                  , jangan lupa untuk gereja ya hari ini.
+                  , jangan lupa beribadah di era New Normal kini ya, jaga kesehatan budayakan hidup bersih dan keluar bila ada keperluan penting saja, ingat selalu untuk jaga doa dan pantau informasi terbaru dari runggun di grup permata, kamu diberkati karena itu berbahagialah :)
+            </tr>
+             <!-- <tr>
+                <td style="text-align: center;"><a href="https://www.kitapermata.com/khotbah"><button style="background: #53b343;color: #fff;font-size: 16px;border: 2px solid #4aa63a;padding: 5px 15px;border-radius: 5px;margin: auto;">streaming ibadah</button></a></td>
+            </tr> -->
+            <tr>
+              <td>
+                <br>
+                <br>
+                <br>
+                <strong>STAY SAFE. GOD NEVER LEAVE US, Bless You</strong>
+                 <!--  , jangan lupa untuk gereja ya hari ini.
                   <br>
                     Tetap pantau juga kegiatan permata di minggu ini dari group whatsapp kita atau boleh tanya pengurus permata, dengan senang hati mereka akan menjawab.
                   <br>
                   <br>
                     Semangat, jangan lelah jangan letih. Tuhan bersama anak-anakNya yang percaya yang berusaha. 
-                  </p>
+                  </p> -->
               </td>
             </tr>
           </table>

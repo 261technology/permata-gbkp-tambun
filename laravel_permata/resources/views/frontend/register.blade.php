@@ -62,7 +62,7 @@
                           </div>
 
                           <div class="col-md-6 offset-md-3 col-sm-12 mt-3">
-                            <label class="text-left" for="sektor">Sekotor</label>
+                            <label class="text-left" for="sektor">Sektor</label>
                             <select class="form-control" type="text" name="sektor" id="sektor" placeholder="Sektor">
                                 @foreach($sektor as $key => $value )
                                   <option

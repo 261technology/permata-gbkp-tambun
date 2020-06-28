@@ -2,10 +2,12 @@
 
 @section('header-css')
 <link rel="stylesheet" href="{{url('/')}}/landing/main.css?v=<?= date('d')  ?>" />
-<link rel="stylesheet" href="{{url('/')}}/landing/profile.css?v={{date('d')}}" />
+<link rel="stylesheet" href="{{url('/')}}/landing/profile.css?v={{'profile-permata'.date('d')}}" />
+<link rel="stylesheet" href="{{url('/')}}/assets/landing/plugin/croppie/croppie.css">
 @endsection
 
 @section('header-js')
+<script src="{{url('/')}}/assets/landing/plugin/croppie/croppie.js"></script>
 @endsection
 
 @section('content')
@@ -51,6 +53,9 @@
                     <div role="tabpanel" class="tab-pane fade in active show" id="biodata">
                       <div class="row">
                       
+                        <div class="col-sm-12 col-md-4 label-field-profile mt-2">Status Keanggotaan</div>
+                        <div class="col-sm-12 col-md-8 label-value-profile">{{$user->status}}</div>
+
                         <div class="col-sm-12 col-md-4 label-field-profile mt-2">Nama Depan</div>
                         <div class="col-sm-12 col-md-8 label-value-profile">{{$user->nama_depan}}</div>
 
@@ -77,6 +82,9 @@
 
                         <div class="col-sm-12 col-md-4 label-field-profile mt-2">Email</div>
                         <div class="col-sm-12 col-md-8 label-value-profile">{{$user->email?? '-' }}</div>
+
+                        <div class="col-sm-12 col-md-4 label-field-profile mt-2">Instagram</div>
+                        <div class="col-sm-12 col-md-8 label-value-profile"><a target="_blank" href="<?= !empty($user->instagram) ? "http://instagram.com/".str_replace('@','', $user->instagram) : "" ?>"><?= "@".str_replace('@','', $user->instagram) ?></a></div>
                         
                         <div class="col-sm-12 col-md-4 label-field-profile mt-2">No. Telepon</div>
                         <div class="col-sm-12 col-md-8 label-value-profile"><?= !empty($user->telepon) ? "+62".$user->telepon  : '-' ?></div>
@@ -111,10 +119,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-body">
-              <p>Modal body text goes here.</p>
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div id="upload-demo" style="width:100%;padding: 0px;">
+                  </div>
+                   <input style="display: none;" type="file" id="upload-photo" accept="image/*">
+                </div>
+              </div>
             </div>
             <div class="modal-footer text-center">
-              <button type="button" class="btn btn-success" id="btn-upload-photo">Upload Photo</button>
+              <button type="button" class="btn btn-warning" id="btn-pilih-upload-photo">Pilih Foto</button>
+              <button type="button" class="btn btn-success" id="btn-upload-photo">Unggah Foto</button>
             </div>
           </div>
         </div>
@@ -127,51 +142,67 @@
 @section('footer-js')  
 <script src="{{url('/')}}/assets/template/solid-state/assets/js/main.js"></script>
 <script type="text/javascript">
-  $(document).on("click","#btn-change-photo", ()=>{
-      // $("#modal-photo").modal("show");
-  });
+    $uploadCropCont = document.getElementById('upload-demo');
+    $uploadCrop = new Croppie($uploadCropCont, {
+          enableExif: true,
+          enableResize: true,
+        enableOrientation: true,
+          viewport: {
+              width: 200,
+              height: 200,
+              type: 'circle'
+          },
+          boundary: {
+              width: 300,
+              height: 300
+          }
+      });
 
-   var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    
+    $(".upload-button").on('click', function() {
+       $("#modal-photo").modal("show");
+       $("#upload-photo").click();
+    });
 
-            reader.onload = function (e) {
-                $('.profile-pic').attr('src', e.target.result);
-                $("#base64image").val(e.target.result)
-                $.ajax({
+    $('#upload-photo').on('change', function () { 
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $uploadCrop.bind({
+          url: e.target.result
+        }).then(function(){
+          console.log('jQuery bind complete');
+        });
+        
+        }
+      reader.readAsDataURL(this.files[0]);
+    });
+
+    $('#btn-upload-photo').on('click', function (ev) {
+        $uploadCrop.result('base64','viewport').then(function (resp) {
+          $("#landing-loader").removeClass("hidden");
+          $.ajax({
                   url       : "{{url('/upload-photo-profile')}}",
                   type      : "POST",
                   data      :  {
                     email   : "{{$user->email}}",
-                    foto    : e.target.result,
+                    foto    : resp,
                     _token  : "{{@csrf_token()}}" 
 
                   },
                   success: function(data)
                       {
                         $("#landing-loader").addClass("hidden");
+                         $("#modal-photo").modal("hide");
+                         $(".profile-pic").attr("src",resp);
                       },
                   error: function() 
                     {
                       alert("eeh sangana la danci")
                     }           
                });
+        });
+      });
 
-            }
-    
-            reader.readAsDataURL(input.files[0]);
-        }
-        return true;
-    }
-    
-
-    $(".file-upload").on('change', function(){
-        readURL(this)
-    });
-    
-    $(".upload-button").on('click', function() {
-       $(".file-upload").click();
-    });
 
 </script>
 @endsection

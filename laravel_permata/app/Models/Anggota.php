@@ -71,7 +71,7 @@ class Anggota extends Model
 
     function get_datatable($length, $start, $searchValue, $orderColumn, $orderDir, $order,$status){
         $query      = DB::table('anggota as a')
-                      ->select('a.*','sektor.nama as nama_sektor','pekerjaan.nama as nama_pekerjaan','marga.nama as nama_marga')
+                      ->select('a.*','sektor.nama as nama_sektor','pekerjaan.nama as nama_pekerjaan','marga.nama as nama_marga','a.updated_at')
                       ->leftJoin('m_parameter as marga','a.marga','=','marga.id')
                       ->leftJoin('m_parameter as pendidikan','a.pendidikan','=','pendidikan.id')
                       ->leftJoin('m_parameter as pekerjaan','a.pekerjaan','=','pekerjaan.id')
@@ -82,15 +82,24 @@ class Anggota extends Model
         if(!empty($searchValue)){
             $query->where(function($q) use ($searchValue) {
                   $q->whereRaw("UPPER(a.nama) like '%".$searchValue."%'")
-                    ->orWhereRaw("UPPER(a.marga) like '%".$searchValue."%'");
+                    ->orWhereRaw("UPPER(a.marga) like '%".$searchValue."%'")
+                    ->orWhereRaw("UPPER(a.email) like '%".$searchValue."%'");
               });
 
         } 
 
-        $fieldTable = array('a.nama','a.sektor','a.telepon','a.status');
+        if(!empty($status)){
+            $query->where(function($q) use ($searchValue) {
+                  $q->where("STATUS",$status);
+              });
+
+        } 
+
+        $fieldTable = array('a.nama','a.sektor','a.telepon','a.status','a.updated_at');
                 
+                // echo $orderColumn;die;
         if(!empty($fieldTable[$orderColumn])){
-            $query->orderBy($fieldTable[$orderColumn],$orderDir);
+            $query->orderBy($fieldTable[4],$orderDir);
         }else{
             $query->orderBy('a.nama','asc');
         }

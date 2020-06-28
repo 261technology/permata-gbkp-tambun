@@ -63,8 +63,8 @@ class EventController extends Controller
     }
 
     function covid19(){
-        $title       = "PERMATA GBKP RUNGGUN TAMBUN WASPADA COVID-19";
-        $description = "PERMATA GBKP Memperhatikan Perkembangan Virus Corona ( COVID-19 ) di Indonesia";
+        $title       = "COVID-19 | PERMATA GBKP RUNGGUN TAMBUN WASPADA";
+        $description = "Informasi Perkembangan Virus Corona ( COVID-19 ) di Indonesia dalam bahasa karo";
         return view('event.covid19',compact('description','title'));
     }
 

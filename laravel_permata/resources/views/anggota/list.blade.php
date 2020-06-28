@@ -24,11 +24,10 @@
                                                 <div class="form-group">
                                                         <label for="status">Status</label>
                                                         <select id="status" class="form-control">
-                                                            <option value="0">Semua</option>
-                                                            <option value="aktif">Aktif</option>
-                                                            <option value="Luar Biasa">Luar Biasa</option>
-                                                            <option value="Normal">Normal</option>
-                                                            <option value="pasfi">Pasif</option>
+                                                            <option value="">Semua</option>
+                                                            <option value="AKTIF">AKTIF</option>
+                                                            <option value="PASIF">PASIF</option>
+                                                            <option value="TERDAFTAR">TERDAFTAR</option>
                                                         </select>
                                                     </div>
                                         </div>
@@ -78,7 +77,7 @@
                                             <th style="width:15%">SEKTOR</th>
                                             <th style="width:15%">TELEPON</th>
                                             <th style="width:10%">STATUS</th>
-                                            <th style="width:10%">STATUS</th>
+                                            <th style="width:10%"></th>
                                         </thead>
                                         <tbody>
                                         </tbody>

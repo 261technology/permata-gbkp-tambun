@@ -152,7 +152,7 @@ class Keuangan extends Model
         return array(
             "recordsTotal" => $countAll,
             "recordsFiltered" => $query->count(),
-            "data" => $query->skip($start)->limit($length)->get(),
+            "data" => $query->skip($start -1)->limit($length)->get(),
         );
     }
 

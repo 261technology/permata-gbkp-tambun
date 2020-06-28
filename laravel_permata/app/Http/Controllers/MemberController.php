@@ -89,13 +89,13 @@ class MemberController extends Controller
 
         $id                         = $request->input('id_anggota');
 
-        if (Anggota::where('email',Session::get("email"))->update($data)) { 
+        if (Anggota::where('uuid',$id)->update($data)) { 
             Session::flash('notification', 'Your data has been updated');
         }else{
             Session::flash('notification', 'ERROR!!!!!!');    
         } 
         
-        return redirect()->back();
+       return redirect(url('/').'/member/profile/');
     }
 
     function uploadPhotoProgress(Request $request){
@@ -105,6 +105,7 @@ class MemberController extends Controller
         $data['updated_at']         = Carbon::now();
 
 
+        sleep(2);
         if (!empty($data["email"]) && !empty($image[1]) ) { 
             Anggota::where('email',Session::get("email"))->update($data);
             echo "success";
@@ -135,6 +136,13 @@ class MemberController extends Controller
                             Session::put($key,$value);
                         }
                 }
+
+                if($user->status == "TERDAFTAR"){
+                    Session::flash('notification','Hai '.$user->nama_depan.' silahkan cek email dan aktifkan akun anda terlebih dahulu');
+                    Session::flash('alert','warning');
+                    return redirect(url('/').'/login');
+                }
+
                 Session::put('nama',$user->nama_depan." ".$user->nama_belakang);
                 Session::put('isLogin',1);
                 Session::flash('notification','Selamat datang '.Session::get('nama_depan').' !!!');
@@ -160,7 +168,11 @@ class MemberController extends Controller
 
     function activation($code_activation){
         $user       = Anggota::where('url_activation', $code_activation)->first();
-        $update     = Anggota::where('email', $user["email"])->update(['status' => "AKTIF", 'url_activation' => str_replace('-', '',Uuid::uuid4()).$user["email"]]);
+        $update     = false;
+        if(!empty($user["email"])){
+            $update     = Anggota::where('email', $user["email"])->update(['status' => "AKTIF", 'url_activation' => str_replace('-', '',Uuid::uuid4()).$user["email"]]);
+        }
+        
         if($update){
         	$result['activation'] 	= true;
         	 return redirect('login')->with($result);
@@ -272,6 +284,7 @@ class MemberController extends Controller
             $member->runggun            = strtoupper($request->input('runggun'));
             $member->sektor             = $request->input('sektor');
             $member->marga              = strtolower($request->input('marga'));
+            $member->status             = "TERDAFTAR";
             $member->created_at         = Carbon::now();
             $member->updated_at         = Carbon::now();
             $member->save();

@@ -10,6 +10,7 @@ use App\Models\Dashboard;
 use App\Models\Anggota;
 use Session;
 use Harisa;
+use DB;
 
 class LandingController extends Controller
 {
@@ -24,14 +25,18 @@ class LandingController extends Controller
         if(!empty(Session::get('isLogin')) && Session::get('isLogin') == 1 ){
              return redirect(url('/').'/member');
         }      
-        return view('frontend.login');
+        $title       = "LOGIN | PERMATA GBKP";
+        $description = "Keanggotaan Permata GBKP Runggun Tambun";
+        return view('frontend.login',compact('title','description'));
     }
 
     public function register()
     {
         $marga      = Harisa::get_marga();
         $sektor     = Harisa::get_sektor();
-        return view('frontend.register',compact('marga','sektor'));
+        $title       = "PENDAFTARAN | PERMATA GBKP";
+        $description = "Pendaftaran Anggota Permata GBKP Runggun Tambun";
+        return view('frontend.register',compact('marga','sektor','title','description'));
     }
 
     public function forgotPassword(){
@@ -42,22 +47,71 @@ class LandingController extends Controller
         $config                        = new Config();   
         $chartAnggota                  = $this->chartAnggota();
         $totalAnggota                  = array();
-        $totalAnggota["all"]           = Anggota::where("role",2)->count();
-        $totalAnggota["aktif"]         = Anggota::where("role",2)->where("status","AKTIF")->count();
-        $totalAnggota["tidak-aktif"]   = Anggota::where("role",2)->where("status","TIDAK AKTIF")->count();
-        $totalAnggota["terdaftar"]     = Anggota::where("role",2)->where("status","TERDAFTAR")->count();
+        $totalAnggota["all"]           = Anggota::whereRaw("sektor is not null")->count();
+        $totalAnggota["aktif"]         = Anggota::whereRaw("sektor is not null")->where("status","AKTIF")->count();
+        $totalAnggota["pasif"]         = Anggota::where("status","PASIF")->whereRaw("sektor is not null")->count();
+        $totalAnggota["terdaftar"]     = Anggota::where("status","TERDAFTAR")->whereRaw("sektor is not null")->count();
         $sektor                        = $config->getConfig('sektor',true);
         $sektor2                       = $config->getConfig('sektor');
         $anggotaBySektor               = array();
 
-        $description                   = "Informasi Keanggotaan PERMATA di GBKP Runggun Tambun";
+        $totalDalamBekasi              = Anggota::where("domisili_kota",16)->whereRaw("sektor is not null")->count();
+        $totalLuarBekasi               = Anggota::whereRaw("domisili_kota != 16")->whereRaw("sektor is not null")->count();
+
         foreach ($sektor2 as $key => $value) {
-            $anggotaBySektor[$value->nama] = Anggota::where('sektor','=',$value->id)->orderBy("nama_depan","asc")->get();
+            $anggotaBySektor[$value->nama] = DB::table('anggota as a')->select(
+                        'a.uuid',
+                        'a.email',
+                        'a.nama',
+                        'a.nama_depan',
+                        'a.nama_belakang',
+                        'a.nama_panggilan',
+                        'a.jenis_kelamin',
+                        'a.tanggal_lahir',
+                        DB::raw("IFNULL(YEAR(CURDATE()) - YEAR(a.tanggal_lahir),0) as umur"),
+                        'a.tempat_lahir',
+                        'a.status',
+                        'a.sektor',
+                        'sektor.nama as nama_sektor',
+                        'a.pekerjaan',
+                        'pekerjaan.nama as nama_pekerjaan',
+                        'a.perusahaan',
+                        'a.pendidikan',
+                        'pendidikan.nama as nama_pendidikan',
+                        'a.jurusan',
+                        'a.sekolah',
+                        'a.marga',
+                        'marga.nama as nama_marga',
+                        'a.hobi',
+                        'a.tahun_ngawan',
+                        'a.runggun_ngawan',
+                        'a.runggun',
+                        'a.dengan_orang_tua',
+                        'a.telepon',
+                        'a.instagram',
+                        'a.alamat',
+                        'a.domisili_kecamatan',
+                        'kecamatan.nama_kecamatan as kecamatan',
+                        'a.domisili_kota',
+                        'kabupaten.nama_kabkota as kota',
+                        'a.domisili_provinsi',
+                        'provinsi.nama_propinsi as provinsi',
+                        'a.avatar'
+                      )
+                      ->leftJoin('m_parameter as marga','a.marga','=','marga.id')
+                      ->leftJoin('m_parameter as pendidikan','a.pendidikan','=','pendidikan.id')
+                      ->leftJoin('m_parameter as pekerjaan','a.pekerjaan','=','pekerjaan.id')
+                      ->leftJoin('m_parameter as sektor','a.sektor','=','sektor.id')
+                      ->leftJoin('m_provinsi  as provinsi','a.domisili_provinsi','=','provinsi.id_propinsi')
+                      ->leftJoin('m_kabkota   as kabupaten','a.domisili_kota','=','kabupaten.id_kabkota')
+                      ->leftJoin('m_kecamatan as kecamatan','a.domisili_kecamatan','=','kecamatan.id_kecamatan')
+                      ->where('a.sektor','=',$value->id)->orderBy("a.nama_depan","asc")->get();
         }
 
         // echo json_encode($anggotBySektor);die;
-
-        return view('frontend.information',compact('sektor','chartAnggota','totalAnggota','anggotaBySektor','description'));
+        $title       = "INFORMASI | PERMATA GBKP";
+        $description = "Informasi Keanggota Permata GBKP Runggun Tambun";
+        return view('frontend.information',compact('sektor','chartAnggota','totalAnggota','anggotaBySektor','description','totalDalamBekasi','totalLuarBekasi'));
     }
 
     function chartAnggota(){
@@ -66,7 +120,7 @@ class LandingController extends Controller
         $model              = new Dashboard();
         $config             = new Config();        
         $chart              =   array();
-        $status             =   array('aktif','tidak aktif','terdaftar');
+        $status             =   array('aktif','pasif','terdaftar');
         
         $color2             =   array('#04c100','#f9c237','#d94c42');
         $sektor             =   $config->getConfig('sektor');
@@ -101,6 +155,14 @@ class LandingController extends Controller
         );
 
         return $result;
+    }
+
+
+    // ARTIKEL
+    public function artikel(){
+        $title       = "PERMATA GBKP";
+        $description = "Permata GBKP Runggun Tambun";
+        return view('frontend.article',compact('title','description'));
     }
 
 }

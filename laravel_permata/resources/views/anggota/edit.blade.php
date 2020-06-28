@@ -3,7 +3,7 @@
 @section('content')
   <div class="card">
     <div class="card-header">
-      <h4>Data Anggota</h4>
+      <h4>Data Anggota <a class="fa fa-trash text-danger pull-right" href="{{url('/application/anggota/delete/'.$anggota['uuid'])}}"></a></h4>
     </div>
     <div class="card-body">
       <form id="form_update" method="post" action="{{url('/')}}/application/anggota/update-process">
@@ -117,7 +117,7 @@
                                               +62
                                             </span>
                                           </div>
-                                            <input class="form-control" id="telepon" type="number" name="telepon" placeholder="Telepon" value="{{$anggota['telepon']}}">
+                                            <input class="form-control" id="telepon" type="text" name="telepon" placeholder="Telepon" value="{{$anggota['telepon']}}">
                                         </div>
                                       </div>
 
@@ -152,14 +152,14 @@
 
                                       <div class="form-group">
                                           <label>Kabupaten</label>
-                                          <select class="form-control" name="domisili_kabupaten" id="domisili_kabupaten" disabled>
+                                          <select class="form-control" name="domisili_kabupaten" id="domisili_kabupaten" >
                                             <option value="<?= $anggota['domisili_kota'] ?>"><?= $anggota['kota'] ?></option>
                                           </select>
                                       </div>
 
                                       <div class="form-group">
                                           <label>Kecamatan</label>
-                                          <select class="form-control" name="domisili_kecamatan" id="domisili_kecamatan" disabled>
+                                          <select class="form-control" name="domisili_kecamatan" id="domisili_kecamatan" >
                                             <option value="<?= $anggota['domisili_kecamatan'] ?>"><?= $anggota['kecamatan'] ?></option>
                                           </select>
                                       </div>
@@ -176,7 +176,7 @@
                                           <label>Status</label>
                                           <select class="form-control" name="status" id="status">
                                             <option value="TERDAFTAR" <?= $anggota['status'] == "TERDAFTAR" ? 'selected' : '' ?>>TERDAFTAR</option>
-                                            <option value="TIDAK AKTIF" <?= $anggota['status'] == "TIDAK AKTIF" ? 'selected' : '' ?>>TIDAK AKTIF</option>
+                                            <option value="PASIF" <?= $anggota['status'] == "PASIF" ? 'selected' : '' ?>>PASIF</option>
                                             <option value="AKTIF" <?= $anggota['status'] == "AKTIF" ? 'selected' : '' ?>>AKTIF</option>
                                             
                                           </select>

@@ -49,6 +49,13 @@ class AnggotaController extends Controller
 
         return view('anggota.edit',compact('pendidikan','anggota','sektor','marga','pekerjaan','total'));
     }
+    
+    function delete($id){
+            $model  = new Anggota();
+            Anggota::where('uuid',$id)->delete();
+            Session::flash('notification', 'user data has been deleted');
+            return redirect(url('/').'/application/anggota/');
+        }
 
     function profile($id){
         $model  = new Anggota();
@@ -77,8 +84,8 @@ class AnggotaController extends Controller
         $length         = $request->input('length');
         $start          = $request->input('start');
         $searchValue    = trim(strtoupper($_POST['search']['value']));
-        $orderColumn    = $_POST['order']['0']['column'];
-        $orderDir       = $_POST['order']['0']['dir'];
+        $orderColumn    = $request->input('order')['0']['column'];
+        $orderDir       = $request->input('order')['0']['dir'];
         $order          = $request->input('order');
         
         $status         = $request->input('status');
@@ -130,7 +137,7 @@ class AnggotaController extends Controller
             Session::flash('notification', 'ERROR!!!!!!');    
         } 
         
-        return redirect()->back();
+        return redirect(url('/').'/application/anggota/');
     }
     
 }

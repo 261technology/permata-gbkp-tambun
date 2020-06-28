@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{url('/')}}/landing/edit-profile.css?v={{date('d')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url('assets/plugin/select2/css/select2-bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url('assets/plugin/datepicker/css/bootstrap-datepicker3.css')}}">
 @endsection
 
 @section('header-js')
@@ -157,14 +158,14 @@
 
                               <div class="form-group">
                                   <label>Kabupaten</label>
-                                  <select class="form-control" name="domisili_kabupaten" id="domisili_kabupaten" disabled>
+                                  <select class="form-control" name="domisili_kabupaten" id="domisili_kabupaten">
                                     <option value="<?= $anggota['domisili_kota'] ?>"><?= $anggota['kota'] ?></option>
                                   </select>
                               </div>
 
                               <div class="form-group">
                                   <label>Kecamatan</label>
-                                  <select class="form-control" name="domisili_kecamatan" id="domisili_kecamatan" disabled>
+                                  <select class="form-control" name="domisili_kecamatan" id="domisili_kecamatan">
                                     <option value="<?= $anggota['domisili_kecamatan'] ?>"><?= $anggota['kecamatan'] ?></option>
                                   </select>
                               </div>
