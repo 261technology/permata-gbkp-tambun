@@ -90,11 +90,13 @@ class EmailController extends Controller
              $data      = $model->get_anggota($value["email"]);
              // echo json_encode($data);die;
              $dataArr   = json_decode(json_encode($data),true); 
-             Mail::send('email.custom', $dataArr, function($message) use ($data){     
-                $message->to($data->email, $data->nama_depan)->subject("==[EVENT CERITA KITA]==");
+             Mail::send('email.kerja_rani', $dataArr, function($message) use ($data){     
+                // $message->to($data->email, $data->nama_depan)->subject("==[KERJA RANI 2020]==");
+                $message->to('harisaginting@gmail.com', $data->nama_depan)->subject("==[KERJA RANI 2020]==");
                 $message->cc(array('harisaginting@gmail.com'));
-                $message->from('informasi@kitapermata.com','PERMATA GBKP RUNGGUN TAMBUN');
+                $message->from('kitapermatagbkp@gmail.com','PERMATA GBKP RUNGGUN TAMBUN');
             });
+             die;
         }
 
         echo "success";

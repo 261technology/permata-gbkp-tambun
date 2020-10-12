@@ -107,7 +107,7 @@
                    <div class="row anggota-sektor">
                      @foreach ($anggotaBySektor[$vSektor] as $vAnggota)
                      <?php if($vAnggota->email != 'mvikral@gmail.com') :  ?>
-                     <div class="container-person <?= $vAnggota->status == 'AKTIF' ? 'bg-success':''; ?> <?= $vAnggota->status == 'TIDAK AKTIF' ? 'bg-warning':''; ?> <?= $vAnggota->status == 'TERDAFTAR' ? 'bg-danger':''; ?>">
+                     <div class="container-person <?= $vAnggota->status == 'AKTIF' ? 'bg-success':''; ?> <?= $vAnggota->status == 'TIDAK AKTIF' || $vAnggota->status == 'PASIF' ? 'bg-warning':''; ?> <?= $vAnggota->status == 'TERDAFTAR' ? 'bg-danger':''; ?>">
                         <div class="w-100 text-right pb-0 mb-0 info-location">
                         <?php if(!empty($vAnggota->kota)) :  ?>  
                         <i class="fa fa-location-arrow"></i>&nbsp;&nbsp;{{ $vAnggota->kota ?? '-'}}

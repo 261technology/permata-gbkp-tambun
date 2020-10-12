@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('Asia/Jakarta');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
