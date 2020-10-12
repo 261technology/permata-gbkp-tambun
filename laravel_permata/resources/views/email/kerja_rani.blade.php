@@ -148,7 +148,7 @@
             <tr>
               <td>
                 <br>
-                <strong>Ingat Stay Safe. Jaga diri, Jaga orang-orang yang kita cintai dan selalu muliakan nama Tuhan</strong>
+                <strong>Ingat, Jaga diri. Jaga orang-orang yang kita cintai dan selalu muliakan nama Tuhan</strong>
               </td>
             </tr>
           </table>
